@@ -1,0 +1,178 @@
+package br.com.onpecas.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.onpecas.helper.Alerta;
+import br.com.onpecas.helper.MySqlConnect;
+
+public class Permissao {
+
+	private int Oid_permissao;
+	private int acs_cms;
+
+	public int getOid_permissao() {
+		return Oid_permissao;
+	}
+	public void setOid_permissao(int oid_permissao) {
+		Oid_permissao = oid_permissao;
+	}
+	public int getAcs_cms() {
+		return acs_cms;
+	}
+	public void setAcs_cms(int acs_cms) {
+		this.acs_cms = acs_cms;
+	}
+
+	public static void Insert(Permissao permissao,int oid_grupo){
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql ="insert into permissao (acs_cms) values(?);";
+
+		String sql2="insert into permissao_grupo(Oid_permissao,Oid_grupo) values (?,?);";
+
+		PreparedStatement parametros;
+
+		try {
+			parametros = con.prepareStatement(sql);
+			parametros.setInt(1, permissao.getAcs_cms());
+
+			parametros.executeUpdate();
+
+			parametros = con.prepareStatement(sql2);
+			parametros.setInt(1, permissao.getOid_permissao());
+			parametros.setInt(2, oid_grupo);
+
+			parametros.executeUpdate();
+
+			con.close();
+
+			Alerta.showInformation("sucesso", "Inserido com sucesso");
+			//limpar();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
+		}
+
+
+
+	}
+
+	public static void Update(Permissao permissao){
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql ="update permissao set acs_cms = ? where oid_permissao = ?;";
+
+		PreparedStatement parametros;
+
+		try {
+			parametros = con.prepareStatement(sql);
+			parametros.setInt(1, permissao.getAcs_cms());
+			parametros.setInt(6, permissao.getOid_permissao());
+
+			parametros.executeUpdate();
+			con.close();
+
+			Alerta.showInformation("sucesso", "Atualizado com sucesso");
+			//limpar();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
+		}
+
+	}
+
+	public static void Delete(Permissao permissao){
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql ="delete from permissao where oid_permissao = ?;";
+
+		PreparedStatement parametros;
+
+		try {
+			parametros = con.prepareStatement(sql);
+			parametros.setInt(1, permissao.getOid_permissao());
+
+			parametros.executeUpdate();
+			con.close();
+
+			Alerta.showInformation("sucesso", "Deletado com sucesso");
+			//limpar();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
+		}
+	}
+
+	public static Permissao Select(Grupo grupo){
+		Connection con = MySqlConnect.ConectarDb();
+
+
+		String sql = "select p.* from permissao p inner join permissao_grupo pg on(p.oid_permissao = pg.oid_permissao) where pg.oid_grupo = "+grupo.getOid_grupo()+";";
+
+		try{
+			ResultSet rs = con.createStatement().executeQuery(sql);
+			
+			Permissao permissao = new Permissao();
+			
+			while(rs.next()){
+				
+			permissao.setOid_permissao(rs.getInt("oid_permissao"));
+			permissao.setAcs_cms(rs.getInt("acs_cms"));
+			
+			}
+			con.close();
+			return permissao;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static boolean Buscar(Grupo grupo){
+		Connection con = MySqlConnect.ConectarDb();
+		
+
+		String sql = "select * from permissao_grupo where oid_grupo = "+grupo.getOid_grupo()+";";
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sql);
+			
+			
+			while(rs.next()){
+				
+				if(rs.getRow()== 1){
+					
+					System.out.println(rs.getRow());
+					
+					return true;
+				
+				}else{
+					
+					return false;
+					
+				}
+				
+				}
+
+			con.close();
+
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
+
+}

@@ -1,0 +1,5 @@
+package br.com.onpecas.helper;
+
+public class Helper {
+	public static boolean AUX;
+}

@@ -1,0 +1,30 @@
+package br.com.onpecas.view;
+
+import java.io.IOException;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+
+public class CallScene {
+	public void loadTransportadoraDetalhe(BorderPane border){
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("TransportadoraDetalhe.fxml"));
+
+		try {
+			AnchorPane anchor = (AnchorPane) loader.load();
+			border.setCenter(anchor);
+		} catch (IOException e) { e.printStackTrace(); }
+	}
+
+	public void loadTransportadoraInicial(BorderPane border){
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("TransportadoraInicial.fxml"));
+
+		try {
+			ScrollPane scroll = (ScrollPane) loader.load();
+			border.setCenter(scroll);
+		} catch (IOException e) { e.printStackTrace(); }
+	}
+}

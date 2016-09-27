@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;CSOP-Relatorios/src/br/com/onpecas/view/Relatorio - Total.fxml&apos; to &apos;Relatorio.fxml&apos;" description="Rename resource &apos;Relatorio - Total.fxml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/br/com/onpecas/view/Relatorio - Total.fxml" name="Relatorio.fxml" stamp="1474562082402" updateReferences="true"/>
+</session>

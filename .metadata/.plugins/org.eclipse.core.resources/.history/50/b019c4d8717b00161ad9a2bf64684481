@@ -1,0 +1,90 @@
+package br.com.onpecas.controller;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import br.com.onpecas.helper.Helper;
+import br.com.onpecas.model.*;
+import br.com.onpecas.view.CallScene;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+public class PermissaoController implements Initializable {
+
+	@FXML CheckBox CMSAcessar;
+	@FXML Button btnSalvar,btnCancelar;
+	@FXML Label lbGrupo;
+
+	CallScene scene;
+	Stage myStage;
+	Grupo grupo;
+	Permissao permissao;
+
+	int aux;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+
+		permissao = new Permissao();
+
+		scene = new CallScene();
+
+		AtribuirBotoes();
+		lbGrupo.setText(grupo.getNome());
+
+	}
+
+	public PermissaoController(Stage myStage, Grupo grupo) {
+		this.myStage = myStage;
+		this.grupo = grupo;
+
+		VerificarExistencia(grupo);
+	}
+
+
+	public void VerificarExistencia(Grupo grupo){
+		if(Permissao.Buscar(grupo)){
+
+		}else{
+
+		}
+	}
+	public void AtribuirBotoes(){
+
+		btnSalvar.setOnAction(l-> InsertPermissao());
+		btnCancelar.setOnAction(l-> VoltarTela());
+
+	}
+
+	private void VoltarTela() {
+		Helper.AUXGROUP.setValue(1);
+		myStage.close();
+
+	}
+
+	private void InsertPermissao() {
+
+		if(CMSAcessar.isSelected()){
+
+			permissao.setAcs_cms(1);
+
+		}else{
+
+			permissao.setAcs_cms(0);
+
+		}
+
+		Permissao.Insert(permissao, grupo.getOid_grupo());
+
+		VoltarTela();
+
+	}
+
+}

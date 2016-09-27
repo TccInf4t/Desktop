@@ -1,0 +1,28 @@
+package br.com.onpecas.helper;
+
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class CallScene extends Application{
+
+	@Override
+	public void start(Stage stage){
+
+        Button b = new Button("Botão");
+        b.setOnAction((a) -> {
+            test2 t = new test2();
+            t.start(stage);
+        });
+        stage.setTitle("Primeira janela");
+        StackPane sp = new StackPane();
+        sp.getChildren().add(b);
+        Scene sc = new Scene(sp,300,300);
+        stage.setScene(sc);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+
+}

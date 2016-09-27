@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1000.0">
+         <children>
+            <Separator prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
+            <Label fx:id="lbGrupo" layoutX="409.0" layoutY="21.0" text="Nome do Grupo">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <GridPane layoutX="16.0" layoutY="79.0" prefHeight="122.0" prefWidth="970.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="79.0">
+              <columnConstraints>
+                <ColumnConstraints maxWidth="686.0" minWidth="10.0" prefWidth="130.0" />
+                  <ColumnConstraints maxWidth="686.0" minWidth="10.0" prefWidth="534.0" />
+                  <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="545.0" minWidth="0.0" prefWidth="80.0" />
+                  <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="239.0" minWidth="0.0" prefWidth="80.0" />
+                  <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="79.0" />
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="140.0" minWidth="0.0" prefWidth="75.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Excluir" GridPane.columnIndex="5" />
+                  <Label text="Editar" GridPane.columnIndex="4" />
+                  <Label text="Inserir" GridPane.columnIndex="3" />
+                  <Label text="CMS" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <CheckBox fx:id="CMSAcessar" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label text="Acessar" GridPane.columnIndex="2" />
+                  <Label text="-" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Label text="-" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <Label text="-" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <GridPane layoutX="15.0" layoutY="443.0" prefHeight="204.0" prefWidth="970.0">
+               <children>
+                  <Label text="Excluir" GridPane.columnIndex="5" />
+                  <Label text="Editar" GridPane.columnIndex="4" />
+                  <Label text="Inserir" GridPane.columnIndex="3" />
+                  <Label text="     Expedição" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Acessar" GridPane.columnIndex="2" />
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints maxWidth="686.0" minWidth="10.0" prefWidth="130.0" />
+                  <ColumnConstraints maxWidth="686.0" minWidth="10.0" prefWidth="534.0" />
+                  <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="545.0" minWidth="0.0" prefWidth="80.0" />
+                  <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="239.0" minWidth="0.0" prefWidth="80.0" />
+                  <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="79.0" />
+                  <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="140.0" minWidth="0.0" prefWidth="75.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="111.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="122.0" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <Button fx:id="btnSalvar" layoutX="820.0" layoutY="750.0" mnemonicParsing="false" style="-fx-background-color: #32CD32;" text="Salvar">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <ColorAdjust />
+               </effect>
+            </Button>
+            <Button fx:id="btnCancelar" layoutX="882.0" layoutY="749.0" mnemonicParsing="false" style="-fx-background-color: #FA8072;" text="Cancelar">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Separator prefWidth="200.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+         </children></AnchorPane>
+  </content>
+</ScrollPane>

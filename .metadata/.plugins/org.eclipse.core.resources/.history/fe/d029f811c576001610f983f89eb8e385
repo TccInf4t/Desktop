@@ -1,0 +1,53 @@
+package br.com.onpecas.helper;
+
+import java.io.IOException;
+
+import br.com.onpecas.controller.PermissaoController;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.stage.Stage;
+
+public class CallScene extends Application{
+	
+	public int verif;
+	
+	public CallScene(int i) {
+		
+		this.verif=i;
+		
+	}
+
+	@Override
+	public void start(Stage stage){
+
+       if(this.verif == 1){
+    	   
+    	   LoadPermission();
+    	   
+       }
+        
+    }
+	public void LoadPermission(){
+
+		Stage secondStage = new Stage();
+
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Permissoes.fxml"));
+
+	    loader.setController(new PermissaoController()); 
+		try {
+			ScrollPane module= (ScrollPane) loader.load();
+			
+			Scene scene = new Scene(module);
+
+			secondStage.setScene(scene);
+			secondStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+}

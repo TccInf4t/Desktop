@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="800.0" maxWidth="1000.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Separator layoutY="210.0" prefHeight="18.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="220.0" />
+      <Separator layoutY="264.0" prefHeight="18.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0" />
+      <Button layoutX="12.0" layoutY="231.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="30.0" style="-fx-background-color: #32CD32;" text="+" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="231.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="47.0" layoutY="231.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="30.0" style="-fx-background-color: FA8072;" text="x" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="231.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="85.0" layoutY="231.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="30.0" style="-fx-background-color: #00BFFF;" text="e" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="231.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TableView layoutX="12.0" layoutY="266.0" prefHeight="522.0" prefWidth="976.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="266.0">
+        <columns>
+          <TableColumn maxWidth="195.0" minWidth="95.0" prefWidth="147.0" resizable="false" text="Num. Lote" />
+          <TableColumn editable="false" maxWidth="704.0" prefWidth="210.0" resizable="false" sortable="false" text="Data Prev. de saida" />
+            <TableColumn prefWidth="206.0" resizable="false" text="Data Prev. de finalizaçao" />
+            <TableColumn prefWidth="243.0" resizable="false" text="Quantidade de Itens" />
+            <TableColumn prefWidth="179.0" resizable="false" text="Data criação" />
+        </columns>
+      </TableView>
+      <Label layoutX="24.0" layoutY="37.0" text="Num. Lote" AnchorPane.leftAnchor="24.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="73.0" text="Data de Saida" AnchorPane.leftAnchor="24.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="111.0" text="Status" AnchorPane.leftAnchor="24.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="152.0" text="Transportadora" AnchorPane.leftAnchor="24.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField layoutX="191.0" layoutY="38.0" prefHeight="25.0" prefWidth="264.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="545.0" AnchorPane.topAnchor="38.0" />
+      <ComboBox layoutX="191.0" layoutY="112.0" prefWidth="150.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="659.0" AnchorPane.topAnchor="112.0" />
+      <ComboBox layoutX="191.0" layoutY="153.0" prefWidth="150.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="659.0" AnchorPane.topAnchor="153.0" />
+      <DatePicker layoutX="191.0" layoutY="74.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="635.0" AnchorPane.topAnchor="74.0" />
+      <Button layoutX="926.0" layoutY="195.0" mnemonicParsing="false" text="FILTRAR" AnchorPane.bottomAnchor="580.0" AnchorPane.rightAnchor="14.0" />
+   </children>
+</AnchorPane>
