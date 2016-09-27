@@ -109,14 +109,14 @@ public class CallScene {
 
 
 	//Esse método serve para carregar a tela inicial do módulo Controle de Usuario
-			public void LoadMain(BorderPane border) throws IOException{
+	public void LoadMain(BorderPane border) throws IOException{
 
-				FXMLLoader loader = new FXMLLoader();
-		        loader.setLocation(getClass().getResource("UsuariosGrupos.fxml"));
-		        loader.setController(new UsuariosGruposController());
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("UsuariosGrupos.fxml"));
+        loader.setController(new UsuariosGruposController());
 
-				ScrollPane module= (ScrollPane) loader.load();
-				border.setCenter(module);
-			}
-
+		ScrollPane module= (ScrollPane) loader.load();
+		border.setCenter(module);
+		
+	}
 }

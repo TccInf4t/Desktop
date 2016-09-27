@@ -2,32 +2,30 @@ package br.com.onpecas.view;
 
 import java.io.IOException;
 
-import br.com.onpecas.controller.PainelPrincipalController;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class CallScene {
-	// Carrega a tela de cadastro de transportadora
-	public void loadTransportadoraDetalhe(BorderPane border){
+	public void LoadTransportadoraInicial(){
+
+		Stage secondStage = new Stage();
+
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("TransportadoraDetalhe.fxml"));
+        loader.setLocation(getClass().getResource("TransportadoraInicial.fxml"));
 
 		try {
-			AnchorPane anchor = (AnchorPane) loader.load();
-			border.setCenter(anchor);
-		} catch (IOException e) { e.printStackTrace(); }
+			ScrollPane module= (ScrollPane) loader.load();
+			CSOPControllerExpedicao.border.setCenter(module);
+			/*Scene scene = new Scene(module);
+
+			secondStage.setScene(scene);
+			secondStage.show();*/
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	// Carrega a tela de lista de transportadora
-	public void loadTransportadoraInicial(BorderPane border){
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("TransportadoraInicial.fxml"));
-
-		try {
-			ScrollPane scroll = loader.load();
-			border.setCenter(scroll);
-		} catch (IOException e) { e.printStackTrace(); }
-	}
 }

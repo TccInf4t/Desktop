@@ -2,7 +2,7 @@ package br.com.onpecas.view;
 
 import java.io.IOException;
 
-import br.com.onpecas.controller.*;
+import br.com.onpecas.controller.PainelPrincipalController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,35 +10,28 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class CSOPControllerExpedicao extends Application {
-	BorderPane border;
-	Stage stage;
+
+	Stage primaryStage;
+	static BorderPane border;
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
-		this.stage = primaryStage;
-
-		CallScene callScene = new CallScene();
-		loadBorder();
-		/*callScene.loadTransportadoraInicial(this.border);*/
+	public void start(Stage primaryStage) throws IOException {
+		this.primaryStage = primaryStage;
+		LoadBorder();
 	}
 
-	public void loadBorder(){
+	public void LoadBorder() throws IOException{
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("PainelPrincipal.fxml"));
-		loader.setController(new PainelPrincipal());
+        loader.setLocation(getClass().getResource("PainelPrincipal.fxml"));
+        loader.setController(new PainelPrincipalController());
+        
+		border = (BorderPane) loader.load();
+        Scene scene = new Scene(border);
 
-		try {
-			border = loader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		Scene scene = new Scene(border);
-		stage.setScene(scene);
-		stage.show();
+        primaryStage.setScene(scene);
+        primaryStage.show();
 	}
-
-	public static void main(String[] args){
-		launch();
+	public static void main(String[] args) {
+		launch(args);
 	}
 }
