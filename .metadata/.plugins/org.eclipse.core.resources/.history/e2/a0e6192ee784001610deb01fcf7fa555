@@ -158,8 +158,7 @@ public class UsuariosGruposController implements Initializable{
         btnUserEdit.setOnAction(l-> UpdateUser());
         btnUserDelete.setOnAction(l-> DeleteUser());
 
-        btnLimparFiltro.setOnAction(l-> AtualizarTblUser());
-        btnFiltrar.setOnAction(l-> Filtrar());
+        btnLimparFiltro.setOnAction(l-> Filtrar());
     }
 
     //Metodo que chama a tela de permissões passando o grupo que foi selecionado

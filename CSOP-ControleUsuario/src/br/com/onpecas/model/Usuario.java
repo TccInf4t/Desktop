@@ -187,32 +187,245 @@ public class Usuario {
 	}
 
 	//Método utilizado para filtrar os usuarios que aparecerão na table
-		public static void FiltrarGrupo(int grupo, int nomuser, int nome, int login){
+	public static List<Usuario> FiltrarGrupo(int grupo, int temnomuser, int nonome, int nologin, String nomerecebido, int temgrupo){
+		Connection con = MySqlConnect.ConectarDb();
 
-			if(nomuser ==1){
-				if(grupo==1){
-					if(nome == 1 && login == 1){
-						/* TEM NOME DE USUARIO, GRUPO SELECIONADO, NOME E LOGIN */
-					}else if(nome == 1){
-						/* TEM NOME DE USUARIO, GRUPO SELECIONADO E NOME */
-					}else if( login == 1){
-						/* TEM NOME DE USUARIO, GRUPO SELECIONADO E LOGIN */
-					}else{
-						/* TEM NOME DE USUARIO E GRUPO SELECIONADO */
+		if(temnomuser == 1){
+			if(temgrupo == 1){
+				if(nonome == 1 && nologin == 1){
+					List<Usuario> lstUsuario = new ArrayList<>();
+					String sql = "select u.*, g.* from usuariosistema as u "
+							+ "inner join grupousuario as g on (u.oid_grupo = g.oid_grupo) "
+							+ "where u.oid_grupo = "+grupo+" and u.nomecompleto like '%"+nomerecebido+"%' or u.login like '%"+nomerecebido+"%';";
+					try {
+
+						ResultSet rs = con.createStatement().executeQuery(sql);
+
+						while(rs.next()){
+
+							Usuario usuario = new Usuario();
+							Grupo grupoN = new Grupo();
+
+							grupoN.setOid_grupo(rs.getInt("oid_grupo"));
+							grupoN.setNome(rs.getString("nome"));
+							grupoN.setDescricao(rs.getString("descricao"));
+
+							usuario.setGrupo(grupoN);
+
+							usuario.setOid_usuario(rs.getInt("oid_usuario"));
+							usuario.setNomeCompleto(rs.getString("nomecompleto"));
+							usuario.setEmail(rs.getString("email"));
+							usuario.setLogin(rs.getString("login"));
+							usuario.setSenha(rs.getString("senha"));
+
+							lstUsuario.add(usuario);
+						}
+
+						con.close();
+						return lstUsuario;
+
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						return null;
+					}
+				}else if(nonome == 1){
+					/* TEM NOME DE USUARIO, GRUPO SELECIONADO E NOME */
+					List<Usuario> lstUsuario = new ArrayList<>();
+					String sql = "select u.*, g.* from usuariosistema as u "
+							+ "inner join grupousuario as g on (u.oid_grupo = g.oid_grupo) "
+							+ "where u.oid_grupo = "+grupo+" and u.nomecompleto like '%"+nomerecebido+"%';";
+					try {
+
+						ResultSet rs = con.createStatement().executeQuery(sql);
+
+						while(rs.next()){
+
+							Usuario usuario = new Usuario();
+							Grupo grupoN = new Grupo();
+
+							grupoN.setOid_grupo(rs.getInt("oid_grupo"));
+							grupoN.setNome(rs.getString("nome"));
+							grupoN.setDescricao(rs.getString("descricao"));
+
+							usuario.setGrupo(grupoN);
+
+							usuario.setOid_usuario(rs.getInt("oid_usuario"));
+							usuario.setNomeCompleto(rs.getString("nomecompleto"));
+							usuario.setEmail(rs.getString("email"));
+							usuario.setLogin(rs.getString("login"));
+							usuario.setSenha(rs.getString("senha"));
+
+							lstUsuario.add(usuario);
+						}
+
+						con.close();
+						return lstUsuario;
+
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						return null;
+					}
+
+				}else if(nologin == 1){
+					/* TEM NOME DE USUARIO, GRUPO SELECIONADO E LOGIN */
+
+					List<Usuario> lstUsuario = new ArrayList<>();
+					String sql = "select u.*, g.* from usuariosistema as u "
+							+ "inner join grupousuario as g on (u.oid_grupo = g.oid_grupo) "
+							+ "where u.oid_grupo = "+grupo+" and u.login like '%"+nomerecebido+"%';";
+					try {
+
+						ResultSet rs = con.createStatement().executeQuery(sql);
+
+						while(rs.next()){
+
+							Usuario usuario = new Usuario();
+							Grupo grupoN = new Grupo();
+
+							grupoN.setOid_grupo(rs.getInt("oid_grupo"));
+							grupoN.setNome(rs.getString("nome"));
+							grupoN.setDescricao(rs.getString("descricao"));
+
+							usuario.setGrupo(grupoN);
+
+							usuario.setOid_usuario(rs.getInt("oid_usuario"));
+							usuario.setNomeCompleto(rs.getString("nomecompleto"));
+							usuario.setEmail(rs.getString("email"));
+							usuario.setLogin(rs.getString("login"));
+							usuario.setSenha(rs.getString("senha"));
+
+							lstUsuario.add(usuario);
+						}
+
+						con.close();
+						return lstUsuario;
+
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						return null;
 					}
 				}else{
-					/* TEM NOME DE USUARIO SELECIONADO */
+					/* TEM NOME DE USUARIO E GRUPO SELECIONADO */
+					List<Usuario> lstUsuario = new ArrayList<>();
+					String sql = "select u.*, g.* from usuariosistema as u "
+							+ "inner join grupousuario as g on (u.oid_grupo = g.oid_grupo) "
+							+ "where u.oid_grupo = "+grupo+" and u.nomecompleto like '%"+nomerecebido+"%' or u.login like '%"+nomerecebido+"%';";
+					try {
+
+						ResultSet rs = con.createStatement().executeQuery(sql);
+
+						while(rs.next()){
+
+							Usuario usuario = new Usuario();
+							Grupo grupoN = new Grupo();
+
+							grupoN.setOid_grupo(rs.getInt("oid_grupo"));
+							grupoN.setNome(rs.getString("nome"));
+							grupoN.setDescricao(rs.getString("descricao"));
+
+							usuario.setGrupo(grupoN);
+
+							usuario.setOid_usuario(rs.getInt("oid_usuario"));
+							usuario.setNomeCompleto(rs.getString("nomecompleto"));
+							usuario.setEmail(rs.getString("email"));
+							usuario.setLogin(rs.getString("login"));
+							usuario.setSenha(rs.getString("senha"));
+
+							lstUsuario.add(usuario);
+						}
+
+						con.close();
+						return lstUsuario;
+
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						return null;
+					}
 				}
-			} else if(grupo==1){
-				if(nome == 1 && login == 1){
-					/* TEM GRUPO SELECIONADO, NOME E LOGIN */
-				}else if(nome == 1){
-					/* TEM GRUPO SELECIONADO, E NOME */
-				}else if(login == 1){
-					/* TEM GRUPO SELECIONADO E LOGIN */
-				}else{
-					/* TEM GRUPO SELECIONADO */
+			}else{
+				/* TEM NOME DE USUARIO SELECIONADO */
+				List<Usuario> lstUsuario = new ArrayList<>();
+				String sql = "select u.*, g.* from usuariosistema as u "
+						+ "inner join grupousuario as g on (u.oid_grupo = g.oid_grupo) "
+						+ "where u.nomecompleto like '%"+nomerecebido+"%' or u.login like '%"+nomerecebido+"%';";
+				try {
+
+					ResultSet rs = con.createStatement().executeQuery(sql);
+
+					while(rs.next()){
+
+						Usuario usuario = new Usuario();
+						Grupo grupoN = new Grupo();
+
+						grupoN.setOid_grupo(rs.getInt("oid_grupo"));
+						grupoN.setNome(rs.getString("nome"));
+						grupoN.setDescricao(rs.getString("descricao"));
+
+						usuario.setGrupo(grupoN);
+
+						usuario.setOid_usuario(rs.getInt("oid_usuario"));
+						usuario.setNomeCompleto(rs.getString("nomecompleto"));
+						usuario.setEmail(rs.getString("email"));
+						usuario.setLogin(rs.getString("login"));
+						usuario.setSenha(rs.getString("senha"));
+
+						lstUsuario.add(usuario);
+					}
+
+					con.close();
+					return lstUsuario;
+
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return null;
 				}
 			}
+		} else if(temgrupo==1){
+
+			/* TEM GRUPO SELECIONADO, NOME E LOGIN */
+
+			List<Usuario> lstUsuario = new ArrayList<>();
+			String sql = "select u.*, g.* from usuariosistema as u "
+					+ "inner join grupousuario as g on (u.oid_grupo = g.oid_grupo) "
+					+ "where u.oid_grupo = "+grupo+" ;";
+			try {
+
+				ResultSet rs = con.createStatement().executeQuery(sql);
+
+				while(rs.next()){
+
+					Usuario usuario = new Usuario();
+					Grupo grupoN = new Grupo();
+
+					grupoN.setOid_grupo(rs.getInt("oid_grupo"));
+					grupoN.setNome(rs.getString("nome"));
+					grupoN.setDescricao(rs.getString("descricao"));
+
+					usuario.setGrupo(grupoN);
+
+					usuario.setOid_usuario(rs.getInt("oid_usuario"));
+					usuario.setNomeCompleto(rs.getString("nomecompleto"));
+					usuario.setEmail(rs.getString("email"));
+					usuario.setLogin(rs.getString("login"));
+					usuario.setSenha(rs.getString("senha"));
+
+					lstUsuario.add(usuario);
+				}
+
+				con.close();
+				return lstUsuario;
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
 		}
+		return null;
+	}
 }

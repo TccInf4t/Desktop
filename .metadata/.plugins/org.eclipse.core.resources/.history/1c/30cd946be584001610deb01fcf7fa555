@@ -2,7 +2,8 @@ package br.com.onpecas.view;
 
 import java.io.IOException;
 
-import br.com.onpecas.controller.*;
+import br.com.onpecas.controller.PainelPrincipal;
+import br.com.onpecas.controller.PainelPrincipalController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
