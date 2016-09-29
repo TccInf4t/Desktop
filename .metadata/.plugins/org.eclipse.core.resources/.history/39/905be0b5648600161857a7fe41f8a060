@@ -1,0 +1,78 @@
+package br.com.onpecas.model;
+
+import java.util.List;
+
+public class Transportadora {
+	private int oid_transportadora;
+	private int oid_endereco;
+	private String nome;
+	private String cnpj;
+	private String frete;
+	private String ramo;
+
+
+	public int getOid_transportadora() {
+		return oid_transportadora;
+	}
+
+
+	public void setOid_transportadora(int oid_transportadora) {
+		this.oid_transportadora = oid_transportadora;
+	}
+
+
+	public int getOid_endereco() {
+		return oid_endereco;
+	}
+
+
+	public void setOid_endereco(int oid_endereco) {
+		this.oid_endereco = oid_endereco;
+	}
+
+
+	public String getNome() {
+		return nome;
+	}
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+
+	public String getFrete() {
+		return frete;
+	}
+
+
+	public void setFrete(String frete) {
+		this.frete = frete;
+	}
+
+
+	public String getRamo() {
+		return ramo;
+	}
+
+
+	public void setRamo(String ramo) {
+		this.ramo = ramo;
+	}
+
+
+	public static List<Transportadora> Select(){
+		return null;
+
+	}
+}

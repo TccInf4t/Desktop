@@ -5,7 +5,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="65.0" layoutY="45.0" text="Logradouro" AnchorPane.leftAnchor="30.0">
@@ -38,14 +37,14 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="179.0" layoutY="46.0" prefHeight="25.0" prefWidth="501.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="120.0" />
-      <TextField layoutX="179.0" layoutY="89.0" prefHeight="25.0" prefWidth="367.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="300.0" />
-      <TextField layoutX="179.0" layoutY="133.0" prefHeight="25.0" prefWidth="116.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="420.0" />
-      <TextField layoutX="179.0" layoutY="177.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="500.0" />
-      <ComboBox layoutX="179.0" layoutY="218.0" prefHeight="25.0" prefWidth="207.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="414.0" />
-      <ComboBox layoutX="179.0" layoutY="257.0" prefHeight="25.0" prefWidth="207.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="414.0" />
-      <Button layoutX="707.0" layoutY="567.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="OK" AnchorPane.bottomAnchor="8.0" />
-      <Button layoutX="601.0" layoutY="567.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="CANCELAR" AnchorPane.bottomAnchor="8.0" />
+      <TextField fx:id="txtLogradouro" layoutX="179.0" layoutY="46.0" prefHeight="25.0" prefWidth="501.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="120.0" />
+      <TextField fx:id="txtBairro" layoutX="179.0" layoutY="89.0" prefHeight="25.0" prefWidth="367.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="300.0" />
+      <TextField fx:id="txtNumero" layoutX="179.0" layoutY="133.0" prefHeight="25.0" prefWidth="116.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="420.0" />
+      <TextField fx:id="txtCEP" layoutX="179.0" layoutY="177.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="500.0" />
+      <ComboBox fx:id="cboEstado" layoutX="179.0" layoutY="218.0" onAction="#handleComboBoxAction" prefHeight="25.0" prefWidth="207.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="414.0" />
+      <ComboBox fx:id="cboCidade" layoutX="179.0" layoutY="257.0" prefHeight="25.0" prefWidth="207.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="414.0" />
+      <Button fx:id="btnConfirmar" layoutX="707.0" layoutY="567.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="OK" AnchorPane.bottomAnchor="8.0" />
+      <Button fx:id="btnCancelar" layoutX="601.0" layoutY="567.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="CANCELAR" AnchorPane.bottomAnchor="8.0" />
       <Separator layoutX="6.0" layoutY="558.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    </children>
 </AnchorPane>

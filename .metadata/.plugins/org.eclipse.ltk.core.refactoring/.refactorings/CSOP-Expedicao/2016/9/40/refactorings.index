@@ -2,3 +2,6 @@
 1475005624347	Delete element
 1475005627485	Delete element
 1475005630697	Delete element
+1475167763797	Encapsulate field 'endereco'
+1475168255442	Encapsulate field 'enderecoCompleto'
+1475168516424	Encapsulate field 'observacoes'

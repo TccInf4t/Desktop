@@ -1,0 +1,60 @@
+package br.com.onpecas.controller;
+
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import br.com.onpecas.model.*;
+import br.com.onpecas.view.CallScene;
+import javafx.collections.*;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+public class TransportadoraInicialController implements Initializable{
+
+	@FXML TableView<Transportadora> tblTransportadoras;
+	@FXML TableColumn<Transportadora, String> clnNomeExibicao, clnFretePadrao, clnCidade, clnEstado, clnObservacao;
+
+	@FXML Button btnEditar, btnAdicionar, btnExcluir;
+
+	CallScene callscene;
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		callscene = new CallScene();
+		
+		AtribuirBotoes();
+	}
+
+	public void AtribuirBotoes(){
+		btnAdicionar.setOnAction(l-> AdicionarTransportadora() );
+	}
+
+	public void AdicionarTransportadora(){
+		callscene.LoadTransportadoraCadastroDetalhe();
+	}
+	public void AtualizarTblUser(){
+		clnNomeExibicao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("nomeCompleto"));
+		clnFretePadrao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("login"));
+		clnCidade.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("nomeGrupo"));
+		clnEstado.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("nomeGrupo"));
+		clnObservacao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("nomeGrupo"));
+
+        List<Transportadora> lstTransportadora = Transportadora.Select();
+        ObservableList<Transportadora> data = FXCollections.observableList(lstTransportadora);
+
+        tblTransportadoras.setItems(data);
+    }
+    public void AtualizarTblUserComFiltro( List<Transportadora> lstTransportadora){
+        clnNomeExibicao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("nomeCompleto"));
+		clnFretePadrao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("login"));
+		clnCidade.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("nomeGrupo"));
+		clnEstado.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("nomeGrupo"));
+		clnObservacao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("nomeGrupo"));
+
+        ObservableList<Transportadora> data = FXCollections.observableList(lstTransportadora);
+
+        tblTransportadoras.setItems(data);
+    }
+}

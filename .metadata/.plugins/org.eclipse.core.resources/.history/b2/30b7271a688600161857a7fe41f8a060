@@ -1,0 +1,28 @@
+package br.com.onpecas.model;
+
+public class Cidade {
+	private int oid_cidade;
+	private Estado estado;
+	private String nome;
+
+	public int getOid_cidade() {
+		return oid_cidade;
+	}
+	public void setOid_cidade(int oid_cidade) {
+		this.oid_cidade = oid_cidade;
+	}
+	public Estado getEstado() {
+		return estado;
+	}
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+}

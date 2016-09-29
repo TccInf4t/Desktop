@@ -6,37 +6,34 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <ScrollPane prefHeight="810.0" prefWidth="1010.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0">
          <children>
             <Separator layoutY="210.0" prefHeight="18.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="220.0" />
             <Separator layoutY="264.0" prefHeight="18.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0" />
-            <Button layoutX="12.0" layoutY="231.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="30.0" style="-fx-background-color: #32CD32;" text="+" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="231.0">
+            <Button fx:id="btnAdicionar" layoutX="12.0" layoutY="231.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="30.0" style="-fx-background-color: #32CD32;" text="+" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="231.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="47.0" layoutY="231.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="30.0" style="-fx-background-color: FA8072;" text="x" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="231.0">
+            <Button fx:id="btnExcluir" layoutX="47.0" layoutY="231.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="30.0" style="-fx-background-color: FA8072;" text="x" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="231.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="85.0" layoutY="231.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="30.0" style="-fx-background-color: #00BFFF;" text="e" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="231.0">
+            <Button fx:id="btnEditar" layoutX="85.0" layoutY="231.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="30.0" style="-fx-background-color: #00BFFF;" text="e" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="231.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TableView layoutY="259.0" prefHeight="532.0" prefWidth="1000.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0">
+            <TableView fx:id="tblTransportadoras" layoutY="259.0" prefHeight="524.0" prefWidth="986.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0">
                <columns>
-                  <TableColumn prefWidth="157.0" resizable="false" text="Nome Exibição" />
-                  <TableColumn prefWidth="170.0" resizable="false" text="Nome Real" />
-                  <TableColumn prefWidth="156.0" resizable="false" text="CPF/CNPJ" />
-                  <TableColumn prefWidth="213.0" resizable="false" text="Estado" />
-                  <TableColumn minWidth="0.0" prefWidth="0.0" text="Frete Padrão" />
-                  <TableColumn minWidth="0.0" prefWidth="132.0" resizable="false" text="Cidade" />
-                  <TableColumn prefWidth="171.0" resizable="false" text="Observações" />
+                  <TableColumn fx:id="clnNomeExibicao" prefWidth="317.0" resizable="false" text="Nome Exibição" />
+                  <TableColumn fx:id="clnFretePadrao" minWidth="0.0" prefWidth="161.0" text="Frete Padrão" />
+                  <TableColumn fx:id="clnCidade" minWidth="0.0" prefWidth="158.0" resizable="false" text="Cidade" />
+                  <TableColumn fx:id="clnEstado" prefWidth="134.0" resizable="false" text="Estado" />
+                  <TableColumn fx:id="clnObservacao" prefWidth="215.0" resizable="false" text="Observações" />
                </columns>
             </TableView>
             <Button layoutX="939.0" layoutY="195.0" mnemonicParsing="false" text="FILTRAR" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="195.0">

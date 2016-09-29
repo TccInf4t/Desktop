@@ -1,0 +1,107 @@
+package br.com.onpecas.model;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.onpecas.helper.MySqlConnect;
+
+public class Transportadora {
+	private int oid_transportadora;
+	private int oid_endereco;
+	private String nome;
+	private String cnpj;
+	private String frete;
+	private String ramo;
+	private Endereco endereco;
+
+
+	public int getOid_transportadora() {
+		return oid_transportadora;
+	}
+
+	public void setOid_transportadora(int oid_transportadora) {
+		this.oid_transportadora = oid_transportadora;
+	}
+
+	public int getOid_endereco() {
+		return oid_endereco;
+	}
+
+	public void setOid_endereco(int oid_endereco) {
+		this.oid_endereco = oid_endereco;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	public String getFrete() {
+		return frete;
+	}
+
+	public void setFrete(String frete) {
+		this.frete = frete;
+	}
+
+	public String getRamo() {
+		return ramo;
+	}
+
+	public void setRamo(String ramo) {
+		this.ramo = ramo;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public static List<Transportadora> Select(){
+		Connection con = MySqlConnect.ConectarDb();
+
+		List<Transportadora> lstTransportadora = new ArrayList<Transportadora>();
+		String sql ="select * from transportadora";
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sql);
+
+			while(rs.next()){
+				Transportadora transportadora = new Transportadora();
+
+				transportadora.setOid_transportadora(rs.getInt(""));
+				transportadora.setOid_endereco(rs.getInt(""));
+				transportadora.setCnpj(rs.getString(""));
+				transportadora.setFrete(rs.getString(""));
+				transportadora.setNome(rs.getString(""));
+				transportadora.setRamo(rs.getString(""));
+
+				lstTransportadora.add(transportadora);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lstTransportadora;
+
+	}
+
+}

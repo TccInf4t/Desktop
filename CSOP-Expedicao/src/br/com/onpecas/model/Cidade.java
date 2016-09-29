@@ -1,0 +1,67 @@
+package br.com.onpecas.model;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.onpecas.helper.MySqlConnect;
+
+public class Cidade {
+	private int oid_cidade;
+	private Estado estado;
+	private String nome;
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return getNome();
+	}
+
+	public int getOid_cidade() {
+		return oid_cidade;
+	}
+	public void setOid_cidade(int oid_cidade) {
+		this.oid_cidade = oid_cidade;
+	}
+	public Estado getEstado() {
+		return estado;
+	}
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public static List<Cidade> BuscarCidade(Estado estado){
+
+
+		Connection con = MySqlConnect.ConectarDb();
+
+		List<Cidade> lstCidade = new ArrayList<>();
+		String sql ="select * from cidade where oid_estado ="+estado.getOid_estado();
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sql);
+
+			while(rs.next()){
+				Cidade cidade = new Cidade();
+				cidade.setNome(rs.getString("nome"));
+				cidade.setOid_cidade(rs.getInt("oid_cidade"));
+
+				lstCidade.add(cidade);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lstCidade;
+
+	}
+
+}
