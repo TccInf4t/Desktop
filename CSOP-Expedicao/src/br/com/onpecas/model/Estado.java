@@ -11,6 +11,7 @@ import br.com.onpecas.helper.MySqlConnect;
 public class Estado {
 	private int oid_estado;
 	private String nome;
+	private String UF;
 
 	@Override
 	public String toString() {
@@ -30,6 +31,13 @@ public class Estado {
 		this.nome = nome;
 	}
 
+	public String getUF() {
+		return UF;
+	}
+	public void setUF(String uF) {
+		UF = uF;
+	}
+
 	public static List<Estado> Select(){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -43,6 +51,7 @@ public class Estado {
 				Estado estado = new Estado();
 				estado.setNome(rs.getString("nome"));
 				estado.setOid_estado(rs.getInt("oid_estado"));
+				estado.setUF(rs.getString("uf"));
 
 				lstEstado.add(estado);
 			}
@@ -51,6 +60,32 @@ public class Estado {
 			e.printStackTrace();
 		}
 		return lstEstado;
+	}
+
+	public static Estado BuscarEstado(int oid_estado){
+		Connection con = MySqlConnect.ConectarDb();
+
+		List<Estado> lstEstado = new ArrayList<>();
+		String sql ="select * from estado where oid_estado ="+oid_estado;
+
+		Estado estado = new Estado();
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sql);
+
+			while(rs.next()){
+
+				estado.setNome(rs.getString("nome"));
+				estado.setOid_estado(rs.getInt("oid_estado"));
+				estado.setUF(rs.getString("uf"));
+
+				lstEstado.add(estado);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return estado;
 	}
 
 }

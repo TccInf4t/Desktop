@@ -18,7 +18,7 @@ public class Transportadora {
 	private String ramo;
 	private String observacoes;
 	private Endereco endereco;
-
+	private String estado;
 
 	public int getOid_transportadora() {
 		return oid_transportadora;
@@ -72,6 +72,22 @@ public class Transportadora {
 		return observacoes;
 	}
 
+
+	public String getCidade() {
+		return endereco.getCidade().getNome();
+	}
+
+	public void setCidade(String cidade) {
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
 	}
@@ -80,7 +96,7 @@ public class Transportadora {
 		Connection con = MySqlConnect.ConectarDb();
 
 		List<Transportadora> lstTransportadora = new ArrayList<Transportadora>();
-		String sql ="select * from transportadora";
+		String sql ="select * from transportadora order by oid_transportadora desc";
 
 		try {
 			ResultSet rs = con.createStatement().executeQuery(sql);
@@ -93,7 +109,8 @@ public class Transportadora {
 				transportadora.setFrete(rs.getString("frete"));
 				transportadora.setNome(rs.getString("nome"));
 				transportadora.setRamo(rs.getString("ramo"));
-
+				transportadora.setObservacoes(rs.getString("observacoes"));
+				transportadora.setEndereco(Endereco.BuscarUltimaEndereco());
 				lstTransportadora.add(transportadora);
 			}
 		} catch (SQLException e) {
@@ -103,10 +120,10 @@ public class Transportadora {
 		return lstTransportadora;
 	}
 
-	public void Insert(Transportadora transportadora){
+	public static void Insert(Transportadora transportadora){
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql ="insert into transportadora (nome, cnpj, frete, ramo, observacoes, oid_endereco) values(?, ?, ?, ?, ?, ?);";
+		String sql ="insert into transportadora (nome, cnpj, frete, ramo, observacoes, oid_endereco) values(?, ?, ?, ?, ?, ?); ";
 
 		PreparedStatement parametros;
 
@@ -124,6 +141,61 @@ public class Transportadora {
 			con.close();
 
 			Alerta.showInformation("sucesso", "Inserido com sucesso");
+			//limpar();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
+		}
+	}
+
+	public static void Update(Transportadora transportadora) {
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql ="update transportadora set nome = ?, cnpj = ?, frete = ?, ramo = ?, observacoes = ? where oid_transportadora = ?; ";
+
+		PreparedStatement parametros;
+
+		try {
+			parametros = con.prepareStatement(sql);
+
+			parametros.setString(1, transportadora.getNome());
+			parametros.setString(2, transportadora.getCnpj());
+			parametros.setString(3, transportadora.getFrete());
+			parametros.setString(4, transportadora.getRamo());
+			parametros.setString(5, transportadora.getObservacoes());
+			parametros.setInt(6, transportadora.getOid_transportadora());
+
+			parametros.executeUpdate();
+			con.close();
+
+			Alerta.showInformation("sucesso", "Inserido com sucesso");
+			//limpar();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
+		}
+	}
+
+	public void Delete(Transportadora transportadora) {
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql ="delete * from endereco where oid_endereco = ? ;"
+				+ "delete * from transportadora where oid_transportadora = ?; ";
+
+		PreparedStatement parametros;
+
+		try {
+			parametros = con.prepareStatement(sql);
+
+			parametros.setInt(1, transportadora.getEndereco().getOid_endereco());
+			parametros.setInt(2, transportadora.getOid_transportadora());
+
+			parametros.executeUpdate();
+			con.close();
+
+			Alerta.showInformation("sucesso", "Deletado com sucesso");
 			//limpar();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

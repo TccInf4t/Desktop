@@ -5,3 +5,5 @@
 1475167763797	Encapsulate field 'endereco'
 1475168255442	Encapsulate field 'enderecoCompleto'
 1475168516424	Encapsulate field 'observacoes'
+1475255373753	Encapsulate field 'UF'
+1475256297334	Rename type 'EnderecoHelper'

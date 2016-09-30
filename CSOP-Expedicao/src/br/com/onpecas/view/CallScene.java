@@ -10,6 +10,9 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class CallScene {
+	public static Stage secondStage;
+	public static Stage thirdStage;
+
 	public void LoadTransportadoraInicial(){
 
 		FXMLLoader loader = new FXMLLoader();
@@ -29,14 +32,13 @@ public class CallScene {
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("Endereco.fxml"));
         loader.setController(new EnderecoController());
-        Stage secondStage = new Stage();
-
+        thirdStage = new Stage();
 		try {
 			AnchorPane module= (AnchorPane) loader.load();
 
 			Scene scene = new Scene(module);
-			secondStage.setScene(scene);
-			secondStage.show();
+			thirdStage.setScene(scene);
+			thirdStage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,9 +50,7 @@ public class CallScene {
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("TransportadoraDetalhe.fxml"));
         loader.setController(new TransportadoraCadastroDetalheController());
-
-        Stage secondStage = new Stage();
-
+        secondStage = new Stage();
 		try {
 			AnchorPane module= (AnchorPane) loader.load();
 

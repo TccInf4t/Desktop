@@ -40,7 +40,6 @@ public class Cidade {
 
 	public static List<Cidade> BuscarCidade(Estado estado){
 
-
 		Connection con = MySqlConnect.ConectarDb();
 
 		List<Cidade> lstCidade = new ArrayList<>();
@@ -53,6 +52,7 @@ public class Cidade {
 				Cidade cidade = new Cidade();
 				cidade.setNome(rs.getString("nome"));
 				cidade.setOid_cidade(rs.getInt("oid_cidade"));
+				cidade.setEstado(estado);
 
 				lstCidade.add(cidade);
 			}
@@ -61,6 +61,32 @@ public class Cidade {
 			e.printStackTrace();
 		}
 		return lstCidade;
+
+	}
+
+	public static Cidade BuscarCidadeUnica(int oid_cidade){
+
+		Connection con = MySqlConnect.ConectarDb();
+
+		List<Cidade> lstCidade = new ArrayList<>();
+		String sql ="select * from cidade where oid_cidade ="+oid_cidade;
+		Cidade cidade = new Cidade();
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sql);
+
+			while(rs.next()){
+				
+				cidade.setNome(rs.getString("nome"));
+				cidade.setOid_cidade(rs.getInt("oid_cidade"));
+				cidade.setEstado(Estado.BuscarEstado(rs.getInt("oid_estado")));
+
+				lstCidade.add(cidade);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cidade;
 
 	}
 

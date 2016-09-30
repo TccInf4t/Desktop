@@ -27,7 +27,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TableView fx:id="tblTransportadoras" layoutY="259.0" prefHeight="524.0" prefWidth="986.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0">
+            <TableView fx:id="tblTransportadoras" layoutY="259.0" prefHeight="524.0" prefWidth="986.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0">
                <columns>
                   <TableColumn fx:id="clnNomeExibicao" prefWidth="317.0" resizable="false" text="Nome Exibição" />
                   <TableColumn fx:id="clnFretePadrao" minWidth="0.0" prefWidth="161.0" text="Frete Padrão" />

@@ -1,0 +1,87 @@
+package br.com.onpecas.controller;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import br.com.onpecas.helper.Helper;
+import br.com.onpecas.model.Transportadora;
+import br.com.onpecas.view.CallScene;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+
+public class TransportadoraCadastroDetalheController implements Initializable{
+
+	@FXML Button btnAbrirEndereco, btnCadastrar, btnCancelar;
+
+	@FXML TextField txtNomeCompleto, txtCPF, txtRG, txtTelefone, txtFrete, txtObservacoes, txtRamo;
+
+	@FXML Label lblEnderecoCompleto;
+
+	Transportadora transportadora;
+
+	CallScene callscene;
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		callscene = new CallScene();
+		AtribuirBotoes();
+
+		if(transportadora != null){
+			btnCadastrar.setText("ATUALIZAR");
+		}else{
+			btnCadastrar.setText("CADASTRAR");
+		}
+	}
+
+	public void AtribuirBotoes(){
+		btnAbrirEndereco.setOnAction(l-> AdicionarEndereco());
+		btnCadastrar.setOnAction(l-> AdicionarTransportadora());
+		btnCancelar.setOnAction(l-> Cancelar());
+	}
+
+	public TransportadoraCadastroDetalheController(Transportadora transportadora) {
+		this.transportadora = transportadora;
+	}
+
+	public TransportadoraCadastroDetalheController() {
+
+	}
+
+	private void Cancelar() {
+		CallScene.secondStage.close();
+	}
+
+	public void AdicionarEndereco(){
+		callscene.LoadEndereco();
+	}
+
+	public void AdicionarTransportadora(){
+		if(btnCadastrar.getText().equals("CADASTRAR")){
+			Transportadora transportadora_gerada = new Transportadora();
+
+			transportadora_gerada.setEndereco(Helper.ENDERECO_GERADO);
+
+			transportadora_gerada.setCnpj(txtCPF.getText());
+			transportadora_gerada.setFrete(txtFrete.getText());
+			transportadora_gerada.setObservacoes(txtObservacoes.getText());
+			transportadora_gerada.setRamo(txtRamo.getText());
+			transportadora_gerada.setNome(txtNomeCompleto.getText());
+
+			Transportadora.Insert(transportadora_gerada);
+			
+		}else if(btnCadastrar.getText().equals("ATUALIZAR")){
+			Transportadora transportadora_editada = new Transportadora();
+
+			transportadora_editada.setEndereco(transportadora.getEndereco());
+			transportadora_editada.setOid_transportadora(transportadora.getOid_transportadora());
+
+			transportadora_editada.setCnpj(txtCPF.getText());
+			transportadora_editada.setFrete(txtFrete.getText());
+			transportadora_editada.setObservacoes(txtObservacoes.getText());
+			transportadora_editada.setRamo(txtRamo.getText());
+			transportadora_editada.setNome(txtNomeCompleto.getText());
+
+			Transportadora.Update(transportadora_editada);
+		}
+	}
+}

@@ -1,5 +1,13 @@
 package br.com.onpecas.model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import br.com.onpecas.helper.Alerta;
+import br.com.onpecas.helper.MySqlConnect;
+
 public class Endereco {
 
 	private int oid_endereco;
@@ -66,5 +74,119 @@ public class Endereco {
 	}
 	public void setEnderecoCompleto(String enderecoCompleto) {
 		this.enderecoCompleto = enderecoCompleto;
+	}
+
+	public static void Insert(Endereco endereco){
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql = "insert into endereco (logradouro, numero, cep, bairro, complemento, classname, enderecocompleto, oid_cidade) values (?, ?, ?, ?, ?, ?, ?, ?);";
+
+		PreparedStatement parametros;
+
+		try {
+			parametros = con.prepareStatement(sql);
+
+			parametros.setString(1, endereco.getLogradouro());
+			parametros.setString(2, endereco.getNumero());
+			parametros.setString(3, endereco.getCep());
+			parametros.setString(4, endereco.getBairro());
+			parametros.setString(5, endereco.getComplemento());
+			parametros.setString(6, endereco.getClassname());
+			parametros.setString(7, endereco.getEnderecoCompleto());
+			parametros.setInt(8, endereco.getCidade().getOid_cidade());
+
+			parametros.executeUpdate();
+			con.close();
+			Alerta.showInformation("sucesso", "Inserido com sucesso");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
+		}
+	}
+
+	public static void Update(Endereco endereco){
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql = "update endereco set logradouro =?, numero=?, cep=?, bairro=?, complemento=?, classname=?, enderecocompleto=?, oid_cidade=? where oid_endereco = ?;";
+
+		PreparedStatement parametros;
+
+		try {
+			parametros = con.prepareStatement(sql);
+
+			parametros.setString(1, endereco.getLogradouro());
+			parametros.setString(2, endereco.getNumero());
+			parametros.setString(3, endereco.getCep());
+			parametros.setString(4, endereco.getBairro());
+			parametros.setString(5, endereco.getComplemento());
+			parametros.setString(6, endereco.getClassname());
+			parametros.setString(7, endereco.getEnderecoCompleto());
+			parametros.setInt(8, endereco.getCidade().getOid_cidade());
+			parametros.setInt(9, endereco.getOid_endereco());
+
+			parametros.executeUpdate();
+			con.close();
+			Alerta.showInformation("sucesso", "Atualizado com sucesso");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
+		}
+	}
+
+	public static Endereco BuscarUltimaEndereco(){
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql = "Select * from endereco order by oid_endereco desc LIMIT 1;";
+		Endereco endereco = new Endereco();
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sql);
+			while(rs.next()){
+
+				endereco.setLogradouro(rs.getString("logradouro"));
+				endereco.setNumero(rs.getString("numero"));
+				endereco.setCep(rs.getString("cep"));
+				endereco.setBairro(rs.getString("bairro"));
+				endereco.setComplemento(rs.getString("complemento"));
+				endereco.setClassname(rs.getString("classname"));
+				endereco.setEnderecoCompleto(rs.getString("enderecocompleto"));
+				endereco.setOid_endereco(rs.getInt("oid_endereco"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return endereco;
+	}
+
+	public static Endereco BuscarEndereco(int oid_endereco){
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql = "Select * from endereco where oid_endereco=;" + oid_endereco;
+		Endereco endereco = new Endereco();
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sql);
+			while(rs.next()){
+
+				endereco.setLogradouro(rs.getString("logradouro"));
+				endereco.setNumero(rs.getString("numero"));
+				endereco.setCep(rs.getString("cep"));
+				endereco.setBairro(rs.getString("bairro"));
+				endereco.setComplemento(rs.getString("complemento"));
+				endereco.setClassname(rs.getString("classname"));
+				endereco.setEnderecoCompleto(rs.getString("enderecocompleto"));
+				endereco.setOid_endereco(rs.getInt("oid_endereco"));
+				endereco.setCidade(Cidade.BuscarCidadeUnica(rs.getInt("oid_cidade")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return endereco;
 	}
 }
