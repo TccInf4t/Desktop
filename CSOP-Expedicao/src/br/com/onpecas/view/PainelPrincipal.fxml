@@ -9,9 +9,9 @@
    <top>
       <MenuBar fx:id="menuBar" prefHeight="9.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Transportadora">
             <items>
-              <MenuItem fx:id="menuItemTransportadora" mnemonicParsing="false" text="Transportadoras" />
+              <MenuItem fx:id="menuItemTransportadora" mnemonicParsing="false" text="Inicial" />
             </items>
           </Menu>
         </menus>

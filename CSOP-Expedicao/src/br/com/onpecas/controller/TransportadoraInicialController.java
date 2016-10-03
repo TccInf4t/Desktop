@@ -38,8 +38,10 @@ public class TransportadoraInicialController implements Initializable{
 		         int newValuenovo =Integer.parseInt(newValue.toString());
 		         if(newValuenovo == 1){
 		            AtualizarTblTransportadora();
-		            Helper.AUXENDERECOCOMPLETO.setValue(0);
-		         }else{}
+		            Helper.AUXTRANSPORTADORA.setValue(0);
+		         }else{
+
+		         }
 		     }
 		   });
 	}
@@ -47,6 +49,7 @@ public class TransportadoraInicialController implements Initializable{
 	public void AtribuirBotoes(){
 		btnAdicionar.setOnAction(l-> AdicionarTransportadora() );
 		btnExcluir.setOnAction(l-> ExcluirTransportadora());
+		btnEditar.setOnAction(l-> AtualizarTransportadora());
 	}
 
 	private void ExcluirTransportadora() {
@@ -56,22 +59,33 @@ public class TransportadoraInicialController implements Initializable{
 
         if(result ==JOptionPane.YES_OPTION){
         	if(transportadora == null){
-    			Alerta.showError("Erro ao Editar", "Selecione uma Transportadora");
+    			Alerta.showError("Erro ao Excluir", "Selecione uma Transportadora");
     		}else{
     			transportadora.Delete(transportadora);
+    			Helper.AUXTRANSPORTADORA.setValue(1);
     		}
         }
 	}
 
 	public void AdicionarTransportadora(){
-		callscene.LoadTransportadoraCadastroDetalhe();
+		callscene.LoadTransportadoraCadastroDetalhe(null);
+	}
+
+	public void AtualizarTransportadora(){
+		Transportadora transportadora = tblTransportadoras.getSelectionModel().getSelectedItem();
+
+		if(transportadora == null){
+			Alerta.showError("Erro ao Editar", "Selecione uma Transportadora");
+		}else{
+			callscene.LoadTransportadoraCadastroDetalhe(transportadora);
+		}
 	}
 
 	public void AtualizarTblTransportadora(){
 		clnNomeExibicao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("nome"));
 		clnFretePadrao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("frete"));
-		//clnCidade.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("cidade"));
-		//clnEstado.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("nomeGrupo"));
+		clnCidade.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("cidade"));
+		clnEstado.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("estado"));
 		clnObservacao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("observacoes"));
 
 
@@ -81,10 +95,11 @@ public class TransportadoraInicialController implements Initializable{
         tblTransportadoras.setItems(data);
     }
     public void AtualizarTblTransportadoraComFiltro(List<Transportadora> lstTransportadora){
+
     	clnNomeExibicao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("nome"));
 		clnFretePadrao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("frete"));
-		//clnCidade.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("nomeGrupo"));
-		//clnEstado.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("nomeGrupo"));
+		clnCidade.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("cidade"));
+		clnEstado.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("estado"));
 		clnObservacao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("observacoes"));
 
         ObservableList<Transportadora> data = FXCollections.observableList(lstTransportadora);

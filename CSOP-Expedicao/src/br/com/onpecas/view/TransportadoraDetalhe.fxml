@@ -71,7 +71,7 @@
       </Button>
       <Label fx:id="lblEnderecoCompleto" layoutX="252.0" layoutY="253.0" prefHeight="27.0" prefWidth="538.0">
          <font>
-            <Font size="18.0" />
+            <Font size="14.0" />
          </font>
       </Label>
       <TextField fx:id="txtFrete" layoutX="219.0" layoutY="327.0" prefHeight="25.0" prefWidth="147.0" />

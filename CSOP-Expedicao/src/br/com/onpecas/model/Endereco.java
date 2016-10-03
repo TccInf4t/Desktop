@@ -128,7 +128,6 @@ public class Endereco {
 
 			parametros.executeUpdate();
 			con.close();
-			Alerta.showInformation("sucesso", "Atualizado com sucesso");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -140,33 +139,7 @@ public class Endereco {
 	public static Endereco BuscarUltimaEndereco(){
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql = "Select * from endereco order by oid_endereco desc LIMIT 1;";
-		Endereco endereco = new Endereco();
-
-		try {
-			ResultSet rs = con.createStatement().executeQuery(sql);
-			while(rs.next()){
-
-				endereco.setLogradouro(rs.getString("logradouro"));
-				endereco.setNumero(rs.getString("numero"));
-				endereco.setCep(rs.getString("cep"));
-				endereco.setBairro(rs.getString("bairro"));
-				endereco.setComplemento(rs.getString("complemento"));
-				endereco.setClassname(rs.getString("classname"));
-				endereco.setEnderecoCompleto(rs.getString("enderecocompleto"));
-				endereco.setOid_endereco(rs.getInt("oid_endereco"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return endereco;
-	}
-
-	public static Endereco BuscarEndereco(int oid_endereco){
-		Connection con = MySqlConnect.ConectarDb();
-
-		String sql = "Select * from endereco where oid_endereco=;" + oid_endereco;
+		String sql = "Select * from endereco where classname='TEnderecoTransportadora' order by oid_endereco desc LIMIT 1;";
 		Endereco endereco = new Endereco();
 
 		try {
@@ -188,5 +161,54 @@ public class Endereco {
 			e.printStackTrace();
 		}
 		return endereco;
+	}
+
+	public static Endereco BuscarEndereco(int oid_endereco){
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql = "Select * from endereco where oid_endereco=" + oid_endereco;
+		Endereco endereco = new Endereco();
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sql);
+			while(rs.next()){
+
+				endereco.setLogradouro(rs.getString("logradouro"));
+				endereco.setNumero(rs.getString("numero"));
+				endereco.setCep(rs.getString("cep"));
+				endereco.setBairro(rs.getString("bairro"));
+				endereco.setComplemento(rs.getString("complemento"));
+				endereco.setClassname(rs.getString("classname"));
+				endereco.setEnderecoCompleto(rs.getString("enderecocompleto"));
+				endereco.setOid_endereco(rs.getInt("oid_endereco"));
+				endereco.setCidade(Cidade.BuscarCidadeUnica(rs.getInt("oid_cidade")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return endereco;
+	}
+
+	public static void Delete(int oid_endereco){
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql = "delete from endereco where oid_endereco = ? and classname = ?;";
+
+		PreparedStatement parametros;
+
+		try {
+			parametros = con.prepareStatement(sql);
+
+			parametros.setInt(1, oid_endereco);
+			parametros.setString(2, "TEnderecoTransportadora");
+
+			parametros.executeUpdate();
+			con.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

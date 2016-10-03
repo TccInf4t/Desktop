@@ -19,6 +19,25 @@ public class Transportadora {
 	private String observacoes;
 	private Endereco endereco;
 	private String estado;
+	private String cidade;
+	private String rg;
+	private String natureza;
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+	public String getNatureza() {
+		return natureza;
+	}
+
+	public void setNatureza(String natureza) {
+		this.natureza = natureza;
+	}
 
 	public int getOid_transportadora() {
 		return oid_transportadora;
@@ -73,21 +92,6 @@ public class Transportadora {
 	}
 
 
-	public String getCidade() {
-		return endereco.getCidade().getNome();
-	}
-
-	public void setCidade(String cidade) {
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
 	}
@@ -103,6 +107,7 @@ public class Transportadora {
 
 			while(rs.next()){
 				Transportadora transportadora = new Transportadora();
+				Endereco endereco = Endereco.BuscarEndereco(rs.getInt("oid_endereco"));
 
 				transportadora.setOid_transportadora(rs.getInt("oid_transportadora"));
 				transportadora.setCnpj(rs.getString("cnpj"));
@@ -110,7 +115,13 @@ public class Transportadora {
 				transportadora.setNome(rs.getString("nome"));
 				transportadora.setRamo(rs.getString("ramo"));
 				transportadora.setObservacoes(rs.getString("observacoes"));
-				transportadora.setEndereco(Endereco.BuscarUltimaEndereco());
+				transportadora.setNatureza(rs.getString("natureza"));
+				transportadora.setRg(rs.getString("rg"));
+
+				transportadora.setEndereco(endereco);
+				transportadora.setCidade(endereco.getCidade().getNome());
+				transportadora.setEstado(endereco.getCidade().getEstado().getNome());
+
 				lstTransportadora.add(transportadora);
 			}
 		} catch (SQLException e) {
@@ -181,20 +192,19 @@ public class Transportadora {
 	public void Delete(Transportadora transportadora) {
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql ="delete * from endereco where oid_endereco = ? ;"
-				+ "delete * from transportadora where oid_transportadora = ?; ";
-
+		String sql ="delete from transportadora where oid_transportadora = ?; ";
+		
 		PreparedStatement parametros;
 
 		try {
 			parametros = con.prepareStatement(sql);
 
-			parametros.setInt(1, transportadora.getEndereco().getOid_endereco());
-			parametros.setInt(2, transportadora.getOid_transportadora());
+			parametros.setInt(1, transportadora.getOid_transportadora());			
 
 			parametros.executeUpdate();
 			con.close();
 
+			Endereco.Delete(transportadora.getEndereco().getOid_endereco());
 			Alerta.showInformation("sucesso", "Deletado com sucesso");
 			//limpar();
 		} catch (SQLException e) {
@@ -202,5 +212,21 @@ public class Transportadora {
 			e.printStackTrace();
 			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
 		}
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 }
