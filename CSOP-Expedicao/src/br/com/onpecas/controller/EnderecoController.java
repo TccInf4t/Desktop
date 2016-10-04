@@ -39,13 +39,11 @@ public class EnderecoController implements Initializable{
 			cboEstado.setValue(endereco.getCidade().getEstado());
 			CarregarCidades(endereco.getCidade().getEstado());
 			cboCidade.setValue(endereco.getCidade());
-			System.out.println(endereco.getOid_endereco());
 		}
 	}
 
 	public EnderecoController(Endereco endereco) {
 		this.endereco = endereco;
-		
 	}
 
 	public EnderecoController() {}
@@ -104,7 +102,6 @@ public class EnderecoController implements Initializable{
 			}else{
 				Helper.AUXENDERECOCOMPLETO.setValue(0);
 				Endereco endereco_novo = new Endereco();
-				System.out.println(Helper.AUXENDERECOCOMPLETO);
 				endereco_novo.setLogradouro(txtLogradouro.getText());
 				endereco_novo.setBairro(txtBairro.getText());
 				endereco_novo.setNumero(txtNumero.getText());
@@ -119,12 +116,10 @@ public class EnderecoController implements Initializable{
 
 				endereco_novo.setEnderecoCompleto(enderecoCompleto);
 				endereco_novo.setOid_endereco(endereco.getOid_endereco());
-				System.out.println(endereco.getOid_endereco());
 				Endereco.Update(endereco_novo);
 
 				Helper.ENDERECO_GERADO = endereco_novo;
 				Helper.AUXENDERECOCOMPLETO.setValue(1);
-				System.out.println(Helper.AUXENDERECOCOMPLETO);
 				CallScene.thirdStage.close();
 			}
 		}

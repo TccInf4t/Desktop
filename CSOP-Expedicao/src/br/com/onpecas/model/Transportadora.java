@@ -22,6 +22,16 @@ public class Transportadora {
 	private String cidade;
 	private String rg;
 	private String natureza;
+	private String telefone;
+
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 
 	public String getRg() {
 		return rg;
@@ -91,9 +101,24 @@ public class Transportadora {
 		return observacoes;
 	}
 
-
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 
 	public static List<Transportadora> Select(){
@@ -117,7 +142,8 @@ public class Transportadora {
 				transportadora.setObservacoes(rs.getString("observacoes"));
 				transportadora.setNatureza(rs.getString("natureza"));
 				transportadora.setRg(rs.getString("rg"));
-
+				transportadora.setTelefone(rs.getString("telefone"));
+				
 				transportadora.setEndereco(endereco);
 				transportadora.setCidade(endereco.getCidade().getNome());
 				transportadora.setEstado(endereco.getCidade().getEstado().getNome());
@@ -134,7 +160,7 @@ public class Transportadora {
 	public static void Insert(Transportadora transportadora){
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql ="insert into transportadora (nome, cnpj, frete, ramo, observacoes, oid_endereco) values(?, ?, ?, ?, ?, ?); ";
+		String sql ="insert into transportadora (nome, cnpj, frete, ramo, observacoes, oid_endereco, natureza, rg, telefone) values(?, ?, ?, ?, ?, ?, ?, ?, ?); ";
 
 		PreparedStatement parametros;
 
@@ -147,6 +173,9 @@ public class Transportadora {
 			parametros.setString(4, transportadora.getRamo());
 			parametros.setString(5, transportadora.getObservacoes());
 			parametros.setInt(6, transportadora.getEndereco().getOid_endereco());
+			parametros.setString(7, transportadora.getNatureza());
+			parametros.setString(8, transportadora.getRg());
+			parametros.setString(8, transportadora.getTelefone());
 
 			parametros.executeUpdate();
 			con.close();
@@ -163,7 +192,7 @@ public class Transportadora {
 	public static void Update(Transportadora transportadora) {
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql ="update transportadora set nome = ?, cnpj = ?, frete = ?, ramo = ?, observacoes = ? where oid_transportadora = ?; ";
+		String sql ="update transportadora set nome = ?, cnpj = ?, frete = ?, ramo = ?, observacoes = ?, rg = ?, natureza =?, telefone =? where oid_transportadora = ?; ";
 
 		PreparedStatement parametros;
 
@@ -175,7 +204,11 @@ public class Transportadora {
 			parametros.setString(3, transportadora.getFrete());
 			parametros.setString(4, transportadora.getRamo());
 			parametros.setString(5, transportadora.getObservacoes());
-			parametros.setInt(6, transportadora.getOid_transportadora());
+
+			parametros.setString(6, transportadora.getRg());
+			parametros.setString(7, transportadora.getNatureza());
+			parametros.setString(8, transportadora.getTelefone());
+			parametros.setInt(9, transportadora.getOid_transportadora());
 
 			parametros.executeUpdate();
 			con.close();
@@ -193,13 +226,13 @@ public class Transportadora {
 		Connection con = MySqlConnect.ConectarDb();
 
 		String sql ="delete from transportadora where oid_transportadora = ?; ";
-		
+
 		PreparedStatement parametros;
 
 		try {
 			parametros = con.prepareStatement(sql);
 
-			parametros.setInt(1, transportadora.getOid_transportadora());			
+			parametros.setInt(1, transportadora.getOid_transportadora());
 
 			parametros.executeUpdate();
 			con.close();
@@ -212,21 +245,5 @@ public class Transportadora {
 			e.printStackTrace();
 			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
 		}
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
 	}
 }

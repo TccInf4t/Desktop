@@ -38,13 +38,40 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 
 		AtribuirBotoes();
 
+		cboTipoPessoa.getItems().add("FÍSICA");
+		cboTipoPessoa.getItems().add("JURÍDICA");
+
 		if(transportadora != null){
 			btnCadastrar.setText("ATUALIZAR");
+
+			txtNomeCompleto.setText(transportadora.getNome());
+			txtFrete.setText(transportadora.getFrete().substring(3).replace(".", "").replace(",", "."));
+			txtRamo.setText(transportadora.getRamo());
+			txtObservacoes.setText(transportadora.getObservacoes());
+			txtTelefone.setText(transportadora.getTelefone());
+			lblEnderecoCompleto.setText(transportadora.getEndereco().getEnderecoCompleto());
+
+			if(transportadora.getNatureza().equals("F")){
+				cboTipoPessoa.setValue("FÍSICA");
+				Mascaras.mascaraCPF(txtCPF);
+				txtCPF.setEditable(true);
+				txtRG.setEditable(true);
+				txtCPF.setText(transportadora.getCnpj());
+				txtRG.setText(transportadora.getRg());
+			}else if(transportadora.getNatureza().equals("J")){
+				cboTipoPessoa.setValue("JURÍDICA");
+				Mascaras.mascaraCNPJ(txtCPF);
+				txtCPF.setEditable(true);
+				txtRG.setEditable(false);
+				txtCPF.setText(transportadora.getCnpj());
+			}
+
+			Helper.ENDERECO_GERADO = transportadora.getEndereco();
+			Helper.AUXENDERECOCOMPLETO.setValue(1);
+			endereco = transportadora.getEndereco();
 		}else{
 			btnCadastrar.setText("SALVAR");
 		}
-		cboTipoPessoa.getItems().add("FÍSICA");
-		cboTipoPessoa.getItems().add("JURÍDICA");
 
 		 Helper.AUXENDERECOCOMPLETO.addListener(new ChangeListener<Object>() {
 		     @Override
@@ -74,7 +101,6 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 		txtRG.setEditable(false);
 
 		Mascaras.mascaraNumero(txtFrete);
-
 	}
 
 	@FXML
@@ -98,7 +124,6 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 			if(Helper.ENDERECO_GERADO != null){
 				Endereco.Delete(Helper.ENDERECO_GERADO.getOid_endereco());
 			}
-
 			CallScene.secondStage.close();
 		}
 	}
@@ -116,17 +141,12 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 			Transportadora transportadora_gerada = new Transportadora();
 
 			transportadora_gerada.setEndereco(endereco);
-
 			transportadora_gerada.setCnpj(txtCPF.getText());
-			try {
-				transportadora_gerada.setFrete(format.format(Double.parseDouble(txtFrete.getText())));
-			} catch (NumberFormatException e) {
-				transportadora_gerada.setFrete(format.format(Double.parseDouble(txtFrete.getText())));
-			}
+			transportadora_gerada.setFrete(format.format(Double.parseDouble(txtFrete.getText())));
 			transportadora_gerada.setObservacoes(txtObservacoes.getText());
 			transportadora_gerada.setRamo(txtRamo.getText());
 			transportadora_gerada.setNome(txtNomeCompleto.getText());
-
+			transportadora_gerada.setTelefone(txtTelefone.getText());
 
 			if(cboTipoPessoa.getSelectionModel().getSelectedItem().equals("FÍSICA")){
 				transportadora_gerada.setNatureza("F");
@@ -147,21 +167,21 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 		}else if(btnCadastrar.getText().equals("ATUALIZAR")){
 			Transportadora transportadora_editada = new Transportadora();
 
+			transportadora_editada.setOid_transportadora(transportadora.getOid_transportadora());
 			transportadora_editada.setEndereco(endereco);
-
 			transportadora_editada.setCnpj(txtCPF.getText());
 			transportadora_editada.setFrete(format.format(Double.parseDouble(txtFrete.getText())));
 			transportadora_editada.setObservacoes(txtObservacoes.getText());
 			transportadora_editada.setRamo(txtRamo.getText());
 			transportadora_editada.setNome(txtNomeCompleto.getText());
-
+			transportadora_editada.setTelefone(txtTelefone.getText());
 
 			if(cboTipoPessoa.getSelectionModel().getSelectedItem().equals("FÍSICA")){
 				transportadora_editada.setNatureza("F");
 				transportadora_editada.setRg(txtRG.getText());
 			}else if(cboTipoPessoa.getSelectionModel().getSelectedItem().equals("JURÍDICA")){
 				transportadora_editada.setNatureza("J");
-			}else{}
+			}
 
 			transportadora_editada.setCidade(endereco.getCidade().getNome());
 			transportadora_editada.setEstado(endereco.getCidade().getEstado().getNome());
