@@ -76,6 +76,7 @@ public class Endereco {
 		this.enderecoCompleto = enderecoCompleto;
 	}
 
+	//Metodo usado para inserir um novo endereco no banco de dados
 	public static void Insert(Endereco endereco){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -106,6 +107,7 @@ public class Endereco {
 		}
 	}
 
+	/*Método usado para atualizar um registro no banco de dados*/
 	public static void Update(Endereco endereco){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -136,6 +138,7 @@ public class Endereco {
 		}
 	}
 
+	/*Método que busca o ultimo endereco gerado referente as transportadoras*/
 	public static Endereco BuscarUltimaEndereco(){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -163,6 +166,7 @@ public class Endereco {
 		return endereco;
 	}
 
+	/*Método que busca o um endereco especifico que foi gerado referente a transportadora*/
 	public static Endereco BuscarEndereco(int oid_endereco){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -190,6 +194,7 @@ public class Endereco {
 		return endereco;
 	}
 
+	/*Método utilizado para exluir um registro do banco de dados*/
 	public static void Delete(int oid_endereco){
 		Connection con = MySqlConnect.ConectarDb();
 

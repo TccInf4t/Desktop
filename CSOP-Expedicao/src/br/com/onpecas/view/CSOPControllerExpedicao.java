@@ -20,11 +20,12 @@ public class CSOPControllerExpedicao extends Application {
 		LoadBorder();
 	}
 
+	/*Carregamento inicial das bordas*/
 	public void LoadBorder() throws IOException{
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("PainelPrincipal.fxml"));
         loader.setController(new PainelPrincipalController());
-        
+
 		border = (BorderPane) loader.load();
         Scene scene = new Scene(border);
 

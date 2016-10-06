@@ -24,12 +24,10 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 	@FXML ComboBox<String> cboTipoPessoa;
 
 	Transportadora transportadora;
-
 	CallScene callscene;
-
 	Endereco endereco;
-
 	NumberFormat format;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -41,6 +39,13 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 		cboTipoPessoa.getItems().add("FÍSICA");
 		cboTipoPessoa.getItems().add("JURÍDICA");
 
+		/*
+		 * Lógica usada para separar a inserçao de dados, da edição de dados
+		 * Ao instanciar a classe TransportadoraCadastroDetalheController
+		 * terá a opção de passar um objeto do tipo Transportadora para ser editado
+		 * ou passar um objeto nulo, que significa que será uma inserção de dados
+		 *
+		 * */
 		if(transportadora != null){
 			btnCadastrar.setText("ATUALIZAR");
 
@@ -66,6 +71,9 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 				txtCPF.setText(transportadora.getCnpj());
 			}
 
+			/*
+			 * Na classe Helper, existem variaveis que irão auxilixar na inserção e na edição de Transportadoras
+			 * */
 			Helper.ENDERECO_GERADO = transportadora.getEndereco();
 			Helper.AUXENDERECOCOMPLETO.setValue(1);
 			endereco = transportadora.getEndereco();
@@ -73,6 +81,11 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 			btnCadastrar.setText("SALVAR");
 		}
 
+		/*
+		 * Esse é um Listener (Observador) da variavel que auxilia no cadastro do endereco
+		 * referente a transportadora que esta sendo cadastrada ou editada no momento
+		 * Caso o valor seja modificado para 1, ele irá preencher a Label com algunas dados do endereço gerado
+		 * */
 		 Helper.AUXENDERECOCOMPLETO.addListener(new ChangeListener<Object>() {
 		     @Override
 		     public void changed(ObservableValue<?> observableValue, Object oldValue,
@@ -90,8 +103,9 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 		this.transportadora = transportadora;
 	}
 
-	public TransportadoraCadastroDetalheController() {}
-
+	/*
+	 * Método utilizado para atribuir ações e dados à alguns itens da tela
+	 * */
 	public void AtribuirBotoes(){
 		btnAbrirEndereco.setOnAction(l-> AdicionarEndereco());
 		btnCadastrar.setOnAction(l-> AdicionarTransportadora());
@@ -100,9 +114,16 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 		txtCPF.setEditable(false);
 		txtRG.setEditable(false);
 
+		/*Atribuição de mascaras*/
 		Mascaras.mascaraNumero(txtFrete);
 	}
 
+
+	/*
+	 * Esse é um Listener de seleção da combo box
+	 * Quando for seleciodo, irá verificar o que foi
+	 * selecionado e liberar outros itens para a edição
+	 * */
 	@FXML
 	private void handleComboBoxAction() {
 
@@ -117,6 +138,10 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 		}
 	}
 
+	/*
+	 * Ao clicar no botão cancelar quando estiver inserindo uma transportadora,
+	 * é chamado a função para excluir o endereço gerado referente a mesma
+	 * */
 	private void Cancelar() {
 		if(btnCadastrar.getText().equals("ATUALIZAR")){
 			CallScene.secondStage.close();
@@ -128,6 +153,10 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 		}
 	}
 
+	/*
+	 * Ao clicar no botão endereco, irá verificar se a transportadora já possui um endereco cadastrado,
+	 * então mandará o mesmo para a tela de edição/inserção de endereco
+	 * */
 	public void AdicionarEndereco(){
 		if(Helper.AUXENDERECOCOMPLETO.getValue() == 1){
 			callscene.LoadEndereco(endereco);
@@ -136,6 +165,10 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 		}
 	}
 
+	/*
+	 * Esse método serve para verificar se a ação está sendo de inserção ou edição 
+	 * e redirecionar para o método especifico (Insert ou Update)
+	 * */
 	public void AdicionarTransportadora(){
 		if(btnCadastrar.getText().equals("SALVAR")){
 			Transportadora transportadora_gerada = new Transportadora();
@@ -153,7 +186,7 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 				transportadora_gerada.setRg(txtRG.getText());
 			}else if(cboTipoPessoa.getSelectionModel().getSelectedItem().equals("JURÍDICA")){
 				transportadora_gerada.setNatureza("J");
-			}else{}
+			}
 
 			transportadora_gerada.setCidade(endereco.getCidade().getNome());
 			transportadora_gerada.setEstado(endereco.getCidade().getEstado().getNome());

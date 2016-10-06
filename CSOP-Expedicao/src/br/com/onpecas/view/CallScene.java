@@ -15,21 +15,22 @@ public class CallScene {
 	public static Stage secondStage;
 	public static Stage thirdStage;
 
+	/*Função para abrir uma carregar a tela com alguns campos da transportadora, masntendo a primeira*/
 	public void LoadTransportadoraInicial(){
-
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("TransportadoraInicial.fxml"));
         loader.setController(new TransportadoraInicialController());
 
 		try {
 			ScrollPane module= (ScrollPane) loader.load();
+
 			CSOPControllerExpedicao.border.setCenter(module);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	/*Função para abrir uma terceira tela com os campos do endereco, masntendo a segunda*/
 	public void LoadEndereco(Endereco endereco){
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("Endereco.fxml"));
@@ -39,20 +40,21 @@ public class CallScene {
 			AnchorPane module= (AnchorPane) loader.load();
 
 			Scene scene = new Scene(module);
+
 			thirdStage.setScene(scene);
 			thirdStage.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-
+/*Função para abrir uma segunda tela com os campos da transportadora, masntendo a primeira*/
 	public void LoadTransportadoraCadastroDetalhe(Transportadora transportadora){
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("TransportadoraDetalhe.fxml"));
         loader.setController(new TransportadoraCadastroDetalheController(transportadora));
         secondStage = new Stage();
+
 		try {
 			AnchorPane module= (AnchorPane) loader.load();
 
@@ -61,7 +63,6 @@ public class CallScene {
 			secondStage.show();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

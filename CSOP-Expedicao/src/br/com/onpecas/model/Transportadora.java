@@ -17,13 +17,12 @@ public class Transportadora {
 	private String frete;
 	private String ramo;
 	private String observacoes;
-	private Endereco endereco;
 	private String estado;
 	private String cidade;
 	private String rg;
 	private String natureza;
 	private String telefone;
-
+	private Endereco endereco;
 
 	public String getTelefone() {
 		return telefone;
@@ -121,6 +120,7 @@ public class Transportadora {
 		this.cidade = cidade;
 	}
 
+	//Metodo usado para listar os registros referentes as transportadoras
 	public static List<Transportadora> Select(){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -143,7 +143,7 @@ public class Transportadora {
 				transportadora.setNatureza(rs.getString("natureza"));
 				transportadora.setRg(rs.getString("rg"));
 				transportadora.setTelefone(rs.getString("telefone"));
-				
+
 				transportadora.setEndereco(endereco);
 				transportadora.setCidade(endereco.getCidade().getNome());
 				transportadora.setEstado(endereco.getCidade().getEstado().getNome());
@@ -151,12 +151,12 @@ public class Transportadora {
 				lstTransportadora.add(transportadora);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return lstTransportadora;
 	}
 
+	/*Método para inserir um novo registro de tranportadora no banco*/
 	public static void Insert(Transportadora transportadora){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -181,14 +181,13 @@ public class Transportadora {
 			con.close();
 
 			Alerta.showInformation("sucesso", "Inserido com sucesso");
-			//limpar();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
 		}
 	}
 
+	/*Método para atualizar o regostro de transportadora no banco de dados*/
 	public static void Update(Transportadora transportadora) {
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -214,14 +213,13 @@ public class Transportadora {
 			con.close();
 
 			Alerta.showInformation("sucesso", "Inserido com sucesso");
-			//limpar();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
 		}
 	}
 
+	/*Método para apagar transportadoras no banco de dados*/
 	public void Delete(Transportadora transportadora) {
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -239,9 +237,7 @@ public class Transportadora {
 
 			Endereco.Delete(transportadora.getEndereco().getOid_endereco());
 			Alerta.showInformation("sucesso", "Deletado com sucesso");
-			//limpar();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
 		}

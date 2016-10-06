@@ -64,9 +64,7 @@ public class Grupo {
 			con.close();
 
 			Alerta.showInformation("sucesso", "Inserido com sucesso");
-			//limpar();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
 		}
@@ -106,8 +104,6 @@ public class Grupo {
 	//Metodo usado para excluir um grupo no banco de dados
 	public static void Delete(Grupo grupo){
 		Connection con = MySqlConnect.ConectarDb();
-		
-		//Permissao.Delete(grupo.getOid_permissao());
 
 		String sql ="delete from grupousuario where oid_grupo = ?;";
 
@@ -115,7 +111,7 @@ public class Grupo {
 		PreparedStatement parametros;
 
 		try {
-			
+
 			parametros = con.prepareStatement(sql);
 			parametros.setInt(1, grupo.getOid_grupo());
 
@@ -124,9 +120,7 @@ public class Grupo {
 			con.close();
 
 			Alerta.showInformation("sucesso", "Deletado com sucesso");
-			//limpar();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			if(e.getErrorCode() == 1451){
 				Alerta.showError("Não é possível excluir", "Este grupo possui usuários associados");
 			}else{
@@ -153,9 +147,7 @@ public class Grupo {
 			con.close();
 
 			Alerta.showInformation("sucesso", "Atualizado com sucesso");
-			//limpar();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
 		}

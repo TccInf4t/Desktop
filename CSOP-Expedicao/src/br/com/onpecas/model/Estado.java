@@ -16,7 +16,7 @@ public class Estado {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return getNome();
+		return getNome()+" - "+getUF();
 	}
 	public int getOid_estado() {
 		return oid_estado;
@@ -38,6 +38,7 @@ public class Estado {
 		UF = uF;
 	}
 
+	/*Método usado para listar todos os registros da tabela estado*/
 	public static List<Estado> Select(){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -62,6 +63,7 @@ public class Estado {
 		return lstEstado;
 	}
 
+	/*Método para buscar um estado especifico no banco de dados*/
 	public static Estado BuscarEstado(int oid_estado){
 		Connection con = MySqlConnect.ConectarDb();
 

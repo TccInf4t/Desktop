@@ -26,6 +26,12 @@ public class EnderecoController implements Initializable{
 		AtribuirBotoes();
 		Mascaras.mascaraCEP(txtCEP);
 
+		/*
+		 * Lógica usada para separar a inserçao de dados, da edição de dados
+		 * Ao instanciar a classe EnderecoController
+		 * terá a opção de passar um objeto do tipo Endereco para ser editado
+		 * ou passar um objeto nulo, que significa que será uma inserção de dados
+		 * */
 		if(endereco == null){
 			btnConfirmar.setText("SALVAR");
 		}else{
@@ -46,8 +52,11 @@ public class EnderecoController implements Initializable{
 		this.endereco = endereco;
 	}
 
-	public EnderecoController() {}
-
+	/*
+	 * Método que irá ser ativado quando selecionar um item da combobox
+	 * No caso, ao selecionar um estado na combobox cboEstado
+	 * esse método irá carregar a combobox cboCidade
+	 * */
 	@FXML
 	private void handleComboBoxAction() {
 		Estado estado = cboEstado.getSelectionModel().getSelectedItem();
@@ -57,16 +66,28 @@ public class EnderecoController implements Initializable{
 		}
 	}
 
+	/*
+	 * Método para preencher a combobox cboCidade após selecionar um estado
+	 * */
 	public void CarregarCidades(Estado estado){
 		cboCidade.getItems().clear();
 		cboCidade.getItems().addAll(Cidade.BuscarCidade(estado));
 	}
+
+	/*
+	 * Método utilizado para atribuir ações e dados à alguns itens da tela
+	 * */
 	public void AtribuirBotoes(){
 		cboEstado.getItems().addAll(Estado.Select());
 		btnConfirmar.setOnAction(l-> Adicionar());
 		btnCancelar.setOnAction(l-> CallScene.thirdStage.close());
 	}
 
+	/*
+	 * Esse método serve para verificar se a ação está sendo de inserção ou edição
+	 * e redirecionar para o método especifico (Insert ou Update)
+	 * de acordo com o nome do botão
+	 * */
 	private void Adicionar() {
 
 		if(btnConfirmar.getText().equals("SALVAR")){

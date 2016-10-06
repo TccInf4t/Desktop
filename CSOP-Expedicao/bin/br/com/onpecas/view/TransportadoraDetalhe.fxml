@@ -56,12 +56,12 @@
          </cursor>
       </Button>
       <TextField fx:id="txtTelefone" layoutX="219.0" layoutY="289.0" prefHeight="25.0" prefWidth="279.0" AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="289.0" />
-      <Button fx:id="btnCancelar" layoutX="913.0" layoutY="749.0" mnemonicParsing="false" style="-fx-background-color: #FA8072;" text="Cancelar" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="25.0">
+      <Button fx:id="btnCancelar" layoutX="913.0" layoutY="749.0" mnemonicParsing="false" style="-fx-background-color: #FA8072;" text="CANCELAR" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="25.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnCadastrar" layoutX="831.0" layoutY="749.0" mnemonicParsing="false" style="-fx-background-color: #32CD32;" text="Cadastrar" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="110.0">
+      <Button fx:id="btnCadastrar" layoutX="831.0" layoutY="749.0" mnemonicParsing="false" style="-fx-background-color: #32CD32;" text="SALVAR" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="110.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

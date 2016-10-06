@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane prefHeight="810.0" prefWidth="1010.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0">
+         <children>
+            <Separator layoutY="210.0" prefHeight="18.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="220.0" />
+            <Separator layoutY="264.0" prefHeight="18.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0" />
+            <Button fx:id="btnAdicionar" layoutX="12.0" layoutY="231.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="30.0" style="-fx-background-color: #32CD32;" text="+" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="231.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnExcluir" layoutX="47.0" layoutY="231.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="30.0" style="-fx-background-color: FA8072;" text="x" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="231.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnEditar" layoutX="85.0" layoutY="231.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="30.0" style="-fx-background-color: #00BFFF;" text="e" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="231.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <TableView fx:id="tblTransportadoras" layoutY="259.0" prefHeight="524.0" prefWidth="986.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0">
+               <columns>
+                  <TableColumn fx:id="clnNomeExibicao" prefWidth="317.0" resizable="false" text="Nome Exibição" />
+                  <TableColumn fx:id="clnFretePadrao" minWidth="0.0" prefWidth="161.0" text="Frete Padrão" />
+                  <TableColumn fx:id="clnCidade" minWidth="0.0" prefWidth="158.0" resizable="false" text="Cidade" />
+                  <TableColumn fx:id="clnEstado" prefWidth="134.0" resizable="false" text="Estado" />
+                  <TableColumn fx:id="clnObservacao" prefWidth="215.0" resizable="false" text="Observações" />
+               </columns>
+            </TableView>
+            <Button layoutX="939.0" layoutY="195.0" mnemonicParsing="false" text="FILTRAR" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="195.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <ComboBox layoutX="438.0" layoutY="120.0" prefWidth="150.0" AnchorPane.leftAnchor="438.0" AnchorPane.topAnchor="120.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ComboBox>
+            <Label layoutX="275.0" layoutY="122.0" text="Cidade:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="120.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ComboBox layoutX="123.0" layoutY="123.0" prefWidth="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="120.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ComboBox>
+            <TextField layoutX="146.0" layoutY="88.0" prefHeight="25.0" prefWidth="278.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="85.0" />
+            <TextField layoutX="158.0" layoutY="51.0" prefHeight="25.0" prefWidth="657.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="50.0" />
+            <Label layoutX="364.0" layoutY="119.0" text="Estado:" AnchorPane.leftAnchor="364.0" AnchorPane.topAnchor="120.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="35.0" layoutY="87.0" text="CPF/CNP:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="85.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="50.0" text="Nome:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="50.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

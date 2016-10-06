@@ -31,6 +31,13 @@ public class TransportadoraInicialController implements Initializable{
 		AtualizarTblTransportadora();
 		AtribuirBotoes();
 
+
+		/*
+		 * Listener que auxilia na atualização da tabela
+		 * quando é inserido ou atualizado uma transportadora
+		 * a variavel AUXTRANSPORTADORA muda para o valor 1
+		 * então esse Listener detecta e atualiza a tblTransportadoras
+		 * */
 		Helper.AUXTRANSPORTADORA.addListener(new ChangeListener<Object>() {
 		     @Override
 		     public void changed(ObservableValue<?> observableValue, Object oldValue,
@@ -46,12 +53,18 @@ public class TransportadoraInicialController implements Initializable{
 		   });
 	}
 
+	/*
+	 * Método utilizado para atribuir ações e dados à alguns itens da tela
+	 * */
 	public void AtribuirBotoes(){
 		btnAdicionar.setOnAction(l-> AdicionarTransportadora() );
 		btnExcluir.setOnAction(l-> ExcluirTransportadora());
 		btnEditar.setOnAction(l-> AtualizarTransportadora());
 	}
 
+	/*
+	 * Método utilizado para excluir uma transportadora que foi selecionada na tblTransportadoras
+	 * */
 	private void ExcluirTransportadora() {
 		Transportadora transportadora = tblTransportadoras.getSelectionModel().getSelectedItem();
 
@@ -67,10 +80,16 @@ public class TransportadoraInicialController implements Initializable{
         }
 	}
 
+	/*
+	 * Método que chama a tela para adicionar uma transportadora
+	 * */
 	public void AdicionarTransportadora(){
 		callscene.LoadTransportadoraCadastroDetalhe(null);
 	}
 
+	/*
+	 * Método que chama a tela para atualizar a transportadora que foi selecionada na tblTransportadoras
+	 * */
 	public void AtualizarTransportadora(){
 		Transportadora transportadora = tblTransportadoras.getSelectionModel().getSelectedItem();
 
@@ -81,6 +100,9 @@ public class TransportadoraInicialController implements Initializable{
 		}
 	}
 
+	/*
+	 * Método utilizado para carregar os dados da table tblTransportadoras
+	 * */
 	public void AtualizarTblTransportadora(){
 		clnNomeExibicao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("nome"));
 		clnFretePadrao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("frete"));
@@ -88,12 +110,15 @@ public class TransportadoraInicialController implements Initializable{
 		clnEstado.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("estado"));
 		clnObservacao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("observacoes"));
 
-
         List<Transportadora> lstTransportadora = Transportadora.Select();
         ObservableList<Transportadora> data = FXCollections.observableList(lstTransportadora);
 
         tblTransportadoras.setItems(data);
     }
+
+	/*
+	 * Método utilizado para carregar os dados da table tblTransportadoras com os filtros selecionados
+	 * */
     public void AtualizarTblTransportadoraComFiltro(List<Transportadora> lstTransportadora){
 
     	clnNomeExibicao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("nome"));
