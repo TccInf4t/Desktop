@@ -229,7 +229,7 @@ public class UsuariosGruposController implements Initializable{
 
         tblUser.setItems(data);
     }
-    public void AtualizarTblUserComFiltro(List<Usuario> lstUsers){
+    public void AtualizarTblUserComFiltro( List<Usuario> lstUsers){
         clnUserNome.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomeCompleto"));
         clnUserLogin.setCellValueFactory(new PropertyValueFactory<Usuario, String>("login"));
         clnUserGrupo.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomeGrupo"));

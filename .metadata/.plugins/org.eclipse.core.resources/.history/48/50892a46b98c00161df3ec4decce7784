@@ -146,13 +146,9 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 	private void Cancelar() {
 		if(btnCadastrar.getText().equals("ATUALIZAR")){
 			CallScene.secondStage.close();
-			Helper.AUXENDERECOCOMPLETO.setValue(0);
-			Helper.ENDERECO_GERADO = null;
 		}else if (btnCadastrar.getText().equals("SALVAR")){
 			if(Helper.ENDERECO_GERADO != null){
 				Endereco.Delete(Helper.ENDERECO_GERADO.getOid_endereco());
-				Helper.AUXENDERECOCOMPLETO.setValue(0);
-				Helper.ENDERECO_GERADO = null;
 			}
 			CallScene.secondStage.close();
 		}

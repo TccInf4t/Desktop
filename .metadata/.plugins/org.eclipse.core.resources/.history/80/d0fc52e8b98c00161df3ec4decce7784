@@ -175,7 +175,7 @@ public class Transportadora {
 			parametros.setInt(6, transportadora.getEndereco().getOid_endereco());
 			parametros.setString(7, transportadora.getNatureza());
 			parametros.setString(8, transportadora.getRg());
-			parametros.setString(9, transportadora.getTelefone());
+			parametros.setString(8, transportadora.getTelefone());
 
 			parametros.executeUpdate();
 			con.close();
