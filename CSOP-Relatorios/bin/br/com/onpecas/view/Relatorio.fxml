@@ -9,14 +9,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Separator layoutY="210.0" prefHeight="18.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="220.0" />
-      <Separator layoutY="264.0" prefHeight="18.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0" />
-      <TableView layoutX="12.0" layoutY="477.0" prefHeight="315.0" prefWidth="986.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="477.0">
-        <columns>
-          <TableColumn prefWidth="93.0" resizable="false" text="Valor" />
-          <TableColumn prefWidth="108.0" resizable="false" text="Data" />
-        </columns>
-      </TableView>
+      <Separator layoutY="152.0" prefHeight="18.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="152.0" />
+      <Separator layoutY="182.0" prefHeight="18.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="182.0" />
       <Label layoutX="28.0" layoutY="26.0" text="Tipo de relatório:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="26.0">
          <font>
             <Font size="18.0" />
@@ -37,14 +31,14 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <ComboBox layoutX="179.0" layoutY="27.0" prefHeight="25.0" prefWidth="296.0" AnchorPane.leftAnchor="179.0" AnchorPane.topAnchor="27.0" />
-      <RadioButton layoutX="179.0" layoutY="72.0" mnemonicParsing="false" />
-      <ComboBox layoutX="208.0" layoutY="68.0" prefWidth="150.0" AnchorPane.leftAnchor="208.0" AnchorPane.topAnchor="68.0" />
-      <RadioButton layoutX="419.0" layoutY="72.0" mnemonicParsing="false" AnchorPane.leftAnchor="419.0" AnchorPane.topAnchor="72.0" />
-      <DatePicker layoutX="489.0" layoutY="68.0" prefHeight="25.0" prefWidth="101.0" AnchorPane.leftAnchor="489.0" AnchorPane.topAnchor="68.0" />
-      <DatePicker layoutX="680.0" layoutY="69.0" prefHeight="25.0" prefWidth="101.0" AnchorPane.leftAnchor="680.0" AnchorPane.topAnchor="69.0" />
-      <Button layoutX="915.0" layoutY="195.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Filtrar" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="195.0" />
-      <LineChart layoutX="14.0" layoutY="264.0" prefHeight="208.0" prefWidth="977.0">
+      <ComboBox fx:id="cboTipoRelatorio" layoutX="179.0" layoutY="27.0" prefHeight="25.0" prefWidth="296.0" AnchorPane.leftAnchor="179.0" AnchorPane.topAnchor="27.0" />
+      <RadioButton fx:id="radioPeriodo" layoutX="179.0" layoutY="72.0" mnemonicParsing="false" />
+      <ComboBox fx:id="cboPeriodoRelatório" layoutX="208.0" layoutY="68.0" prefWidth="150.0" AnchorPane.leftAnchor="208.0" AnchorPane.topAnchor="68.0" />
+      <RadioButton fx:id="radioDataPeriodo" layoutX="419.0" layoutY="72.0" mnemonicParsing="false" AnchorPane.leftAnchor="419.0" AnchorPane.topAnchor="72.0" />
+      <DatePicker fx:id="datePickerInicial" layoutX="489.0" layoutY="68.0" prefHeight="25.0" prefWidth="101.0" AnchorPane.leftAnchor="489.0" AnchorPane.topAnchor="68.0" />
+      <DatePicker fx:id="datePickerFinal" layoutX="680.0" layoutY="69.0" prefHeight="25.0" prefWidth="101.0" AnchorPane.leftAnchor="680.0" AnchorPane.topAnchor="69.0" />
+      <Button fx:id="btnFiltrar" layoutX="900.0" layoutY="127.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="FILTRAR" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="127.0" />
+      <LineChart fx:id="lineCharRelatorio" layoutX="14.0" layoutY="264.0" prefHeight="512.0" prefWidth="977.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>

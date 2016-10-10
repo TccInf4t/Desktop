@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javafx.scene.control.cell.PropertyValueFactory"/>
-<fullyQualifiedTypeName name="javafx.collections.ObservableList"/>
-<fullyQualifiedTypeName name="javafx.collections.FXCollections"/>
-<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
-<fullyQualifiedTypeName name="javafx.scene.control.PasswordField"/>
 <fullyQualifiedTypeName name="br.com.onpecas.controller.UserController"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Usuario"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Grupo"/>
@@ -24,17 +19,12 @@
 <fullyQualifiedTypeName name="br.com.onpecas.controller.PainelPrincipalController"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TableView"/>
 <fullyQualifiedTypeName name="br.com.onpecas.controller.EnderecoController"/>
-<fullyQualifiedTypeName name="javafx.scene.layout.AnchorPane"/>
 <fullyQualifiedTypeName name="br.com.onpecas.controller.TransportadoraInicialController"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.logging.Handler"/>
 <fullyQualifiedTypeName name="javax.swing.event.ChangeListener"/>
 <fullyQualifiedTypeName name="javafx.event.EventType"/>
 <fullyQualifiedTypeName name="javafx.beans.value.ChangeListener"/>
-<fullyQualifiedTypeName name="javafx.fxml.Initializable"/>
-<fullyQualifiedTypeName name="javafx.fxml.FXML"/>
-<fullyQualifiedTypeName name="javafx.scene.control.Button"/>
 <fullyQualifiedTypeName name="br.com.onpecas.controller.TransportadoraCadastroDetalheController"/>
 <fullyQualifiedTypeName name="com.mysql.jdbc.PreparedStatement"/>
 <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
@@ -60,4 +50,14 @@
 <fullyQualifiedTypeName name="br.com.onpecas.model.Endereco"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Estado"/>
 <fullyQualifiedTypeName name="java.lang.Double"/>
+<fullyQualifiedTypeName name="javafx.fxml.Initializable"/>
+<fullyQualifiedTypeName name="javafx.fxml.FXML"/>
+<fullyQualifiedTypeName name="javafx.scene.control.Button"/>
+<fullyQualifiedTypeName name="javafx.scene.chart.LineChart"/>
+<fullyQualifiedTypeName name="br.com.onpecas.controller.RelatorioController"/>
+<fullyQualifiedTypeName name="javafx.scene.layout.AnchorPane"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="br.com.onpecas.model.Relatorio"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
 </qualifiedTypeNameHistroy>
