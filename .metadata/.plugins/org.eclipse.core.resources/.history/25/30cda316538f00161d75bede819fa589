@@ -5,7 +5,8 @@ import java.util.*;
 
 import br.com.onpecas.helper.Alerta;
 import br.com.onpecas.model.Relatorio;
-import javafx.beans.value.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.*;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
@@ -38,7 +39,7 @@ public class RelatorioController implements Initializable{
 		radioDataPeriodo.toggleGroupProperty().set(group);
 		radioPeriodo.toggleGroupProperty().set(group);
 
-		/*group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 			public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
 				if(radioDataPeriodo.isSelected()){
 					ADDProdutoVendido();
@@ -48,7 +49,7 @@ public class RelatorioController implements Initializable{
 					txtValor.setVisible(true);
 				}
 			}
-		});*/
+});
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

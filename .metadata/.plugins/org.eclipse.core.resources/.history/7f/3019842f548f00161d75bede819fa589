@@ -5,7 +5,8 @@ import java.util.*;
 
 import br.com.onpecas.helper.Alerta;
 import br.com.onpecas.model.Relatorio;
-import javafx.beans.value.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.*;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;

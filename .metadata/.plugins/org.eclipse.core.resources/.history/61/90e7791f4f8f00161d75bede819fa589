@@ -31,15 +31,19 @@ public class Relatorio {
 				e.printStackTrace();
 			}
 		}else if(periodo.equals("Mensal")){
-			String sql ="select *,concat(extract(month from dtrealizado),' - ', extract(year from dtrealizado)) as datareferencia, sum(valortotal)+sum(frete) as ValorFaturado from visualizacaorelatorios group by extract(year from dtrealizado), extract(month from dtrealizado) ;";
 
+			String sql = "select *,"+
+			"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Sunday'), '%X%V %W'), '%d/%m/%y') as semanainicial, "+
+			"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y') as semanafinal, "+
+			"sum(valortotal)+sum(frete) as ValorFaturado "+
+			"from visualizacaorelatorios group by yearweek(dtrealizado) ;";
 			try {
 				ResultSet rs = con.createStatement().executeQuery(sql);
 
 				while(rs.next()){
 					HashMap<Integer,String> itemHash = new HashMap<>();
-
-					itemHash.put(1, rs.getString("datareferencia"));
+					String datareferencia = String.format("De %s até %s", rs.getString("semanainicial"), rs.getString("semanafinal"));
+					itemHash.put(1, datareferencia);
 					itemHash.put(2, rs.getString("ValorFaturado"));
 
 					lstMap.add(itemHash);
@@ -49,26 +53,7 @@ public class Relatorio {
 			}
 
 		}else if(periodo.equals("Semanal")){
-			String sql = "select *,"+
-					"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Sunday'), '%X%V %W'), '%d/%m/%y') as semanainicial, "+
-					"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y') as semanafinal, "+
-					"sum(valortotal)+sum(frete) as ValorFaturado "+
-					"from visualizacaorelatorios group by yearweek(dtrealizado) ;";
-			try {
-				ResultSet rs = con.createStatement().executeQuery(sql);
 
-				while(rs.next()){
-					HashMap<Integer,String> itemHash = new HashMap<>();
-					String datareferencia = String.format("De %s até %s", rs.getString("semanainicial"), rs.getString("semanafinal"));
-
-					itemHash.put(1, datareferencia);
-					itemHash.put(2, rs.getString("ValorFaturado"));
-
-					lstMap.add(itemHash);
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 
 		return lstMap;

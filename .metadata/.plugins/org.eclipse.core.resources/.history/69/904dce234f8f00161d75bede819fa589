@@ -60,7 +60,6 @@ public class Relatorio {
 				while(rs.next()){
 					HashMap<Integer,String> itemHash = new HashMap<>();
 					String datareferencia = String.format("De %s até %s", rs.getString("semanainicial"), rs.getString("semanafinal"));
-
 					itemHash.put(1, datareferencia);
 					itemHash.put(2, rs.getString("ValorFaturado"));
 
