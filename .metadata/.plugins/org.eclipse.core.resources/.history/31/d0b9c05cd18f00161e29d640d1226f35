@@ -6,7 +6,6 @@ import java.util.*;
 import br.com.onpecas.helper.Alerta;
 import br.com.onpecas.model.Relatorio;
 import javafx.beans.value.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
@@ -25,16 +24,11 @@ public class RelatorioController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		CarregarBotoes();
 		ConfigurarBotoes();
-		cboPeriodoRelatório.setDisable(true);
-		datePickerInicial.setDisable(true);
-		datePickerFinal.setDisable(true);
-
-		radioPeriodo.setDisable(true);
-		radioDataPeriodo.setDisable(true);
 	}
 
 	public void CarregarBotoes(){
 		cboTipoRelatorio.getItems().addAll("Faturamento");
+		cboPeriodoRelatório.getItems().addAll("Semanal", "Mensal", "Anual");
 		btnFiltrar.setOnAction(l-> Filtrar());
 	}
 
@@ -44,36 +38,18 @@ public class RelatorioController implements Initializable{
 		radioDataPeriodo.toggleGroupProperty().set(group);
 		radioPeriodo.toggleGroupProperty().set(group);
 
-		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+		/*group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 			public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
-				if(radioPeriodo.isSelected()){
-					String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();
-					if(sltComboTipo!= null){
-						if(sltComboTipo.equals("Faturamento")){
-							cboPeriodoRelatório.setDisable(false);;
-							cboPeriodoRelatório.setPromptText("Selecione");
-						}
-					}
-				}else if (radioDataPeriodo.isSelected()){
-					cboPeriodoRelatório.setDisable(true);
-					cboPeriodoRelatório.setPromptText("");
-					datePickerInicial.setDisable(false);
-					datePickerFinal.setDisable(false);
+				if(radioDataPeriodo.isSelected()){
+					ADDProdutoVendido();
+					main.CarregarPagamento(valor);
+				}else if (radioPeriodo.isSelected()){
+					paneParte.setVisible(true);
+					txtValor.setVisible(true);
 				}
 			}
-		});
+		});*/
 	}
-
-	 @FXML
-	 private void handleButtonAction(ActionEvent event) {
-	     // Button was clicked, do something...
-		 String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();
-		 if(sltComboTipo.equals("Faturamento")){
-			 cboPeriodoRelatório.getItems().addAll("Semanal", "Mensal", "Anual");
-			 radioPeriodo.setDisable(false);
-			 radioDataPeriodo.setDisable(false);
-		 }
-	 }
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void Filtrar(){
@@ -125,16 +101,9 @@ public class RelatorioController implements Initializable{
 					}else{
 						Alerta.showError("Erro ao filtrar", "Selecione um Tipo Período");
 					}
-				}else if(radioDataPeriodo.isSelected()){
-					/*Caso o Radio de data seja selecionado*/
 				}else{
 					Alerta.showError("Erro ao filtrar", "Selecione um Período");
 				}
-			}else if(sltComboTipo.equals("Venda")){
-				/*Relatório de vendas*/
-
-			}else if(sltComboTipo.equals("Pedido")){
-				/*Relatório de Pedidos*/
 			}
 		}else{
 			Alerta.showError("Erro ao gerar relatório", "Selecione o Tipo de Relatório que será emitido");

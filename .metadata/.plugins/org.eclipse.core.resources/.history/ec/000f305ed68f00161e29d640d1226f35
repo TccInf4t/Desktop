@@ -28,7 +28,7 @@ public class RelatorioController implements Initializable{
 		cboPeriodoRelatório.setDisable(true);
 		datePickerInicial.setDisable(true);
 		datePickerFinal.setDisable(true);
-
+		
 		radioPeriodo.setDisable(true);
 		radioDataPeriodo.setDisable(true);
 	}
@@ -74,7 +74,7 @@ public class RelatorioController implements Initializable{
 			 radioDataPeriodo.setDisable(false);
 		 }
 	 }
-
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void Filtrar(){
 		String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();
@@ -125,16 +125,9 @@ public class RelatorioController implements Initializable{
 					}else{
 						Alerta.showError("Erro ao filtrar", "Selecione um Tipo Período");
 					}
-				}else if(radioDataPeriodo.isSelected()){
-					/*Caso o Radio de data seja selecionado*/
 				}else{
 					Alerta.showError("Erro ao filtrar", "Selecione um Período");
 				}
-			}else if(sltComboTipo.equals("Venda")){
-				/*Relatório de vendas*/
-
-			}else if(sltComboTipo.equals("Pedido")){
-				/*Relatório de Pedidos*/
 			}
 		}else{
 			Alerta.showError("Erro ao gerar relatório", "Selecione o Tipo de Relatório que será emitido");

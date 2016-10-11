@@ -31,7 +31,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cboTipoRelatorio" layoutX="179.0" layoutY="27.0" prefHeight="25.0" prefWidth="296.0" AnchorPane.leftAnchor="179.0" AnchorPane.topAnchor="27.0" />
+      <ComboBox fx:id="cboTipoRelatorio" layoutX="179.0" layoutY="27.0" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="296.0" promptText="Selecione" AnchorPane.leftAnchor="179.0" AnchorPane.topAnchor="27.0" />
       <RadioButton fx:id="radioPeriodo" layoutX="179.0" layoutY="72.0" mnemonicParsing="false" />
       <ComboBox fx:id="cboPeriodoRelatório" layoutX="208.0" layoutY="68.0" prefWidth="150.0" AnchorPane.leftAnchor="208.0" AnchorPane.topAnchor="68.0" />
       <RadioButton fx:id="radioDataPeriodo" layoutX="419.0" layoutY="72.0" mnemonicParsing="false" AnchorPane.leftAnchor="419.0" AnchorPane.topAnchor="72.0" />

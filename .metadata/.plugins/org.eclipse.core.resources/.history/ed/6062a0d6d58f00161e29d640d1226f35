@@ -6,7 +6,6 @@ import java.util.*;
 import br.com.onpecas.helper.Alerta;
 import br.com.onpecas.model.Relatorio;
 import javafx.beans.value.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
@@ -28,9 +27,6 @@ public class RelatorioController implements Initializable{
 		cboPeriodoRelatório.setDisable(true);
 		datePickerInicial.setDisable(true);
 		datePickerFinal.setDisable(true);
-
-		radioPeriodo.setDisable(true);
-		radioDataPeriodo.setDisable(true);
 	}
 
 	public void CarregarBotoes(){
@@ -50,12 +46,13 @@ public class RelatorioController implements Initializable{
 					String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();
 					if(sltComboTipo!= null){
 						if(sltComboTipo.equals("Faturamento")){
+							cboPeriodoRelatório.getItems().addAll("Semanal", "Mensal", "Anual");
 							cboPeriodoRelatório.setDisable(false);;
 							cboPeriodoRelatório.setPromptText("Selecione");
 						}
 					}
 				}else if (radioDataPeriodo.isSelected()){
-					cboPeriodoRelatório.setDisable(true);
+					cboPeriodoRelatório.setEditable(true);
 					cboPeriodoRelatório.setPromptText("");
 					datePickerInicial.setDisable(false);
 					datePickerFinal.setDisable(false);
@@ -63,17 +60,6 @@ public class RelatorioController implements Initializable{
 			}
 		});
 	}
-
-	 @FXML
-	 private void handleButtonAction(ActionEvent event) {
-	     // Button was clicked, do something...
-		 String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();
-		 if(sltComboTipo.equals("Faturamento")){
-			 cboPeriodoRelatório.getItems().addAll("Semanal", "Mensal", "Anual");
-			 radioPeriodo.setDisable(false);
-			 radioDataPeriodo.setDisable(false);
-		 }
-	 }
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void Filtrar(){
@@ -125,16 +111,9 @@ public class RelatorioController implements Initializable{
 					}else{
 						Alerta.showError("Erro ao filtrar", "Selecione um Tipo Período");
 					}
-				}else if(radioDataPeriodo.isSelected()){
-					/*Caso o Radio de data seja selecionado*/
 				}else{
 					Alerta.showError("Erro ao filtrar", "Selecione um Período");
 				}
-			}else if(sltComboTipo.equals("Venda")){
-				/*Relatório de vendas*/
-
-			}else if(sltComboTipo.equals("Pedido")){
-				/*Relatório de Pedidos*/
 			}
 		}else{
 			Alerta.showError("Erro ao gerar relatório", "Selecione o Tipo de Relatório que será emitido");

@@ -130,10 +130,10 @@ public class RelatorioController implements Initializable{
 				}else{
 					Alerta.showError("Erro ao filtrar", "Selecione um Período");
 				}
-			}else if(sltComboTipo.equals("Venda")){
+			}else if(sltComboTipo.equals("")){
 				/*Relatório de vendas*/
 
-			}else if(sltComboTipo.equals("Pedido")){
+			}else if(sltComboTipo.equals("")){
 				/*Relatório de Pedidos*/
 			}
 		}else{
