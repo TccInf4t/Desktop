@@ -21,12 +21,12 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="451.0" layoutY="67.0" text="De:" AnchorPane.leftAnchor="451.0" AnchorPane.topAnchor="67.0">
+      <Label layoutX="451.0" layoutY="67.0" text="De:" visible="false" AnchorPane.leftAnchor="451.0" AnchorPane.topAnchor="67.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="632.0" layoutY="67.0" prefHeight="28.0" prefWidth="32.0" text="Até:" AnchorPane.leftAnchor="632.0" AnchorPane.topAnchor="67.0">
+      <Label layoutX="632.0" layoutY="67.0" prefHeight="28.0" prefWidth="32.0" text="Até:" visible="false" AnchorPane.leftAnchor="632.0" AnchorPane.topAnchor="67.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -34,9 +34,9 @@
       <ComboBox fx:id="cboTipoRelatorio" layoutX="179.0" layoutY="27.0" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="296.0" promptText="Selecione" AnchorPane.leftAnchor="179.0" AnchorPane.topAnchor="27.0" />
       <RadioButton fx:id="radioPeriodo" layoutX="179.0" layoutY="72.0" mnemonicParsing="false" />
       <ComboBox fx:id="cboPeriodoRelatório" layoutX="208.0" layoutY="68.0" prefWidth="150.0" AnchorPane.leftAnchor="208.0" AnchorPane.topAnchor="68.0" />
-      <RadioButton fx:id="radioDataPeriodo" layoutX="419.0" layoutY="72.0" mnemonicParsing="false" AnchorPane.leftAnchor="419.0" AnchorPane.topAnchor="72.0" />
-      <DatePicker fx:id="datePickerInicial" layoutX="489.0" layoutY="68.0" prefHeight="25.0" prefWidth="101.0" AnchorPane.leftAnchor="489.0" AnchorPane.topAnchor="68.0" />
-      <DatePicker fx:id="datePickerFinal" layoutX="680.0" layoutY="69.0" prefHeight="25.0" prefWidth="101.0" AnchorPane.leftAnchor="680.0" AnchorPane.topAnchor="69.0" />
+      <RadioButton fx:id="radioDataPeriodo" layoutX="419.0" layoutY="72.0" mnemonicParsing="false" visible="false" AnchorPane.leftAnchor="419.0" AnchorPane.topAnchor="72.0" />
+      <DatePicker fx:id="datePickerInicial" layoutX="489.0" layoutY="68.0" prefHeight="25.0" prefWidth="101.0" visible="false" AnchorPane.leftAnchor="489.0" AnchorPane.topAnchor="68.0" />
+      <DatePicker fx:id="datePickerFinal" layoutX="680.0" layoutY="69.0" prefHeight="25.0" prefWidth="101.0" visible="false" AnchorPane.leftAnchor="680.0" AnchorPane.topAnchor="69.0" />
       <Button fx:id="btnFiltrar" layoutX="900.0" layoutY="127.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="FILTRAR" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="127.0" />
       <LineChart fx:id="lineCharRelatorio" layoutX="14.0" layoutY="264.0" prefHeight="512.0" prefWidth="977.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
         <xAxis>

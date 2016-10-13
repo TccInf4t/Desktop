@@ -34,7 +34,7 @@ public class RelatorioController implements Initializable{
 	}
 
 	public void CarregarBotoes(){
-		cboTipoRelatorio.getItems().addAll("Faturamento");
+		cboTipoRelatorio.getItems().addAll("Faturamento", "Pedido");
 		btnFiltrar.setOnAction(l-> Filtrar());
 	}
 
@@ -52,7 +52,13 @@ public class RelatorioController implements Initializable{
 						if(sltComboTipo.equals("Faturamento")){
 							cboPeriodoRelatório.setDisable(false);;
 							cboPeriodoRelatório.setPromptText("Selecione");
+							
+						}else if(sltComboTipo.equals("Pedido")){
+							cboPeriodoRelatório.setDisable(false);;
+							cboPeriodoRelatório.setPromptText("Selecione");
 						}
+						datePickerInicial.setDisable(true);
+						datePickerFinal.setDisable(true);
 					}
 				}else if (radioDataPeriodo.isSelected()){
 					cboPeriodoRelatório.setDisable(true);
@@ -70,9 +76,13 @@ public class RelatorioController implements Initializable{
 		 String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();
 		 if(sltComboTipo.equals("Faturamento")){
 			 cboPeriodoRelatório.getItems().addAll("Semanal", "Mensal", "Anual");
-			 radioPeriodo.setDisable(false);
-			 radioDataPeriodo.setDisable(false);
+
+		 }if(sltComboTipo.equals("Pedido")){
+			 cboPeriodoRelatório.getItems().addAll("Semanal", "Mensal", "Anual");
+
 		 }
+		 radioPeriodo.setDisable(false);
+		 radioDataPeriodo.setDisable(false);
 	 }
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -127,6 +137,7 @@ public class RelatorioController implements Initializable{
 					}
 				}else if(radioDataPeriodo.isSelected()){
 					/*Caso o Radio de data seja selecionado*/
+
 				}else{
 					Alerta.showError("Erro ao filtrar", "Selecione um Período");
 				}
@@ -135,6 +146,57 @@ public class RelatorioController implements Initializable{
 
 			}else if(sltComboTipo.equals("Pedido")){
 				/*Relatório de Pedidos*/
+				if(radioPeriodo.isSelected()){
+					String sltComboPeriodo = cboPeriodoRelatório.getSelectionModel().getSelectedItem();
+					if(sltComboPeriodo != null){
+						if(sltComboPeriodo.equals("Anual")){
+							lineCharRelatorio.getData().clear();
+							List<HashMap<Integer,String>> lstHash = Relatorio.ListarPedido("Anual");
+
+							XYChart.Series lucro = new XYChart.Series();
+							lucro.setName("Pedidos anual");
+							for(int i = 0; i<lstHash.size(); i++ ){
+
+								double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
+								lucro.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+							}
+							lineCharRelatorio.getData().addAll(lucro);
+
+						}else if(sltComboPeriodo.equals("Mensal")){
+							lineCharRelatorio.getData().clear();
+							List<HashMap<Integer,String>> lstHash = Relatorio.ListarPedido("Mensal");
+
+							XYChart.Series lucro = new XYChart.Series();
+							lucro.setName("Pedidos Mensal");
+							for(int i = 0; i<lstHash.size(); i++ ){
+
+								double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
+								lucro.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+							}
+							lineCharRelatorio.getData().addAll(lucro);
+
+						}else if(sltComboPeriodo.equals("Semanal")){
+							lineCharRelatorio.getData().clear();
+							List<HashMap<Integer,String>> lstHash = Relatorio.ListarPedido("Semanal");
+
+							XYChart.Series lucro = new XYChart.Series();
+							lucro.setName("Pedidos Semanal");
+							for(int i = 0; i<lstHash.size(); i++ ){
+
+								double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
+								lucro.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+							}
+							lineCharRelatorio.getData().addAll(lucro);
+						}
+					}else{
+						Alerta.showError("Erro ao filtrar", "Selecione um Tipo Período");
+					}
+				}else if(radioDataPeriodo.isSelected()){
+					/*Caso o Radio de data seja selecionado*/
+
+				}else{
+					Alerta.showError("Erro ao filtrar", "Selecione um Período");
+				}
 			}
 		}else{
 			Alerta.showError("Erro ao gerar relatório", "Selecione o Tipo de Relatório que será emitido");

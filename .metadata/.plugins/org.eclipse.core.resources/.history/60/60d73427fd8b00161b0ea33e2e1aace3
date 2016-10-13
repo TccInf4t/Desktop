@@ -1,9 +1,0 @@
-package br.com.onpecas.view
-
-import javafx.scene.layout.AnchorPane
-
-component Style {
-	AnchorPane {
-		//TODO Add Nodes
-	}
-}
