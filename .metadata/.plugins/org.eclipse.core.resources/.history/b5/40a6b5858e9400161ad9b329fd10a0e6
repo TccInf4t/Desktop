@@ -1,0 +1,31 @@
+package br.com.onpecas.controller;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.fxml.*;
+import javafx.scene.control.*;
+
+public class CSOPController implements Initializable  {
+
+	@FXML Button btnRelatorios;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		btnRelatorios.setOnAction(l-> AbrirRelatorios(null));
+	}
+
+	public void AbrirRelatorios(String URL){
+		String link = "C:/Users/15160977/Desktop/CSOP/relatorios.jar";
+		try {
+			URL url = new URL(link);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+	}
+}

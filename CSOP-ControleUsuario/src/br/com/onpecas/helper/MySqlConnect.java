@@ -16,7 +16,7 @@ public class MySqlConnect {
 
 			//Define a String de conexão, que contem o server, o banco que será usario, o usuario e a senha
 			con = DriverManager
-					.getConnection("jdbc:mysql://localhost/csoptcc", "root", "root");
+					.getConnection("jdbc:mysql://10.107.134.30/dbcsop", "csop", "csoptcc@2016");
 
 		} catch (Exception ex) {
 			// TODO Auto-generated catch block

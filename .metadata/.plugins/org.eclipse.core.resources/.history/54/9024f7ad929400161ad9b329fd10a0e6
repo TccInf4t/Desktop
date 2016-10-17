@@ -1,0 +1,65 @@
+package br.com.onpecas.controller;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.fxml.*;
+import javafx.scene.control.*;
+
+public class CSOPController implements Initializable  {
+
+	@FXML Button btnRelatorio, btnfinanceiro, btnexpedicao, btnusuarios;
+	
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		btnRelatorio.setOnAction(l-> AbrirRelatorios(null));
+		
+	
+	}
+
+	public void AbrirRelatorios(String URL){
+		/*String link = "C:/CSOP/relatorios.jar";
+		try {
+			URL url = new URL(link);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(link);
+		}
+		*/
+		
+		/*try {
+			Runtime.getRuntime().exec("C:/CSOP/relatorios.jar");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+
+		Process pro;
+		try {
+			pro = Runtime.getRuntime().exec("cmd.exe /c  java -jar arquivo.jar C:/CSOP/relatorios.jar");
+			try {
+				pro.waitFor();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//java -jar arquivo.jar
+
+	}
+	public void AbrirFinanceiro(){
+		
+	}
+}
