@@ -29,7 +29,7 @@ public class CallScene {
 			ScrollPane module= (ScrollPane) loader.load();
 
 			Scene scene = new Scene(module);
-
+			secondStage.initModality(Modality.APPLICATION_MODAL);
 			secondStage.setScene(scene);
 			secondStage.show();
 		} catch (IOException e) {
@@ -64,6 +64,7 @@ public class CallScene {
 			module = (AnchorPane) loader.load();
 
 			Scene scene = new Scene(module);
+			secondStage.initModality(Modality.APPLICATION_MODAL);
 
 			secondStage.setScene(scene);
 			secondStage.show();
@@ -98,6 +99,7 @@ public class CallScene {
 			module = (AnchorPane) loader.load();
 
 			Scene scene = new Scene(module);
+			secondStage.initModality(Modality.APPLICATION_MODAL);
 
 			secondStage.setScene(scene);
 			secondStage.show();
@@ -117,6 +119,6 @@ public class CallScene {
 
 		ScrollPane module= (ScrollPane) loader.load();
 		border.setCenter(module);
-		
+
 	}
 }

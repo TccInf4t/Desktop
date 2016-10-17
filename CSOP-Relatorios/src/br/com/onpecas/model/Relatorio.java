@@ -160,7 +160,7 @@ public class Relatorio {
 	}
 
 	public static List<HashMap<Integer,String>> ListarVenda(String dtInicial){
-		Connection con = MySqlConnect.ConectarDb();
+		//Connection con = MySqlConnect.ConectarDb();
 		List<HashMap<Integer,String>> lstMap = new ArrayList<>();
 
 		return lstMap;

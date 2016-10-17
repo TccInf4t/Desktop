@@ -1,0 +1,7 @@
+package br.com.onpecas.model;
+
+public class Snippet {
+	select *, sum(frete)+sum(valortotal) as valorfinal from visualizacaorelatorios group by oid_pedido;
+	
+}
+

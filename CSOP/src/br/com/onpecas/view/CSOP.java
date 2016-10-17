@@ -29,7 +29,6 @@ public class CSOP extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        ("FILE://C:\CSOP\expedicao.jar")
 	}
 	public static void main(String[] args) {
 		launch(args);

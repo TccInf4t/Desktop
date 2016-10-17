@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class CallScene {
@@ -40,7 +41,7 @@ public class CallScene {
 			AnchorPane module= (AnchorPane) loader.load();
 
 			Scene scene = new Scene(module);
-
+			thirdStage.initModality(Modality.APPLICATION_MODAL);
 			thirdStage.setScene(scene);
 			thirdStage.show();
 		} catch (IOException e) {
@@ -59,9 +60,24 @@ public class CallScene {
 			AnchorPane module= (AnchorPane) loader.load();
 
 			Scene scene = new Scene(module);
+			secondStage.initModality(Modality.APPLICATION_MODAL);
 			secondStage.setScene(scene);
 			secondStage.show();
 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void LoadPedidoSemLoteInicial(){
+
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("PedidoSemLoteInicial.fxml"));
+
+		try {
+			AnchorPane module= (AnchorPane) loader.load();
+
+			CSOPControllerExpedicao.border.setCenter(module);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
