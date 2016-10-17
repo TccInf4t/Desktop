@@ -4,38 +4,54 @@ import java.net.URL;
 import java.util.*;
 
 import br.com.onpecas.helper.Alerta;
-import br.com.onpecas.model.Relatorio;
+import br.com.onpecas.model.*;
 import javafx.beans.value.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 
 public class RelatorioController implements Initializable{
 
 	@FXML Button btnFiltrar;
-	@FXML ComboBox<String> cboTipoRelatorio, cboPeriodoRelatório;
+	@FXML ComboBox<String> cboTipoRelatorio, cboPeriodoRelatório, cboEntidade;
+
+	@FXML ComboBox<Estado> cboEstado;
+
+	@FXML ComboBox<Cidade> cboCidade;
 
 	@FXML LineChart<String, String> lineCharRelatorio;
 	@FXML DatePicker datePickerInicial, datePickerFinal;
 
 	@FXML RadioButton radioPeriodo, radioDataPeriodo;
 
+	@FXML Pane paneVenda, panePedido, paneVendaNome, paneVendaLocalidade;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		CarregarBotoes();
 		ConfigurarBotoes();
+		DestivarTodos();
+	}
+
+	public void CarregarBotoes(){
+		cboTipoRelatorio.getItems().addAll("Faturamento", "Pedido");
+		btnFiltrar.setOnAction(l-> Filtrar());
+	}
+
+	/*
+	 * Desativa todos os componentes que não serão usados até a seleção de um item no combobox cboTipoRelatorio
+	 * */
+	public void DestivarTodos(){
 		cboPeriodoRelatório.setDisable(true);
 		datePickerInicial.setDisable(true);
 		datePickerFinal.setDisable(true);
 
 		radioPeriodo.setDisable(true);
 		radioDataPeriodo.setDisable(true);
-	}
-
-	public void CarregarBotoes(){
-		cboTipoRelatorio.getItems().addAll("Faturamento", "Pedido");
-		btnFiltrar.setOnAction(l-> Filtrar());
+		panePedido.setVisible(false);
+		paneVenda.setVisible(false);
 	}
 
 	public void ConfigurarBotoes(){
@@ -47,19 +63,8 @@ public class RelatorioController implements Initializable{
 		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 			public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
 				if(radioPeriodo.isSelected()){
-					String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();
-					if(sltComboTipo!= null){
-						if(sltComboTipo.equals("Faturamento")){
-							cboPeriodoRelatório.setDisable(false);;
-							cboPeriodoRelatório.setPromptText("Selecione");
-							
-						}else if(sltComboTipo.equals("Pedido")){
-							cboPeriodoRelatório.setDisable(false);;
-							cboPeriodoRelatório.setPromptText("Selecione");
-						}
-						datePickerInicial.setDisable(true);
-						datePickerFinal.setDisable(true);
-					}
+					datePickerInicial.setDisable(true);
+					datePickerFinal.setDisable(true);
 				}else if (radioDataPeriodo.isSelected()){
 					cboPeriodoRelatório.setDisable(true);
 					cboPeriodoRelatório.setPromptText("");
@@ -70,21 +75,35 @@ public class RelatorioController implements Initializable{
 		});
 	}
 
-	 @FXML
-	 private void handleButtonAction(ActionEvent event) {
-	     // Button was clicked, do something...
-		 String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();
-		 if(sltComboTipo.equals("Faturamento")){
-			 cboPeriodoRelatório.getItems().addAll("Semanal", "Mensal", "Anual");
+	//Listener para quando o combobox cboTipoRelatorio for selecionado
+	//Para cada item selecionado, é atribuido seus tipo de pesquisa
+	@FXML
+	private void handleButtonAction(ActionEvent event) {
+	    // Button was clicked, do something...
+		String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();
+		if(!sltComboTipo.equals("Venda")){
+			radioPeriodo.setSelected(true);
+			panePedido.setVisible(true);
+			cboPeriodoRelatório.setDisable(false);;
+			cboPeriodoRelatório.setPromptText("Selecione");
+			cboPeriodoRelatório.getItems().clear();
+			cboPeriodoRelatório.getItems().addAll("Semanal", "Mensal", "Anual");
 
-		 }if(sltComboTipo.equals("Pedido")){
-			 cboPeriodoRelatório.getItems().addAll("Semanal", "Mensal", "Anual");
+		}else if(sltComboTipo.equals("Venda")){
+			panePedido.setVisible(false);
+			paneVenda.setVisible(true);
+			radioPeriodo.setSelected(true);
+			cboPeriodoRelatório.setDisable(false);;
+			cboPeriodoRelatório.setPromptText("Selecione");
+			cboPeriodoRelatório.getItems().clear();
+			cboPeriodoRelatório.getItems().addAll("Semanal", "Mensal", "Anual");
+		}
+		radioPeriodo.setDisable(false);
+		radioDataPeriodo.setDisable(false);
+	}
 
-		 }
-		 radioPeriodo.setDisable(false);
-		 radioDataPeriodo.setDisable(false);
-	 }
 
+	// Método para Filtrar os relatórios e preecher o gráfico de linha
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void Filtrar(){
 		String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();

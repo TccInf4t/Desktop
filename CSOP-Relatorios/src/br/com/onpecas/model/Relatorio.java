@@ -9,6 +9,8 @@ import br.com.onpecas.helper.MySqlConnect;
 
 public class Relatorio {
 
+	//Classe criada para realizar as buscas no banco de dados, filtrando de acordo com o que foi selecionado no controller
+
 	public static List<HashMap<Integer,String>> ListarFaturamento(String periodo){
 		Connection con = MySqlConnect.ConectarDb();
 		List<HashMap<Integer,String>> lstMap = new ArrayList<>();
@@ -78,7 +80,25 @@ public class Relatorio {
 		Connection con = MySqlConnect.ConectarDb();
 		List<HashMap<Integer,String>> lstMap = new ArrayList<>();
 
-		if(periodo.equals("Anual")){
+		if(periodo.equals("Padrao")){
+			String sql ="select count(*) as QtdPedido, extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as ValorFaturado "
+					+ "from visualizacaorelatorios group by extract(year from dtrealizado) ;";
+
+			try {
+				ResultSet rs = con.createStatement().executeQuery(sql);
+
+				while(rs.next()){
+					HashMap<Integer,String> itemHash = new HashMap<>();
+
+					itemHash.put(1, rs.getString("datareferencia"));
+					itemHash.put(2, rs.getString("QtdPedido"));
+
+					lstMap.add(itemHash);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}else if(periodo.equals("Anual")){
 			String sql ="select count(*) as QtdPedido, extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as ValorFaturado "
 					+ "from visualizacaorelatorios group by extract(year from dtrealizado) ;";
 

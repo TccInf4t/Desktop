@@ -1,0 +1,259 @@
+package br.com.onpecas.controller;
+
+import java.net.URL;
+import java.util.*;
+
+import br.com.onpecas.helper.Alerta;
+import br.com.onpecas.model.*;
+import javafx.beans.value.*;
+import javafx.event.ActionEvent;
+import javafx.fxml.*;
+import javafx.scene.chart.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
+
+public class RelatorioController implements Initializable{
+
+	@FXML Button btnFiltrar;
+	@FXML ComboBox<String> cboTipoRelatorio, cboPeriodoRelatório, cboEntidade;
+
+	@FXML ComboBox<Estado> cboEstado;
+
+	@FXML ComboBox<Cidade> cboCidade;
+
+	@FXML LineChart<String, String> lineCharRelatorio;
+	@FXML DatePicker datePickerInicial, datePickerFinal;
+
+	@FXML RadioButton radioPeriodo, radioDataPeriodo;
+
+	@FXML Pane paneVenda, panePedido, paneVendaNome, paneVendaLocalidade;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		CarregarBotoes();
+		ConfigurarBotoes();
+		DestivarTodos();
+	}
+
+	public void CarregarBotoes(){
+		cboTipoRelatorio.getItems().addAll("Faturamento", "Pedido", "Venda");
+		btnFiltrar.setOnAction(l-> Filtrar());
+	}
+
+	public void DestivarTodos(){
+		cboPeriodoRelatório.setDisable(true);
+		datePickerInicial.setDisable(true);
+		datePickerFinal.setDisable(true);
+
+		radioPeriodo.setDisable(true);
+		radioDataPeriodo.setDisable(true);
+		panePedido.setVisible(false);
+		paneVenda.setVisible(false);
+	}
+
+	public void ConfigurarBotoes(){
+		ToggleGroup group = new ToggleGroup();
+
+		radioDataPeriodo.toggleGroupProperty().set(group);
+		radioPeriodo.toggleGroupProperty().set(group);
+
+		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+			public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+				if(radioPeriodo.isSelected()){
+					datePickerInicial.setDisable(true);
+					datePickerFinal.setDisable(true);
+				}else if (radioDataPeriodo.isSelected()){
+					cboPeriodoRelatório.setDisable(true);
+					cboPeriodoRelatório.setPromptText("");
+					datePickerInicial.setDisable(false);
+					datePickerFinal.setDisable(false);
+				}
+			}
+		});
+	}
+
+	 @FXML
+	 private void handleButtonAction(ActionEvent event) {
+	     // Button was clicked, do something...
+		 String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();
+		 if(sltComboTipo.equals("Faturamento")){
+			radioPeriodo.setSelected(true);
+			panePedido.setVisible(true);			cboPeriodoRelatório.setDisable(false);;
+			cboPeriodoRelatório.setPromptText("Selecione");
+			cboPeriodoRelatório.getItems().clear();
+			cboPeriodoRelatório.getItems().addAll("Semanal", "Mensal", "Anual");
+
+		 }else if(sltComboTipo.equals("Pedido")){
+			 panePedido.setVisible(true);
+			 radioPeriodo.setSelected(true);
+			 cboPeriodoRelatório.setDisable(false);;
+			 cboPeriodoRelatório.setPromptText("Selecione");
+			 cboPeriodoRelatório.getItems().clear();
+			 cboPeriodoRelatório.getItems().addAll("Semanal", "Mensal", "Anual");
+
+		 }else if(sltComboTipo.equals("Venda")){
+			 panePedido.setVisible(false);
+			 paneVenda.setVisible(true);
+
+			 radioPeriodo.setSelected(true);
+			 cboPeriodoRelatório.setDisable(false);;
+			 cboPeriodoRelatório.setPromptText("Selecione");
+			 cboPeriodoRelatório.getItems().clear();
+			 cboPeriodoRelatório.getItems().addAll("Semanal", "Mensal", "Anual");
+
+		 }
+		 radioPeriodo.setDisable(false);
+		 radioDataPeriodo.setDisable(false);
+	 }
+
+	 @FXML
+	 private void handleButtonActionVenda(ActionEvent event) {
+	     // Button was clicked, do something...
+		 String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();
+		 if(sltComboTipo.equals("Faturamento")){
+			radioPeriodo.setSelected(true);
+			panePedido.setVisible(true);			cboPeriodoRelatório.setDisable(false);;
+			cboPeriodoRelatório.setPromptText("Selecione");
+			cboPeriodoRelatório.getItems().clear();
+			cboPeriodoRelatório.getItems().addAll("Semanal", "Mensal", "Anual");
+
+		 }else if(sltComboTipo.equals("Pedido")){
+			 panePedido.setVisible(true);
+			 radioPeriodo.setSelected(true);
+			 cboPeriodoRelatório.setDisable(false);;
+			 cboPeriodoRelatório.setPromptText("Selecione");
+			 cboPeriodoRelatório.getItems().clear();
+			 cboPeriodoRelatório.getItems().addAll("Semanal", "Mensal", "Anual");
+
+		 }else if(sltComboTipo.equals("Venda")){
+			 panePedido.setVisible(false);
+			 paneVenda.setVisible(true);
+
+			 radioPeriodo.setSelected(true);
+			 cboPeriodoRelatório.setDisable(false);;
+			 cboPeriodoRelatório.setPromptText("Selecione");
+			 cboPeriodoRelatório.getItems().clear();
+			 cboPeriodoRelatório.getItems().addAll("Semanal", "Mensal", "Anual");
+
+		 }
+		 radioPeriodo.setDisable(false);
+		 radioDataPeriodo.setDisable(false);
+	 }
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void Filtrar(){
+		String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();
+		if(sltComboTipo != null){
+			if(sltComboTipo.equals("Faturamento")){
+				if(radioPeriodo.isSelected()){
+					String sltComboPeriodo = cboPeriodoRelatório.getSelectionModel().getSelectedItem();
+					if(sltComboPeriodo != null){
+						if(sltComboPeriodo.equals("Anual")){
+							lineCharRelatorio.getData().clear();
+							List<HashMap<Integer,String>> lstHash = Relatorio.ListarFaturamento("Anual");
+
+							XYChart.Series lucro = new XYChart.Series();
+							lucro.setName("Faturamento anual");
+							for(int i = 0; i<lstHash.size(); i++ ){
+
+								double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
+								lucro.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+							}
+							lineCharRelatorio.getData().addAll(lucro);
+
+						}else if(sltComboPeriodo.equals("Mensal")){
+							lineCharRelatorio.getData().clear();
+							List<HashMap<Integer,String>> lstHash = Relatorio.ListarFaturamento("Mensal");
+
+							XYChart.Series lucro = new XYChart.Series();
+							lucro.setName("Faturamento Mensal");
+							for(int i = 0; i<lstHash.size(); i++ ){
+
+								double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
+								lucro.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+							}
+							lineCharRelatorio.getData().addAll(lucro);
+
+						}else if(sltComboPeriodo.equals("Semanal")){
+							lineCharRelatorio.getData().clear();
+							List<HashMap<Integer,String>> lstHash = Relatorio.ListarFaturamento("Semanal");
+
+							XYChart.Series lucro = new XYChart.Series();
+							lucro.setName("Faturamento Semanal");
+							for(int i = 0; i<lstHash.size(); i++ ){
+
+								double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
+								lucro.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+							}
+							lineCharRelatorio.getData().addAll(lucro);
+						}
+					}else{
+						Alerta.showError("Erro ao filtrar", "Selecione um Tipo Período");
+					}
+				}else if(radioDataPeriodo.isSelected()){
+					/*Caso o Radio de data seja selecionado*/
+
+				}else{
+					Alerta.showError("Erro ao filtrar", "Selecione um Período");
+				}
+			}else if(sltComboTipo.equals("Venda")){
+				/*Relatório de vendas*/
+
+			}else if(sltComboTipo.equals("Pedido")){
+				/*Relatório de Pedidos*/
+				if(radioPeriodo.isSelected()){
+					String sltComboPeriodo = cboPeriodoRelatório.getSelectionModel().getSelectedItem();
+					if(sltComboPeriodo != null){
+						if(sltComboPeriodo.equals("Anual")){
+							lineCharRelatorio.getData().clear();
+							List<HashMap<Integer,String>> lstHash = Relatorio.ListarPedido("Anual");
+
+							XYChart.Series lucro = new XYChart.Series();
+							lucro.setName("Pedidos anual");
+							for(int i = 0; i<lstHash.size(); i++ ){
+
+								double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
+								lucro.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+							}
+							lineCharRelatorio.getData().addAll(lucro);
+
+						}else if(sltComboPeriodo.equals("Mensal")){
+							lineCharRelatorio.getData().clear();
+							List<HashMap<Integer,String>> lstHash = Relatorio.ListarPedido("Mensal");
+
+							XYChart.Series lucro = new XYChart.Series();
+							lucro.setName("Pedidos Mensal");
+							for(int i = 0; i<lstHash.size(); i++ ){
+
+								double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
+								lucro.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+							}
+							lineCharRelatorio.getData().addAll(lucro);
+
+						}else if(sltComboPeriodo.equals("Semanal")){
+							lineCharRelatorio.getData().clear();
+							List<HashMap<Integer,String>> lstHash = Relatorio.ListarPedido("Semanal");
+
+							XYChart.Series lucro = new XYChart.Series();
+							lucro.setName("Pedidos Semanal");
+							for(int i = 0; i<lstHash.size(); i++ ){
+
+								double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
+								lucro.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+							}
+							lineCharRelatorio.getData().addAll(lucro);
+						}
+					}else{
+						Alerta.showError("Erro ao filtrar", "Selecione um Tipo Período");
+					}
+				}else if(radioDataPeriodo.isSelected()){
+					/*Caso o Radio de data seja selecionado*/
+
+				}else{
+					Alerta.showError("Erro ao filtrar", "Selecione um Período");
+				}
+			}
+		}else{
+			Alerta.showError("Erro ao gerar relatório", "Selecione o Tipo de Relatório que será emitido");
+		}
+	}
+}
