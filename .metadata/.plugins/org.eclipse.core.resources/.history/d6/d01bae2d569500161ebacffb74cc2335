@@ -1,0 +1,31 @@
+package br.com.onpecas.model;
+
+public class Status {
+	private int oid_status;
+	private String nome;
+	private String descricao;
+
+	public int getOid_status() {
+		return oid_status;
+	}
+	public void setOid_status(int oid_status) {
+		this.oid_status = oid_status;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Status BuscarStatus(int oid_status){
+
+		return null;
+	}
+}

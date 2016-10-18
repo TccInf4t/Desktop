@@ -10,30 +10,15 @@
    <children>
       <Separator layoutY="210.0" prefHeight="18.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="220.0" />
       <Separator layoutY="264.0" prefHeight="18.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0" />
-      <Button layoutX="12.0" layoutY="231.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="30.0" style="-fx-background-color: #32CD32;" text="+" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="231.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button layoutX="47.0" layoutY="231.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="30.0" style="-fx-background-color: FA8072;" text="x" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="231.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button layoutX="85.0" layoutY="231.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="30.0" style="-fx-background-color: #00BFFF;" text="e" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="231.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <TableView layoutX="12.0" layoutY="266.0" prefHeight="522.0" prefWidth="976.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="266.0">
+      <TableView fx:id="tblPedido" layoutX="12.0" layoutY="266.0" prefHeight="522.0" prefWidth="976.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="266.0">
         <columns>
-          <TableColumn prefWidth="111.0" resizable="false" text="Num. Pedido" />
-          <TableColumn prefWidth="124.0" resizable="false" text="Data da Compra" />
-            <TableColumn prefWidth="137.0" resizable="false" text="Status" />
-            <TableColumn prefWidth="256.0" resizable="false" text="Cliente" />
-            <TableColumn prefWidth="82.0" resizable="false" text="Qtd. Itens" />
-            <TableColumn prefWidth="144.0" resizable="false" sortable="false" text="Estado" />
-            <TableColumn prefWidth="131.0" resizable="false" sortable="false" text="Cidade" />
+          <TableColumn fx:id="clnNumPedido" prefWidth="111.0" resizable="false" text="Num. Pedido" />
+          <TableColumn fx:id="clnDtCompra" prefWidth="124.0" resizable="false" text="Data da Compra" />
+            <TableColumn fx:id="clnStatus" prefWidth="137.0" resizable="false" text="Status" />
+            <TableColumn fx:id="clnCliente" prefWidth="256.0" resizable="false" text="Cliente" />
+            <TableColumn fx:id="clnQtdItens" prefWidth="82.0" resizable="false" text="Qtd. Itens" />
+            <TableColumn fx:id="clnEstado" prefWidth="144.0" resizable="false" sortable="false" text="Estado" />
+            <TableColumn fx:id="clnCidade" prefWidth="131.0" resizable="false" sortable="false" text="Cidade" />
         </columns>
       </TableView>
       <DatePicker layoutX="206.0" layoutY="99.0" AnchorPane.leftAnchor="200.0" />
@@ -67,11 +52,6 @@
       </Label>
       <Button layoutX="926.0" layoutY="195.0" mnemonicParsing="false" text="FILTRAR" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="195.0" />
       <TextField layoutX="200.0" layoutY="35.0" prefHeight="25.0" prefWidth="443.0" />
-      <Label layoutX="30.0" layoutY="188.0" text="Status do Pedido">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <ComboBox layoutX="200.0" layoutY="190.0" prefHeight="25.0" prefWidth="214.0" promptText="Todos" />
+      <Button fx:id="btnVisualizar" layoutX="14.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Visualizar" />
    </children>
 </AnchorPane>

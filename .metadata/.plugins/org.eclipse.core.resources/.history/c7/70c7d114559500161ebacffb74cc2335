@@ -1,0 +1,122 @@
+package br.com.onpecas.model;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.onpecas.helper.MySqlConnect;
+
+public class Pedido {
+	private int oid_pedido;
+	private String tipoCartao;
+	private String numeroCartao;
+	private String vlrFrete;
+	private String formaPagamento;
+	private String dtRealizada;
+
+	private List<Produto> lstProduto;
+	private Cliente cliente;
+	private Endereco enderecoEntrega;
+	private Status status;
+
+	public int getOid_pedido() {
+		return oid_pedido;
+	}
+	public void setOid_pedido(int oid_pedido) {
+		this.oid_pedido = oid_pedido;
+	}
+	public Endereco getEnderecoEntrega() {
+		return enderecoEntrega;
+	}
+	public void setEnderecoEntrega(Endereco enderecoEntrega) {
+		this.enderecoEntrega = enderecoEntrega;
+	}
+	public String getTipoCartao() {
+		return tipoCartao;
+	}
+	public void setTipoCartao(String tipoCartao) {
+		this.tipoCartao = tipoCartao;
+	}
+	public String getNumeroCartao() {
+		return numeroCartao;
+	}
+	public void setNumeroCartao(String numeroCartao) {
+		this.numeroCartao = numeroCartao;
+	}
+	public String getVlrFrete() {
+		return vlrFrete;
+	}
+	public void setVlrFrete(String vlrFrete) {
+		this.vlrFrete = vlrFrete;
+	}
+	public String getFormaPagamento() {
+		return formaPagamento;
+	}
+	public void setFormaPagamento(String formaPagamento) {
+		this.formaPagamento = formaPagamento;
+	}
+	public Status getStatus() {
+		return status;
+	}
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	public String getDtRealizada() {
+		return dtRealizada;
+	}
+	public void setDtRealizada(String dtRealizada) {
+		this.dtRealizada = dtRealizada;
+	}
+	public List<Produto> getLstProduto() {
+		return lstProduto;
+	}
+	public void setLstProduto(List<Produto> lstProduto) {
+		this.lstProduto = lstProduto;
+	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public static List<Estado> Select(){
+		Connection con = MySqlConnect.ConectarDb();
+
+//		private int oid_pedido;
+//		private String tipoCartao;
+//		private String numeroCartao;
+//		private String vlrFrete;
+//		private String formaPagamento;
+//		private String dtRealizada;
+//
+//		private List<Produto> lstProduto;
+//		private Cliente cliente;
+//		private Endereco enderecoEntrega;
+//		private Status status;
+		
+		
+		List<Estado> lstEstado = new ArrayList<>();
+		String sql ="select * from pedidos";
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sql);
+
+			while(rs.next()){
+				Estado estado = new Estado();
+				estado.setNome(rs.getString("nome"));
+				estado.setOid_estado(rs.getInt("oid_estado"));
+				estado.setUF(rs.getString("uf"));
+
+				lstEstado.add(estado);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lstEstado;
+	}
+
+}

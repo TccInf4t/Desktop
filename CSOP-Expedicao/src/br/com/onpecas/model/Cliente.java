@@ -58,10 +58,10 @@ public class Cliente {
 		this.endereco = endereco;
 	}
 
-	public static Cliente Select(){
+	public static Cliente Select(int oid_cliente){
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql = "Select * from cliente where oid_cliente=";
+		String sql = "Select * from cliente where oid_cliente="+oid_cliente;
 		Cliente cliente = new Cliente();
 
 		try {

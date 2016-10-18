@@ -1,14 +1,16 @@
 package br.com.onpecas.model;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import br.com.onpecas.helper.MySqlConnect;
+
 public class Pedido {
-	private int oid_pedido;
-	private String tipoCartao;
-	private String numeroCartao;
-	private String vlrFrete;
-	private String formaPagamento;
-	private String dtRealizada;
+	private int oid_pedido, qtdItens;
+	private String tipoCartao, numeroCartao, vlrFrete, formaPagamento, dtRealizada, estado, cidade, statusedt, nomeCliente;
 
 	private List<Produto> lstProduto;
 	private Cliente cliente;
@@ -75,8 +77,71 @@ public class Pedido {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	public int getQtdItens() {
+		return qtdItens;
+	}
+	public void setQtdItens(int qtdItens) {
+		this.qtdItens = qtdItens;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public String getCidade() {
+		return cidade;
+	}
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+	public String getStatusedt() {
+		return statusedt;
+	}
+	public void setStatusedt(String statusedt) {
+		this.statusedt = statusedt;
+	}
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+	public static List<Pedido> Select(){
+		Connection con = MySqlConnect.ConectarDb();
+		List<Pedido> lstPedidos = new ArrayList<Pedido>();
+		String sql ="select * from pedido";
 
-	public void Select(){
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sql);
+			while(rs.next()){
 
+				Pedido pedido = new Pedido();
+
+				pedido.setOid_pedido(rs.getInt("oid_pedido"));
+				pedido.setTipoCartao(rs.getString("tipocartao"));
+				pedido.setNumeroCartao(rs.getString("numcartao"));
+				pedido.setVlrFrete(rs.getString("frete"));
+				pedido.setFormaPagamento(rs.getString("formapagamento"));
+				pedido.setDtRealizada(rs.getString("dtrealizado"));
+
+				pedido.setCliente(Cliente.Select(rs.getInt("oid_cliente")));
+				pedido.setEnderecoEntrega(Endereco.BuscarEndereco(rs.getInt("oid_endereco")));
+				pedido.setStatus(Status.BuscarStatus(rs.getInt("oid_status")));
+				//pedido.setLstProduto(null);
+
+				//pedido.setQtdItens(pedido.getLstProduto().size());
+
+				pedido.setCidade(pedido.getEnderecoEntrega().getCidade().getNome());
+				pedido.setEstado(pedido.getEnderecoEntrega().getCidade().getEstado().getNome());
+				pedido.setNomeCliente(pedido.getCliente().getNome());
+				pedido.setStatusedt(pedido.getStatus().getNome());
+				lstPedidos.add(pedido);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lstPedidos;
 	}
 }

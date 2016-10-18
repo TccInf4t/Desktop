@@ -1,0 +1,37 @@
+package br.com.onpecas.controller;
+
+import java.net.URL;
+import java.util.*;
+
+import br.com.onpecas.model.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+public class PedidoSemLoteInicialController implements Initializable{
+
+	@FXML TableView<Pedido> tblPedido;
+	@FXML TableColumn<Pedido, String> clnNumPedido, clnDtCompra, clnStatus, clnCliente, clnQtdItens, clnEstado, clnCidade;
+	@FXML Button btnVisualizar;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		AtualizarTblPedido();
+	}
+
+	public void AtualizarTblPedido(){
+		clnNomeExibicao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("nome"));
+		clnFretePadrao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("frete"));
+		clnCidade.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("cidade"));
+		clnEstado.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("estado"));
+		clnObservacao.setCellValueFactory(new PropertyValueFactory<Transportadora, String>("observacoes"));
+
+        List<Transportadora> lstTransportadora = Transportadora.Select();
+        ObservableList<Transportadora> data = FXCollections.observableList(lstTransportadora);
+
+        tblTransportadoras.setItems(data);
+	}
+}

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import br.com.onpecas.controller.*;
 import br.com.onpecas.model.Endereco;
+import br.com.onpecas.model.Pedido;
 import br.com.onpecas.model.Transportadora;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -73,7 +74,8 @@ public class CallScene {
 
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("PedidoSemLoteInicial.fxml"));
-
+        loader.setController(new PedidoSemLoteInicialController());
+        
 		try {
 			AnchorPane module= (AnchorPane) loader.load();
 
