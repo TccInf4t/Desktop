@@ -10,7 +10,7 @@
    <children>
       <Separator layoutY="210.0" prefHeight="18.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="220.0" />
       <Separator layoutY="264.0" prefHeight="18.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0" />
-      <TableView fx:id="tblPedido" layoutX="12.0" layoutY="266.0" prefHeight="493.0" prefWidth="986.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="266.0">
+      <TableView fx:id="tblPedido" layoutX="12.0" layoutY="266.0" prefHeight="493.0" prefWidth="986.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0">
         <columns>
           <TableColumn fx:id="clnNumPedido" prefWidth="111.0" resizable="false" text="Num. Pedido" />
           <TableColumn fx:id="clnDtCompra" prefWidth="124.0" resizable="false" text="Data da Compra" />
@@ -52,7 +52,7 @@
       </Label>
       <Button layoutX="926.0" layoutY="195.0" mnemonicParsing="false" text="FILTRAR" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="195.0" />
       <TextField layoutX="200.0" layoutY="35.0" prefHeight="25.0" prefWidth="443.0" />
-      <Button fx:id="btnVisualizar" layoutX="14.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Visualizar" />
-      <Button fx:id="btnGerarLote" layoutX="165.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Gerar Lote" />
+      <Button fx:id="btnVisualizar" layoutX="14.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Visualizar" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="231.0" />
+      <Button fx:id="btnGerarLote" layoutX="148.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Gerar Lote" AnchorPane.leftAnchor="148.0" AnchorPane.topAnchor="231.0" />
    </children>
 </AnchorPane>

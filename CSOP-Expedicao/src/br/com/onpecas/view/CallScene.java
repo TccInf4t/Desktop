@@ -121,4 +121,38 @@ public class CallScene {
 			e.printStackTrace();
 		}
 	}
+
+	public void LoadLoteSemTransporteInicial(){
+
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("LoteSemTransporteInicial.fxml"));
+        loader.setController(new LoteSemTransporteInicialController());
+
+		try {
+			AnchorPane module= (AnchorPane) loader.load();
+
+			CSOPControllerExpedicao.border.setCenter(module);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void LoadLoteSemTransporteDetalhe(Lote lote){
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("LoteSemTransporteDetalhe.fxml"));
+        loader.setController(new LoteSemTransporteDetalheController(lote));
+        secondStage = new Stage();
+
+		try {
+			AnchorPane module= (AnchorPane) loader.load();
+
+			Scene scene = new Scene(module);
+			secondStage.initModality(Modality.APPLICATION_MODAL);
+			secondStage.setScene(scene);
+			secondStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

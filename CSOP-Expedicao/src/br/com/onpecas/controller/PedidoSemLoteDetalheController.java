@@ -31,7 +31,7 @@ public class PedidoSemLoteDetalheController implements Initializable{
 	}
 
 	public void PreecherCampos(){
-		if(lote != 0){
+		if(pedido == null){
 			
 		}else{
 			txtCliente.setText(pedido.getCliente().getNome());

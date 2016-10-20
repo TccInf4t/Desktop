@@ -1,0 +1,15 @@
+package br.com.onpecas.controller;
+
+import java.net.URL;
+import java.util.*;
+
+import javafx.fxml.*;
+
+public class LoteSemTransporteDetalheController implements Initializable{
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+	}
+
+}

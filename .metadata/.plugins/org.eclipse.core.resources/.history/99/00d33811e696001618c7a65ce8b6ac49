@@ -1,0 +1,18 @@
+package br.com.onpecas.controller;
+
+import java.net.URL;
+import java.util.*;
+
+import javafx.fxml.*;
+import javafx.scene.control.*;
+
+public class LoteSemTransporteDetalheController implements Initializable{
+
+	@FXML TextField txtNumLote, txtDataCriacao, txtDataPrevSaida, txtDataPrevFinal, txtDataRealSaida, txtDataRealFinal, txtValorTotalLote;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+	}
+
+}

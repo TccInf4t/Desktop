@@ -4,8 +4,11 @@ import java.net.URL;
 import java.util.*;
 
 import br.com.onpecas.helper.Alerta;
+import br.com.onpecas.helper.Helper;
 import br.com.onpecas.model.*;
 import br.com.onpecas.view.CallScene;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.*;
@@ -24,6 +27,21 @@ public class PedidoSemLoteInicialController implements Initializable{
 		AtualizarTblPedido();
 		btnVisualizar.setOnAction(l-> VisualizarPedido());
 		btnGerarLote.setOnAction(l-> GerarLote());
+
+
+		Helper.AUXPEDIDOLOTE.addListener(new ChangeListener<Object>() {
+		     @Override
+		     public void changed(ObservableValue<?> observableValue, Object oldValue,
+		         Object newValue) {
+		         int newValuenovo =Integer.parseInt(newValue.toString());
+		         if(newValuenovo == 1){
+		            AtualizarTblPedido();
+		            Helper.AUXPEDIDOLOTE.setValue(0);
+		         }else{
+
+		         }
+		     }
+		   });
 	}
 
 	public void VisualizarPedido(){

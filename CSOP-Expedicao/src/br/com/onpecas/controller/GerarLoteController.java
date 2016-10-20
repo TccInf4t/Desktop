@@ -98,6 +98,7 @@ public class GerarLoteController implements Initializable{
 			Lote lote = new Lote();
 			lote.setLstPedido(lstItensPassados);
 			Lote.Insert(lote);
+			CallScene.secondStage.close();
 		}
 
 	}

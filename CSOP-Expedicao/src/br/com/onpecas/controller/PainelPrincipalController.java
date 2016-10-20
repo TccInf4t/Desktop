@@ -10,7 +10,7 @@ import javafx.scene.control.MenuItem;
 
 public class PainelPrincipalController implements Initializable{
 
-	@FXML MenuItem menuItemTransportadora, menuItemPedidoSemLote;
+	@FXML MenuItem menuItemTransportadora, menuItemPedidoSemLote, menuItemLoteSemTransporte;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -18,6 +18,7 @@ public class PainelPrincipalController implements Initializable{
 		CallScene scene = new CallScene();
 		menuItemTransportadora.setOnAction(l-> scene.LoadTransportadoraInicial());
 		menuItemPedidoSemLote.setOnAction(l-> scene.LoadPedidoSemLoteInicial());
+		menuItemLoteSemTransporte.setOnAction(l-> scene.LoadLoteSemTransporteInicial());
 	}
 
 }

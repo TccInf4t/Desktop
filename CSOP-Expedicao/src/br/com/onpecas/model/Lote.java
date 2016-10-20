@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.onpecas.helper.*;
@@ -11,11 +12,24 @@ import br.com.onpecas.helper.*;
 public class Lote {
 
 	private int oid_lote;
-	private String data_saida, data_entrega, frete;
+	private String data_saida, data_entrega, frete, data_criacao;
 	private List<Pedido> lstPedido;
 	private Transportadora transportadora;
+	private int qtdItens;
 
 
+	public String getData_criacao() {
+		return data_criacao;
+	}
+	public void setData_criacao(String data_criacao) {
+		this.data_criacao = data_criacao;
+	}
+	public int getQtdItens() {
+		return qtdItens;
+	}
+	public void setQtdItens(int qtdItens) {
+		this.qtdItens = qtdItens;
+	}
 	public Transportadora getTransportadora() {
 		return transportadora;
 	}
@@ -56,14 +70,13 @@ public class Lote {
 	public static void Insert(Lote lote){
 		Connection con =  MySqlConnect.ConectarDb();
 
-		String sqlLote ="insert into lote() value();";
+		String sqlLote ="insert into lote(dt_criacao) value(now());";
 
 		PreparedStatement parametros;
 
 		try {
 			parametros = con.prepareStatement(sqlLote);
 			parametros.executeUpdate();
-
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -90,6 +103,8 @@ public class Lote {
 			parametros1 = con.prepareStatement(sqlPedidoLote);
 			parametros1.executeUpdate();
 			con.close();
+
+			Pedido.MudarStatusPedido(lote.getLstPedido(), 3);
 			Alerta.showInformation("sucesso", "Inserido com sucesso");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -110,10 +125,46 @@ public class Lote {
 				lote.setOid_lote(rs.getInt("oid_lote"));
 
 			}
+			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return lote.getOid_lote();
+	}
+
+	public static List<Lote> Select(){
+		Connection con =  MySqlConnect.ConectarDb();
+
+		String sqlLote ="select * from lote order by oid_lote desc;";
+
+		List<Lote> lstLote = new ArrayList<Lote>();
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sqlLote);
+			while(rs.next()){
+				Lote lote = new Lote();
+				lote.setOid_lote(rs.getInt("oid_lote"));
+				lote.setData_criacao(rs.getString("dt_criacao"));
+				lote.setData_entrega(rs.getString("dt_entrega"));
+				lote.setData_saida(rs.getString("dt_saida"));
+				lote.setFrete(rs.getString("frete"));
+
+				if(rs.getInt("oid_transportadora") == 0){
+					lote.setTransportadora(null);
+				}else{
+					lote.setTransportadora(Transportadora.Buscar(rs.getInt("oid_transportadora")));
+				}
+
+				lote.setLstPedido(Pedido.Buscar(rs.getInt("oid_lote")));
+				lote.setQtdItens(lote.getLstPedido().size());
+
+				lstLote.add(lote);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lstLote;
 	}
 }

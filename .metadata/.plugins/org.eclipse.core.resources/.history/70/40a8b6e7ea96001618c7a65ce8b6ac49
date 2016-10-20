@@ -1,0 +1,64 @@
+package br.com.onpecas.controller;
+
+import java.net.URL;
+import java.util.*;
+
+import br.com.onpecas.model.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+public class LoteSemTransporteDetalheController implements Initializable{
+
+	@FXML TextField txtNumLote, txtDataCriacao, txtDataPrevSaida, txtDataPrevFinal, txtDataRealSaida, txtDataRealFinal, txtValorTotalLote;
+	@FXML Button btnVoltar;
+
+	@FXML TableView<Pedido> tblPedido;
+	@FXML TableColumn<Pedido, String> clnNumPedido, clnDtCompra, clnStatus, clnCliente, clnQtdItens, clnEstado, clnCidade;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		PreecherCampos();
+		
+		
+	}
+
+	Lote lote;
+	public void PreecherCampos(){
+		if(lote == null){
+
+		}else{
+			txtNumLote.setText(""+lote.getOid_lote());
+			txtDataCriacao.setText(lote.getData_criacao());
+			txtDataPrevSaida.setText(lote.getData_saida());
+			txtDataPrevFinal.setText(lote.getData_entrega());
+			txtDataRealSaida.setText("");
+			txtDataRealFinal.setText("");
+			txtValorTotalLote.setText("");
+
+			AtualizarTblPedido(lote.getLstPedido());
+		}
+	}
+
+	public LoteSemTransporteDetalheController(Lote lote) {
+		this.lote = lote;
+	}
+
+	public void AtualizarTblPedido(List<Pedido> lstPedido){
+
+		clnCidade.setCellValueFactory(new PropertyValueFactory<Pedido, String>("cidade"));
+		clnEstado.setCellValueFactory(new PropertyValueFactory<Pedido, String>("estado"));
+		clnNumPedido.setCellValueFactory(new PropertyValueFactory<Pedido, String>("oid_pedido"));
+		clnDtCompra.setCellValueFactory(new PropertyValueFactory<Pedido, String>("dtRealizada"));
+		clnStatus.setCellValueFactory(new PropertyValueFactory<Pedido, String>("statusedt"));
+		clnCliente.setCellValueFactory(new PropertyValueFactory<Pedido, String>("nomeCliente"));
+		clnQtdItens.setCellValueFactory(new PropertyValueFactory<Pedido, String>("qtdItens"));
+
+        ObservableList<Pedido> data = FXCollections.observableList(lstPedido);
+
+        tblPedido.setItems(data);
+	}
+
+}

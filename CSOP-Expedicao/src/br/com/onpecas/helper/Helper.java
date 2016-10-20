@@ -8,4 +8,5 @@ public class Helper {
 	public static Endereco ENDERECO_GERADO;
 	public static IntegerProperty AUXTRANSPORTADORA = new SimpleIntegerProperty();
 	public static IntegerProperty AUXENDERECOCOMPLETO = new SimpleIntegerProperty();
+	public static IntegerProperty AUXPEDIDOLOTE = new SimpleIntegerProperty();
 }
