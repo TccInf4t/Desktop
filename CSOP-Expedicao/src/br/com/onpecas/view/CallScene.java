@@ -1,11 +1,10 @@
 package br.com.onpecas.view;
 
 import java.io.IOException;
+import java.util.List;
 
 import br.com.onpecas.controller.*;
-import br.com.onpecas.model.Endereco;
-import br.com.onpecas.model.Pedido;
-import br.com.onpecas.model.Transportadora;
+import br.com.onpecas.model.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -75,7 +74,7 @@ public class CallScene {
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("PedidoSemLoteInicial.fxml"));
         loader.setController(new PedidoSemLoteInicialController());
-        
+
 		try {
 			AnchorPane module= (AnchorPane) loader.load();
 
@@ -85,4 +84,41 @@ public class CallScene {
 		}
 	}
 
+	public void LoadPedidoSemLoteDetalhe(Pedido pedido){
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("PedidoSemLoteDetalhe.fxml"));
+        loader.setController(new PedidoSemLoteDetalheController(pedido, 0));
+        secondStage = new Stage();
+
+		try {
+			AnchorPane module= (AnchorPane) loader.load();
+
+			Scene scene = new Scene(module);
+			secondStage.initModality(Modality.APPLICATION_MODAL);
+			secondStage.setScene(scene);
+			secondStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void LoadGerarLote(List<Pedido> lstTodosPedidos){
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("GerarLote.fxml"));
+        loader.setController(new GerarLoteController(lstTodosPedidos));
+        secondStage = new Stage();
+
+		try {
+			AnchorPane module= (AnchorPane) loader.load();
+
+			Scene scene = new Scene(module);
+			secondStage.initModality(Modality.APPLICATION_MODAL);
+			secondStage.setScene(scene);
+			secondStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

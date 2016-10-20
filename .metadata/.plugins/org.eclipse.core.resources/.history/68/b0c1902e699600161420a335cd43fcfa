@@ -1,0 +1,84 @@
+package br.com.onpecas.model;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import br.com.onpecas.helper.MySqlConnect;
+
+public class Lote {
+
+	private int oid_lote;
+	private String data_saida, data_entrega, frete;
+	private List<Pedido> lstPedido;
+	private Transportadora transportadora;
+
+
+	public Transportadora getTransportadora() {
+		return transportadora;
+	}
+	public void setTransportadora(Transportadora transportadora) {
+		this.transportadora = transportadora;
+	}
+	public List<Pedido> getLstPedido() {
+		return lstPedido;
+	}
+	public void setLstPedido(List<Pedido> lstPedido) {
+		this.lstPedido = lstPedido;
+	}
+	public int getOid_lote() {
+		return oid_lote;
+	}
+	public void setOid_lote(int oid_lote) {
+		this.oid_lote = oid_lote;
+	}
+	public String getData_saida() {
+		return data_saida;
+	}
+	public void setData_saida(String data_saida) {
+		this.data_saida = data_saida;
+	}
+	public String getData_entrega() {
+		return data_entrega;
+	}
+	public void setData_entrega(String data_entrega) {
+		this.data_entrega = data_entrega;
+	}
+	public String getFrete() {
+		return frete;
+	}
+	public void setFrete(String frete) {
+		this.frete = frete;
+	}
+
+	public static void Insert(Lote lote){
+		Connection con =  MySqlConnect.ConectarDb();
+
+		String sqlLote ="insert into lote() value();";
+
+
+
+
+	}
+
+	public Lote BuscarUltimoLote(){
+		Connection con =  MySqlConnect.ConectarDb();
+
+		String sqlLote ="select * from lote order by oid_lote desc limit 1;";
+
+		Lote lote = new Lote();
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sqlLote);
+			while(rs.next()){
+				lote.setOid_lote(rs.getInt(""));
+				lote.setOid_transportadora(rs.getin);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lote;
+	}
+}

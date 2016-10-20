@@ -1,0 +1,84 @@
+package br.com.onpecas.controller;
+
+import java.net.URL;
+import java.util.*;
+
+import br.com.onpecas.model.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+public class GerarLoteController implements Initializable{
+
+	@FXML Button btnCancelar, btnConcluir, btnPassarUm, btnVoltarUm, btnPassarTodos, btnVoltarTodos;
+	@FXML TableView<Pedido> tblItensNaoPassados, tblItensPassados;
+	@FXML TableColumn<Pedido, String> clnNumPedidoNP, clnDataRealizadoNP, clnNumPedidoP, clnDataRealizadoP;
+
+	List<Pedido> lstItensNaoPassados, lstItensPassados;
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+		btnCancelar.setOnAction(l-> Concluir());
+		btnConcluir.setOnAction(l-> Cancelar());
+
+		btnPassarUm.setOnAction(l-> PassarUm());
+		btnVoltarUm.setOnAction(l-> VoltarUm());
+		btnPassarTodos.setOnAction(l-> PassarTodos());
+		btnVoltarTodos.setOnAction(l-> VoltarTodos());
+
+		CarregarItensNaoPassados();
+	}
+
+	public GerarLoteController(List<Pedido> lstTodosPedidos) {
+		this.lstItensNaoPassados = lstTodosPedidos;
+
+	}
+
+	public void PassarUm(){
+
+
+	}
+
+	public void VoltarUm(){
+
+
+	}
+
+	public void PassarTodos(){
+
+
+	}
+
+	public void VoltarTodos(){
+
+
+	}
+
+	public void Concluir(){
+
+
+	}
+
+	public void Cancelar(){
+
+
+	}
+
+	public void CarregarItensNaoPassados(){
+		clnNumPedidoNP.setCellValueFactory(new PropertyValueFactory<Pedido, String>("oid_pedido"));
+		clnDataRealizadoNP.setCellValueFactory(new PropertyValueFactory<Pedido, String>("dtRealizada"));
+		
+		ObservableList<Pedido> data = FXCollections.observableList(lstItensNaoPassados);
+	    tblItensNaoPassados.setItems(data);
+	}
+
+	public void AtualizarItensNaoPassados(List<Pedido> lstPedidos){
+
+	}
+
+	public void AtualizarItensPassados(List<Pedido> lstPedidos){
+
+	}
+}

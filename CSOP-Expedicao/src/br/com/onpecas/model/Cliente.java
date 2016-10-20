@@ -68,15 +68,13 @@ public class Cliente {
 			ResultSet rs = con.createStatement().executeQuery(sql);
 			while(rs.next()){
 
-				/*endereco.setLogradouro(rs.getString("logradouro"));
-				endereco.setNumero(rs.getString("numero"));
-				endereco.setCep(rs.getString("cep"));
-				endereco.setBairro(rs.getString("bairro"));
-				endereco.setComplemento(rs.getString("complemento"));
-				endereco.setClassname(rs.getString("classname"));
-				endereco.setEnderecoCompleto(rs.getString("enderecocompleto"));
-				endereco.setOid_endereco(rs.getInt("oid_endereco"));
-				endereco.setCidade(Cidade.BuscarCidadeUnica(rs.getInt("oid_cidade")));*/
+				cliente.setOid_cliente(rs.getInt("oid_cliente"));
+				cliente.setAtivo(rs.getInt("ativo"));
+				cliente.setCpfcnpj(rs.getString("cpfcnpj"));
+				cliente.setDtNasc(rs.getString("data_nascimento"));
+				cliente.setEmail(rs.getString("email"));
+				cliente.setNome(rs.getString("nome"));
+				cliente.setEndereco(Endereco.BuscarEndereco(rs.getInt("oid_endereco")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

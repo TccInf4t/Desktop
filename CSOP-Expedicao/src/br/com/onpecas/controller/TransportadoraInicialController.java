@@ -74,7 +74,7 @@ public class TransportadoraInicialController implements Initializable{
         	if(transportadora == null){
     			Alerta.showError("Erro ao Excluir", "Selecione uma Transportadora");
     		}else{
-    			transportadora.Delete(transportadora);
+    			Transportadora.Delete(transportadora);
     			Helper.AUXTRANSPORTADORA.setValue(1);
     		}
         }

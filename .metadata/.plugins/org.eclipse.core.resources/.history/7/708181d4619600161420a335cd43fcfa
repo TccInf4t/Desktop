@@ -1,0 +1,61 @@
+package br.com.onpecas.controller;
+
+import java.net.URL;
+import java.util.*;
+
+import br.com.onpecas.model.*;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+
+public class GerarLoteController implements Initializable{
+
+	@FXML Button btnCancelar, btnConcluir, btnPassarUm, btnVoltarUm, btnPassarTodos, btnVoltarTodos;
+	@FXML TableView<Pedido> tblItensNaoPassados, tblItensPassados;
+	@FXML TableColumn<Pedido, String> clnNumPedidoNP, clnDataRealizadoNP, clnNumPedidoP, clnDataRealizadoP;
+
+	List<Pedido> lstItensNaoPassados, lstItensPassados;
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+		lstItensNaoPassados = new ArrayList<Pedido>();
+		lstItensPassados = new ArrayList<Pedido>();
+
+		btnCancelar.setOnAction(l-> Concluir());
+		btnConcluir.setOnAction(l-> Cancelar());
+
+		btnPassarUm.setOnAction(l-> PassarUm());
+		btnVoltarUm.setOnAction(l-> VoltarUm());
+		btnPassarTodos.setOnAction(l-> PassarTodos());
+		btnVoltarTodos.setOnAction(l-> VoltarTodos());
+	}
+
+	public void PassarUm(){
+
+
+	}
+
+	public void VoltarUm(){
+
+
+	}
+
+	public void PassarTodos(){
+
+
+	}
+
+	public void VoltarTodos(){
+
+
+	}
+
+	public void Concluir(){
+
+
+	}
+
+	public void Cancelar(){
+
+
+	}
+}

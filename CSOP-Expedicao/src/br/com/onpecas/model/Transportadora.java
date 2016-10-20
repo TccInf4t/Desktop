@@ -220,7 +220,7 @@ public class Transportadora {
 	}
 
 	/*Método para apagar transportadoras no banco de dados*/
-	public void Delete(Transportadora transportadora) {
+	public static void Delete(Transportadora transportadora) {
 		Connection con = MySqlConnect.ConectarDb();
 
 		String sql ="delete from transportadora where oid_transportadora = ?; ";
@@ -241,5 +241,38 @@ public class Transportadora {
 			e.printStackTrace();
 			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
 		}
+	}
+
+	public static Transportadora Buscar(int oid_transportadora){
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql ="select * from transportadora where oid_transportadora = "+oid_transportadora;
+		Transportadora transportadora = new Transportadora();
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sql);
+			while(rs.next()){
+
+				Endereco endereco = Endereco.BuscarEndereco(rs.getInt("oid_endereco"));
+
+				transportadora.setOid_transportadora(rs.getInt("oid_transportadora"));
+				transportadora.setCnpj(rs.getString("cnpj"));
+				transportadora.setFrete(rs.getString("frete"));
+				transportadora.setNome(rs.getString("nome"));
+				transportadora.setRamo(rs.getString("ramo"));
+				transportadora.setObservacoes(rs.getString("observacoes"));
+				transportadora.setNatureza(rs.getString("natureza"));
+				transportadora.setRg(rs.getString("rg"));
+				transportadora.setTelefone(rs.getString("telefone"));
+
+				transportadora.setEndereco(endereco);
+				transportadora.setCidade(endereco.getCidade().getNome());
+				transportadora.setEstado(endereco.getCidade().getEstado().getNome());
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return transportadora;
 	}
 }

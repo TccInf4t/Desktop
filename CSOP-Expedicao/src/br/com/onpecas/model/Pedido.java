@@ -10,13 +10,20 @@ import br.com.onpecas.helper.MySqlConnect;
 
 public class Pedido {
 	private int oid_pedido, qtdItens;
-	private String tipoCartao, numeroCartao, vlrFrete, formaPagamento, dtRealizada, estado, cidade, statusedt, nomeCliente;
+	private String vlrTotal, tipoCartao, numeroCartao, vlrFrete, formaPagamento, dtRealizada, estado, cidade, statusedt, nomeCliente;
 
 	private List<Produto> lstProduto;
 	private Cliente cliente;
 	private Endereco enderecoEntrega;
 	private Status status;
 
+
+	public String getVlrTotal() {
+		return vlrTotal;
+	}
+	public void setVlrTotal(String vlrTotal) {
+		this.vlrTotal = vlrTotal;
+	}
 	public int getOid_pedido() {
 		return oid_pedido;
 	}
@@ -128,10 +135,18 @@ public class Pedido {
 				pedido.setCliente(Cliente.Select(rs.getInt("oid_cliente")));
 				pedido.setEnderecoEntrega(Endereco.BuscarEndereco(rs.getInt("oid_endereco")));
 				pedido.setStatus(Status.BuscarStatus(rs.getInt("oid_status")));
-				//pedido.setLstProduto(null);
+				pedido.setLstProduto(Produto.Select(rs.getInt("oid_pedido")));
 
-				//pedido.setQtdItens(pedido.getLstProduto().size());
+				pedido.setQtdItens(pedido.getLstProduto().size());
 
+				double vlrFinalItens = 0;
+				for(Produto item: pedido.getLstProduto()){
+					vlrFinalItens+= Double.parseDouble(item.getPrecoTotalvendido());
+				}
+
+				double valorFinal = vlrFinalItens + Double.parseDouble(pedido.vlrFrete);
+				pedido.setVlrTotal(""+valorFinal);
+				
 				pedido.setCidade(pedido.getEnderecoEntrega().getCidade().getNome());
 				pedido.setEstado(pedido.getEnderecoEntrega().getCidade().getEstado().getNome());
 				pedido.setNomeCliente(pedido.getCliente().getNome());

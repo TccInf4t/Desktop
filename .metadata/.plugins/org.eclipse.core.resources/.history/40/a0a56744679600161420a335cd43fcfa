@@ -1,0 +1,41 @@
+package br.com.onpecas.model;
+
+public class Lote {
+
+	private int oid_lote, oid_transportadora;
+	private String data_saida, data_entrega, frete;
+
+	public int getOid_lote() {
+		return oid_lote;
+	}
+	public void setOid_lote(int oid_lote) {
+		this.oid_lote = oid_lote;
+	}
+	public int getOid_transportadora() {
+		return oid_transportadora;
+	}
+	public void setOid_transportadora(int oid_transportadora) {
+		this.oid_transportadora = oid_transportadora;
+	}
+	public String getData_saida() {
+		return data_saida;
+	}
+	public void setData_saida(String data_saida) {
+		this.data_saida = data_saida;
+	}
+	public String getData_entrega() {
+		return data_entrega;
+	}
+	public void setData_entrega(String data_entrega) {
+		this.data_entrega = data_entrega;
+	}
+	public String getFrete() {
+		return frete;
+	}
+	public void setFrete(String frete) {
+		this.frete = frete;
+	}
+
+
+
+}
