@@ -3,8 +3,11 @@ package br.com.onpecas.controller;
 import java.net.URL;
 import java.util.*;
 
+import br.com.onpecas.helper.Helper;
 import br.com.onpecas.model.*;
 import br.com.onpecas.view.CallScene;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.*;
@@ -14,18 +17,17 @@ import javafx.scene.input.MouseEvent;
 
 public class LoteSemTransporteDetalheController implements Initializable{
 
-	@FXML TextField txtNumLote, txtDataCriacao, txtDataPrevSaida, txtDataPrevFinal, txtDataRealSaida, txtDataRealFinal, txtValorTotalLote;
+	@FXML TextField txtNumLote, txtDataCriacao, txtDataPrevSaida, txtDataPrevFinal, txtValorFrete, txtStatusLote;
 	@FXML Button btnVoltar;
 
 	@FXML TableView<Pedido> tblPedido;
 	@FXML TableColumn<Pedido, String> clnNumPedido, clnDtCompra, clnStatus, clnCliente, clnQtdItens,clnFormaPagamento;
 
-	Lote lote;
+	static Lote lote;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		PreecherCampos();
-
 
 		tblPedido.setOnMouseClicked(new javafx.event.EventHandler<MouseEvent>() {
 			@Override
@@ -33,12 +35,41 @@ public class LoteSemTransporteDetalheController implements Initializable{
 		        if (click.getClickCount() == 2) {
 		        	CallScene callScene = new CallScene();
 		        	Pedido pedido = tblPedido.getSelectionModel().getSelectedItem();
-		        	callScene.LoadPedidoSemLoteDetalhe(pedido);
+		        	if(pedido!= null){
+		        		callScene.LoadPedidoSemLoteDetalhe(pedido, lote);
+		        	}
 		        }else if(click.getClickCount() == 1){
 
 		        }
 		    }
 		});
+
+
+		Helper.AUXPEDIDOLOTEDET.addListener(new ChangeListener<Object>() {
+		     @Override
+		     public void changed(ObservableValue<?> observableValue, Object oldValue,
+		         Object newValue) {
+		         int newValuenovo =Integer.parseInt(newValue.toString());
+		         if(newValuenovo == 1){
+		        	lote.setLstPedido(Pedido.Buscar(lote.getOid_lote()));
+		            AtualizarTblPedido(lote.getLstPedido());
+		            Helper.AUXPEDIDOLOTEDET.setValue(0);
+
+		            int cont=0;
+		            for(Pedido item : lote.getLstPedido()){
+		            	if(item.getStatus().getOid_status() == 5){
+		            		cont ++;
+		            	}
+		            }
+
+		            if(cont >0 && cont == lote.getLstPedido().size()){
+		            	Lote.FinalizarLote(lote);
+		            }
+		         }else{
+
+		         }
+		     }
+		   });
 
 		btnVoltar.setOnAction(l-> CallScene.secondStage.close());
 	}
@@ -51,16 +82,14 @@ public class LoteSemTransporteDetalheController implements Initializable{
 			txtDataCriacao.setText(lote.getData_criacao());
 			txtDataPrevSaida.setText(lote.getData_saida());
 			txtDataPrevFinal.setText(lote.getData_entrega());
-			txtDataRealSaida.setText("");
-			txtDataRealFinal.setText("");
-			txtValorTotalLote.setText("");
+			txtValorFrete.setText(lote.getFrete());
 
 			AtualizarTblPedido(lote.getLstPedido());
 		}
 	}
 
 	public LoteSemTransporteDetalheController(Lote lote) {
-		this.lote = lote;
+		LoteSemTransporteDetalheController.lote = lote;
 	}
 
 	public void AtualizarTblPedido(List<Pedido> lstPedido){

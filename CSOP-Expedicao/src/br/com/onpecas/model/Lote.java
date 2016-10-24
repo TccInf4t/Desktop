@@ -12,11 +12,16 @@ import br.com.onpecas.helper.*;
 public class Lote {
 
 	private int oid_lote;
-	private String data_saida, data_entrega, frete, data_criacao;
+	private String data_saida, data_entrega, frete, data_criacao, nomeTransp, status;
 	private List<Pedido> lstPedido;
 	private Transportadora transportadora;
 	private int qtdItens;
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return oid_lote +" - qtd.: "+ qtdItens ;
+	}
 
 	public String getData_criacao() {
 		return data_criacao;
@@ -65,6 +70,14 @@ public class Lote {
 	}
 	public void setFrete(String frete) {
 		this.frete = frete;
+	}
+
+	public String getNomeTransp() {
+		return nomeTransp;
+	}
+
+	public void setNomeTransp(String nomeTransp) {
+		this.nomeTransp = nomeTransp;
 	}
 
 	public static void Insert(Lote lote){
@@ -154,6 +167,7 @@ public class Lote {
 					lote.setTransportadora(null);
 				}else{
 					lote.setTransportadora(Transportadora.Buscar(rs.getInt("oid_transportadora")));
+					lote.setNomeTransp(lote.getTransportadora().getNome());
 				}
 
 				lote.setLstPedido(Pedido.Buscar(rs.getInt("oid_lote")));
@@ -166,5 +180,104 @@ public class Lote {
 			e.printStackTrace();
 		}
 		return lstLote;
+	}
+
+	public static List<Lote> BuscarLoteSemTransporte(){
+		Connection con =  MySqlConnect.ConectarDb();
+
+		String sqlLote ="select * from lote where emtransp<>1 or emtransp is null order by oid_lote desc;";
+
+		List<Lote> lstLote = new ArrayList<Lote>();
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sqlLote);
+			while(rs.next()){
+				Lote lote = new Lote();
+				lote.setOid_lote(rs.getInt("oid_lote"));
+				lote.setData_criacao(rs.getString("dt_criacao"));
+				lote.setData_entrega(rs.getString("dt_entrega"));
+				lote.setData_saida(rs.getString("dt_saida"));
+				lote.setFrete(rs.getString("frete"));
+
+				if(rs.getInt("oid_transportadora") == 0){
+					lote.setTransportadora(null);
+				}else{
+					lote.setTransportadora(Transportadora.Buscar(rs.getInt("oid_transportadora")));
+					lote.setNomeTransp(lote.getTransportadora().getNome());
+				}
+
+				lote.setLstPedido(Pedido.Buscar(rs.getInt("oid_lote")));
+				lote.setQtdItens(lote.getLstPedido().size());
+
+				lstLote.add(lote);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lstLote;
+	}
+
+	public static void IniciarTransporte(Lote lote){
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql ="update lote set oid_transportadora = ?, dt_saida = ?, dt_entrega = ?, frete = ?, emtransp = ? where oid_lote = ?; "
+				+ "update transportadora set emtransp =? where oid_transportadora = ?; ";
+
+		PreparedStatement parametros;
+
+		try {
+			parametros = con.prepareStatement(sql);
+
+			parametros.setInt(1, lote.getTransportadora().getOid_transportadora());
+			parametros.setString(2, lote.getData_saida());
+			parametros.setString(3, lote.getData_entrega());
+			parametros.setString(4, lote.getFrete());
+			parametros.setInt(5, 1);
+
+			parametros.setInt(6, lote.getOid_lote());
+			parametros.setInt(7, 1);
+			parametros.setInt(8, lote.getTransportadora().getOid_transportadora());
+
+			parametros.executeUpdate();
+			con.close();
+
+			Alerta.showInformation("sucesso", "Inserido com sucesso");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
+		}
+
+	}
+
+	public static void FinalizarLote(Lote lote) {
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql ="update lote set dt_entrega = now(), status = 'Finalizado' where oid_lote = ?; ";
+
+		PreparedStatement parametros;
+
+		try {
+			parametros = con.prepareStatement(sql);
+
+			parametros.setInt(1, lote.getOid_lote());
+
+			parametros.executeUpdate();
+			con.close();
+
+			Alerta.showInformation("sucesso", "Inserido com sucesso");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
+		}
+
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

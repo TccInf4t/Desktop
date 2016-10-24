@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javafx.scene.control.MenuItem"/>
-<fullyQualifiedTypeName name="br.com.onpecas.controller.PainelPrincipalController"/>
-<fullyQualifiedTypeName name="br.com.onpecas.controller.EnderecoController"/>
-<fullyQualifiedTypeName name="br.com.onpecas.controller.TransportadoraInicialController"/>
-<fullyQualifiedTypeName name="java.util.logging.Handler"/>
-<fullyQualifiedTypeName name="javax.swing.event.ChangeListener"/>
 <fullyQualifiedTypeName name="javafx.event.EventType"/>
 <fullyQualifiedTypeName name="br.com.onpecas.controller.TransportadoraCadastroDetalheController"/>
 <fullyQualifiedTypeName name="com.mysql.jdbc.PreparedStatement"/>
@@ -15,8 +9,6 @@
 <fullyQualifiedTypeName name="javafx.stage.Stage"/>
 <fullyQualifiedTypeName name="java.lang.Void"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TextArea"/>
-<fullyQualifiedTypeName name="javafx.scene.control.ComboBox"/>
-<fullyQualifiedTypeName name="br.com.onpecas.helper.Mascaras"/>
 <fullyQualifiedTypeName name="javafx.beans.property.ReadOnlyIntegerWrapper"/>
 <fullyQualifiedTypeName name="javafx.util.Callback"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TableColumn.CellDataFeatures"/>
@@ -31,9 +23,7 @@
 <fullyQualifiedTypeName name="javafx.event.ActionEvent"/>
 <fullyQualifiedTypeName name="javafx.scene.layout.Pane"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Estado"/>
-<fullyQualifiedTypeName name="javafx.scene.control.Alert"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Cliente"/>
-<fullyQualifiedTypeName name="br.com.onpecas.model.Status"/>
 <fullyQualifiedTypeName name="java.lang.StackOverflowError"/>
 <fullyQualifiedTypeName name="br.com.onpecas.controller.PedidoSemLoteInicialController"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Endereco"/>
@@ -43,21 +33,31 @@
 <fullyQualifiedTypeName name="javafx.scene.control.Button"/>
 <fullyQualifiedTypeName name="javafx.fxml.FXML"/>
 <fullyQualifiedTypeName name="br.com.onpecas.controller.GerarLoteController"/>
-<fullyQualifiedTypeName name="br.com.onpecas.model.Pedido"/>
 <fullyQualifiedTypeName name="java.sql.Connection"/>
 <fullyQualifiedTypeName name="br.com.onpecas.helper.MySqlConnect"/>
 <fullyQualifiedTypeName name="br.com.onpecas.helper.Helper"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TableView"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TableColumn"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="br.com.onpecas.model.Transportadora"/>
 <fullyQualifiedTypeName name="br.com.onpecas.controller.LoteSemTransporteInicialController"/>
+<fullyQualifiedTypeName name="br.com.onpecas.controller.LoteSemTransporteDetalheController"/>
+<fullyQualifiedTypeName name="javafx.scene.input.MouseEvent"/>
 <fullyQualifiedTypeName name="javafx.fxml.Initializable"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TextField"/>
-<fullyQualifiedTypeName name="br.com.onpecas.controller.LoteSemTransporteDetalheController"/>
-<fullyQualifiedTypeName name="br.com.onpecas.model.Lote"/>
+<fullyQualifiedTypeName name="javafx.scene.control.DatePicker"/>
+<fullyQualifiedTypeName name="com.sun.media.jfxmedia.events.NewFrameEvent"/>
+<fullyQualifiedTypeName name="br.com.onpecas.controller.IniciarTransporteController"/>
+<fullyQualifiedTypeName name="javafx.scene.control.CheckBox"/>
+<fullyQualifiedTypeName name="br.com.onpecas.model.Transportadora"/>
+<fullyQualifiedTypeName name="javafx.scene.control.Alert"/>
 <fullyQualifiedTypeName name="br.com.onpecas.helper.Alerta"/>
-<fullyQualifiedTypeName name="javafx.scene.input.MouseEvent"/>
+<fullyQualifiedTypeName name="br.com.onpecas.helper.Mascaras"/>
+<fullyQualifiedTypeName name="javafx.scene.control.ComboBox"/>
+<fullyQualifiedTypeName name="br.com.onpecas.model.Status"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.w3c.dom.ls.LSInput"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="br.com.onpecas.view.CallScene"/>
+<fullyQualifiedTypeName name="br.com.onpecas.model.Pedido"/>
+<fullyQualifiedTypeName name="br.com.onpecas.model.Lote"/>
 </qualifiedTypeNameHistroy>

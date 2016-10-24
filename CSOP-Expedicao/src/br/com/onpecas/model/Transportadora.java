@@ -24,6 +24,12 @@ public class Transportadora {
 	private String telefone;
 	private Endereco endereco;
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return nome;
+	}
+
 	public String getTelefone() {
 		return telefone;
 	}
@@ -274,5 +280,40 @@ public class Transportadora {
 			e.printStackTrace();
 		}
 		return transportadora;
+	}
+
+	public static List<Transportadora> BuscarSemTransporte(){
+		Connection con = MySqlConnect.ConectarDb();
+
+		List<Transportadora> lstTransportadora = new ArrayList<Transportadora>();
+		String sql ="select * from transportadora where emtransp <>1 or emtransp is null order by oid_transportadora desc";
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sql);
+
+			while(rs.next()){
+				Transportadora transportadora = new Transportadora();
+				Endereco endereco = Endereco.BuscarEndereco(rs.getInt("oid_endereco"));
+
+				transportadora.setOid_transportadora(rs.getInt("oid_transportadora"));
+				transportadora.setCnpj(rs.getString("cnpj"));
+				transportadora.setFrete(rs.getString("frete"));
+				transportadora.setNome(rs.getString("nome"));
+				transportadora.setRamo(rs.getString("ramo"));
+				transportadora.setObservacoes(rs.getString("observacoes"));
+				transportadora.setNatureza(rs.getString("natureza"));
+				transportadora.setRg(rs.getString("rg"));
+				transportadora.setTelefone(rs.getString("telefone"));
+
+				transportadora.setEndereco(endereco);
+				transportadora.setCidade(endereco.getCidade().getNome());
+				transportadora.setEstado(endereco.getCidade().getEstado().getNome());
+
+				lstTransportadora.add(transportadora);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lstTransportadora;
 	}
 }

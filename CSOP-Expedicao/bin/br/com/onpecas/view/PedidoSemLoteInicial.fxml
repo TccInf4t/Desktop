@@ -52,7 +52,7 @@
       </Label>
       <Button layoutX="926.0" layoutY="195.0" mnemonicParsing="false" text="FILTRAR" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="195.0" />
       <TextField layoutX="200.0" layoutY="35.0" prefHeight="25.0" prefWidth="443.0" />
-      <Button fx:id="btnVisualizar" layoutX="14.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Visualizar" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="231.0" />
-      <Button fx:id="btnGerarLote" layoutX="148.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Gerar Lote" AnchorPane.leftAnchor="148.0" AnchorPane.topAnchor="231.0" />
+      <Button fx:id="btnVisualizar" layoutX="14.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: #32CD32;" text="Visualizar" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="231.0" />
+      <Button fx:id="btnGerarLote" layoutX="148.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: #00BFFF;" text="Gerar Lote" AnchorPane.leftAnchor="148.0" AnchorPane.topAnchor="231.0" />
    </children>
 </AnchorPane>

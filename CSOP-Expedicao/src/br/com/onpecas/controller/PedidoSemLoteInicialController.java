@@ -48,7 +48,7 @@ public class PedidoSemLoteInicialController implements Initializable{
 		Pedido pedidoSelecionado = tblPedido.getSelectionModel().getSelectedItem();
 		CallScene callScene = new CallScene();
 		if(pedidoSelecionado != null){
-			callScene.LoadPedidoSemLoteDetalhe(pedidoSelecionado);
+			callScene.LoadPedidoSemLoteDetalhe(pedidoSelecionado, null);
 		}else{
 			Alerta.showError("Não foi possivel visualizar", "Selecione ao menos um pedido para servisualizado");
 		}
@@ -57,7 +57,7 @@ public class PedidoSemLoteInicialController implements Initializable{
 	public void GerarLote(){
 		List<Pedido> lstPedidos = tblPedido.getItems();
 
-		if(lstPedidos ==null){
+		if(lstPedidos.size() ==0){
 			Alerta.showError("Não foi possivel gerar lote", "A tabela de pedidos está vazia");
 		}else{
 			CallScene callScene = new CallScene();

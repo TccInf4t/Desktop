@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.onpecas.helper.Alerta;
-import br.com.onpecas.helper.Helper;
-import br.com.onpecas.helper.MySqlConnect;
+import br.com.onpecas.helper.*;
 
 public class Pedido {
 	private int oid_pedido, qtdItens;
@@ -189,7 +187,6 @@ public class Pedido {
 		try {
 			parametros = con.prepareStatement(sql);
 			parametros.executeUpdate();
-            Helper.AUXPEDIDOLOTE.setValue(1);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -200,7 +197,7 @@ public class Pedido {
 	public static List<Pedido> Buscar(int oid_lote){
 		Connection con = MySqlConnect.ConectarDb();
 		List<Pedido> lstPedidos = new ArrayList<Pedido>();
-		String sql ="select * from pedido inner join lote_pedido on (pedido.oid_pedido = lote_pedido.oid_pedido) where pedido.oid_status =3 and lote_pedido.oid_lote="+oid_lote;
+		String sql ="select * from pedido inner join lote_pedido on (pedido.oid_pedido = lote_pedido.oid_pedido) where lote_pedido.oid_lote="+oid_lote;
 
 		try {
 			ResultSet rs = con.createStatement().executeQuery(sql);

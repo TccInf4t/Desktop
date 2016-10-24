@@ -1,9 +1,11 @@
 package br.com.onpecas.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import br.com.onpecas.helper.Helper;
 import br.com.onpecas.model.*;
 import br.com.onpecas.view.CallScene;
 import javafx.collections.FXCollections;
@@ -14,41 +16,57 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class PedidoSemLoteDetalheController implements Initializable{
 
-	@FXML TextField txtValorFrete, txtCliente, txtNumPedido, txtDataPedido, txtFormaPagamento, txtNumLote, txtValorFinal, txtQtdItens, txtEnderecoEntrega ;
-	
+	@FXML TextField txtValorFrete, txtCliente, txtNumPedido, txtDataPedido, txtFormaPagamento, txtValorFinal, txtQtdItens, txtEnderecoEntrega ;
 	@FXML TableView<Produto> tblListProduto;
-	
 	@FXML TableColumn<Produto, String> clnNomePeca, clnDescricao, clnQtd, clnDataVencimento, clnValorUnit, clnValorTotal;
-	
-	@FXML Button btnVoltar;
+	@FXML Button btnVoltar, btnAlterar;
+	@FXML ComboBox<Status> cboStatus;
 
 	Pedido pedido;
-	int lote;
+	Lote lote;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		PreecherCampos();
-		btnVoltar.setOnAction(l-> CallScene.secondStage.close());
+		btnVoltar.setOnAction(l-> CallScene.thirdStage.close());
+		btnAlterar.setOnAction(l-> AlterarStatus());
+		cboStatus.getItems().addAll(Status.Select());
+
+	}
+
+	@FXML
+	private void handleComboBoxAction() {
+		btnAlterar.setDisable(false);
 	}
 
 	public void PreecherCampos(){
 		if(pedido == null){
-			
+
 		}else{
 			txtCliente.setText(pedido.getCliente().getNome());
 			txtNumPedido.setText(""+pedido.getOid_pedido());
 			txtDataPedido.setText(pedido.getDtRealizada());
 			txtFormaPagamento.setText(pedido.getFormaPagamento());
-			txtNumLote.setText("--------");
 			txtValorFinal.setText(pedido.getVlrTotal());
 			txtQtdItens.setText(""+pedido.getQtdItens());
 			txtEnderecoEntrega.setText(pedido.getEnderecoEntrega().getEnderecoCompleto());
 			txtValorFrete.setText(pedido.getVlrFrete());
-			
+			cboStatus.getSelectionModel().select(pedido.getStatus());
+
 			CarregarTblPeca(pedido.getLstProduto());
 		}
-		
 	}
-	public PedidoSemLoteDetalheController(Pedido pedido, int lote) {
+
+	public void AlterarStatus(){
+		List<Pedido> lstPedido = new ArrayList<Pedido>();
+		lstPedido.add(pedido);
+		Status status =  cboStatus.getSelectionModel().getSelectedItem();
+		Pedido.MudarStatusPedido(lstPedido,status.getOid_status());
+
+		Helper.AUXPEDIDOLOTEDET.setValue(1);
+		CallScene.thirdStage.close();
+	}
+
+	public PedidoSemLoteDetalheController(Pedido pedido, Lote lote) {
 		this.pedido = pedido;
 		this.lote = lote;
 	}
@@ -60,7 +78,7 @@ public class PedidoSemLoteDetalheController implements Initializable{
 		 clnDataVencimento.setCellValueFactory(new PropertyValueFactory<Produto, String>("validade"));
 		 clnValorUnit.setCellValueFactory(new PropertyValueFactory<Produto, String>("precovendido"));
 		 clnValorTotal.setCellValueFactory(new PropertyValueFactory<Produto, String>("precoTotalvendido"));
-		 
+
 		 ObservableList<Produto> data = FXCollections.observableList(lstProduto);
 
 		 tblListProduto.setItems(data);
