@@ -80,6 +80,15 @@ public class Lote {
 		this.nomeTransp = nomeTransp;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
 	public static void Insert(Lote lote){
 		Connection con =  MySqlConnect.ConectarDb();
 
@@ -273,11 +282,52 @@ public class Lote {
 
 	}
 
-	public String getStatus() {
-		return status;
-	}
+	public static List<Lote> Filtrar(boolean temNumLote, boolean temTransp, boolean taEmTransp,
+			int numLote, Transportadora transportadora ){
 
-	public void setStatus(String status) {
-		this.status = status;
+		Connection con =  MySqlConnect.ConectarDb();
+
+		String sqlLote =null ;
+
+		if(temNumLote){
+			//Filtrar pelo numero do
+			sqlLote ="select * from lote where oid_lote = "+numLote;
+		}else if(temTransp){
+			//Filtrar apenas pelo nome da transportadora
+			sqlLote ="select * from lote where oid_transportadora = "+transportadora.getOid_transportadora();
+		}else if(taEmTransp){
+			//Filtrar se estiver em transporte
+			sqlLote ="select * from lote where emTransp = 1;";
+		}
+
+		List<Lote> lstLote = new ArrayList<Lote>();
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sqlLote);
+			while(rs.next()){
+				Lote lote = new Lote();
+				lote.setOid_lote(rs.getInt("oid_lote"));
+				lote.setData_criacao(rs.getString("dt_criacao"));
+				lote.setData_entrega(rs.getString("dt_entrega"));
+				lote.setData_saida(rs.getString("dt_saida"));
+				lote.setFrete(rs.getString("frete"));
+
+				if(rs.getInt("oid_transportadora") == 0){
+					lote.setTransportadora(null);
+				}else{
+					lote.setTransportadora(Transportadora.Buscar(rs.getInt("oid_transportadora")));
+					lote.setNomeTransp(lote.getTransportadora().getNome());
+				}
+
+				lote.setLstPedido(Pedido.Buscar(rs.getInt("oid_lote")));
+				lote.setQtdItens(lote.getLstPedido().size());
+
+				lstLote.add(lote);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lstLote;
 	}
 }

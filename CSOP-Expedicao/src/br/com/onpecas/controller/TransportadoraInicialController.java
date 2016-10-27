@@ -20,8 +20,10 @@ public class TransportadoraInicialController implements Initializable{
 
 	@FXML TableView<Transportadora> tblTransportadoras;
 	@FXML TableColumn<Transportadora, String> clnNomeExibicao, clnCidade,clnFretePadrao,  clnEstado, clnObservacao;
-
-	@FXML Button btnEditar, btnAdicionar, btnExcluir;
+	@FXML Button btnEditar, btnAdicionar, btnExcluir, btnLimparFiltro, btnFiltrar;
+	@FXML TextField txtNomeTransp;
+	@FXML ComboBox<Cidade> cboCidade;
+	@FXML ComboBox<Estado> cboEstado;
 
 	CallScene callscene;
 	@Override
@@ -30,7 +32,6 @@ public class TransportadoraInicialController implements Initializable{
 		callscene = new CallScene();
 		AtualizarTblTransportadora();
 		AtribuirBotoes();
-
 
 		/*
 		 * Listener que auxilia na atualização da tabela
@@ -57,9 +58,29 @@ public class TransportadoraInicialController implements Initializable{
 	 * Método utilizado para atribuir ações e dados à alguns itens da tela
 	 * */
 	public void AtribuirBotoes(){
+		cboEstado.getItems().addAll(Estado.Select());
 		btnAdicionar.setOnAction(l-> AdicionarTransportadora() );
 		btnExcluir.setOnAction(l-> ExcluirTransportadora());
 		btnEditar.setOnAction(l-> AtualizarTransportadora());
+		btnFiltrar.setOnAction(l-> Filtrar());
+		btnLimparFiltro.setOnAction(l-> LimparFiltro());
+	}
+
+	@FXML
+	private void handleComboBoxAction() {
+		Estado estado = cboEstado.getSelectionModel().getSelectedItem();
+
+		if(estado != null){
+			CarregarCidades(estado);
+		}
+	}
+
+	/*
+	 * Método para preencher a combobox cboCidade após selecionar um estado
+	 * */
+	public void CarregarCidades(Estado estado){
+		cboCidade.getItems().clear();
+		cboCidade.getItems().addAll(Cidade.BuscarCidade(estado));
 	}
 
 	/*
@@ -87,6 +108,45 @@ public class TransportadoraInicialController implements Initializable{
 		callscene.LoadTransportadoraCadastroDetalhe(null);
 	}
 
+	public void LimparFiltro(){
+		txtNomeTransp.setText(null);
+		cboCidade.getItems().clear();
+		cboEstado.getSelectionModel().clearSelection();
+		AtualizarTblTransportadora();
+	}
+	
+	public void Filtrar(){
+		String nomeTransp = txtNomeTransp.getText();
+		Estado estado = cboEstado.getSelectionModel().getSelectedItem();
+		Cidade cidade = cboCidade.getSelectionModel().getSelectedItem();
+
+		if(!nomeTransp.isEmpty()){
+			if(estado!= null){
+				if(cidade != null){
+					//Filtrar pelo nome da transportadora e pela cidade
+					
+					AtualizarTblTransportadoraComFiltro(Transportadora.Filtrar(true, true, true, nomeTransp, estado, cidade));
+				}else{
+					//Filtrar pelo Nome da Transportadora e pelo estado
+					AtualizarTblTransportadoraComFiltro(Transportadora.Filtrar(true, true, false, nomeTransp, estado, null));
+				}
+			}else{
+				//Filtrar por nome da transportadora
+				AtualizarTblTransportadoraComFiltro(Transportadora.Filtrar(true, false, false, nomeTransp, null, null));
+			}
+		}else if(estado != null){
+			if(cidade != null){
+				//Filtrar pelas cidade
+				AtualizarTblTransportadoraComFiltro(Transportadora.Filtrar(false, true, true, null, estado, cidade));
+			}else{
+				//filtrar pelo estado
+				AtualizarTblTransportadoraComFiltro(Transportadora.Filtrar(false, true, false, null, estado, null));
+			}
+		}else{
+			Alerta.showError("Não foi possivel Filtrar", "É preciso selecionar/preecher algum campo de filtro");
+
+		}
+	}
 	/*
 	 * Método que chama a tela para atualizar a transportadora que foi selecionada na tblTransportadoras
 	 * */

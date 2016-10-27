@@ -30,9 +30,9 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="191.0" layoutY="38.0" prefHeight="25.0" prefWidth="264.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="545.0" AnchorPane.topAnchor="38.0" />
-      <ComboBox layoutX="189.0" layoutY="85.0" prefHeight="25.0" prefWidth="397.0" AnchorPane.leftAnchor="189.0" AnchorPane.rightAnchor="414.0" AnchorPane.topAnchor="85.0" />
-      <Button layoutX="926.0" layoutY="195.0" mnemonicParsing="false" text="FILTRAR" AnchorPane.bottomAnchor="580.0" AnchorPane.rightAnchor="14.0" />
+      <TextField fx:id="txtNumLote" layoutX="191.0" layoutY="38.0" prefHeight="25.0" prefWidth="264.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="545.0" AnchorPane.topAnchor="38.0" />
+      <ComboBox fx:id="cboTransportadora" cacheShape="false" layoutX="189.0" layoutY="85.0" onAction="#handleComboBoxAction" prefHeight="25.0" prefWidth="397.0" promptText="Selecione..." visibleRowCount="28" AnchorPane.leftAnchor="189.0" AnchorPane.rightAnchor="414.0" AnchorPane.topAnchor="85.0" />
+      <Button fx:id="btnFiltrar" layoutX="926.0" layoutY="195.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" text="FILTRAR" AnchorPane.bottomAnchor="580.0" AnchorPane.rightAnchor="14.0" />
       <Button fx:id="btnVisualizar" layoutX="23.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="83.0" style="-fx-background-color: #32CD32;" text="Visualizar" />
       <Button fx:id="btnIniciarTransporte" layoutX="147.0" layoutY="231.0" mnemonicParsing="false" style="-fx-background-color: #00BFFF;" text="Iniciar Transporte" />
       <Label layoutX="22.0" layoutY="129.0" text="Em Transporte:">
@@ -40,6 +40,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <CheckBox fx:id="chbEmTransporte" layoutX="189.0" layoutY="134.0" mnemonicParsing="false" />
+      <CheckBox fx:id="chbEmTransporte" layoutX="189.0" layoutY="134.0" mnemonicParsing="false" onAction="#handleCheckBoxAction" />
+      <Button fx:id="btnLimparFiltro" layoutX="767.0" layoutY="195.0" mnemonicParsing="false" text="LIMPAR FILTRO" />
    </children>
 </AnchorPane>

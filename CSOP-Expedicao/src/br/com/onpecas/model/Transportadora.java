@@ -316,4 +316,76 @@ public class Transportadora {
 		}
 		return lstTransportadora;
 	}
+
+	public static List<Transportadora> Filtrar(boolean temNome, boolean temEstado,
+			boolean temCidade, String nomeTransp, Estado estado, Cidade cidade){
+		Connection con = MySqlConnect.ConectarDb();
+
+		List<Transportadora> lstTransportadora = new ArrayList<Transportadora>();
+		String sql =null;
+
+		if(temNome){
+			if(temEstado){
+				if(temCidade){
+					//Filtrar pelo nome da transportadora e pela cidade
+					sql ="select * from transportadora where oid_cidade = "+cidade.getOid_cidade()+" and nome like '%"+nomeTransp+"%'";
+
+					sql="select t.* from transportadora as t inner join endereco as e on (e.oid_endereco = t.oid_endereco) "
+							+ "where e.oid_cidade ="+cidade.getOid_cidade()
+							+ " and nome like '%"+nomeTransp+"%'";
+
+				}else{
+					//Filtrar pelo Nome da Transportadora e pelo estado
+
+					sql="select t.* from transportadora as t inner join endereco as e on (e.oid_endereco = t.oid_endereco) "
+							+ "inner join cidade as c on (e.oid_cidade = c.oid_cidade) where c.oid_estado = "+estado.getOid_estado()
+							+ " and nome like '%"+nomeTransp+"%'";
+
+				}
+			}else{
+				//Filtrar por nome da transportadora
+				sql ="select * from transportadora where nome like '%"+nomeTransp+"%'";
+			}
+		}else if(temEstado){
+			if(temCidade){
+				//Filtrar pelas cidade
+				sql ="select * from transportadora where oid_cidade = "+cidade.getOid_cidade()+";";
+				
+				sql="select t.* from transportadora as t inner join endereco as e on (e.oid_endereco = t.oid_endereco) "
+						+ "where e.oid_cidade ="+cidade.getOid_cidade();
+			}else{
+				//filtrar pelo estado
+				sql="select t.* from transportadora as t inner join endereco as e on (e.oid_endereco = t.oid_endereco) "
+						+ "inner join cidade as c on (e.oid_cidade = c.oid_cidade) where c.oid_estado = "+estado.getOid_estado();
+			}
+		}
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sql);
+
+			while(rs.next()){
+				Transportadora transportadora = new Transportadora();
+				Endereco endereco = Endereco.BuscarEndereco(rs.getInt("oid_endereco"));
+
+				transportadora.setOid_transportadora(rs.getInt("oid_transportadora"));
+				transportadora.setCnpj(rs.getString("cnpj"));
+				transportadora.setFrete(rs.getString("frete"));
+				transportadora.setNome(rs.getString("nome"));
+				transportadora.setRamo(rs.getString("ramo"));
+				transportadora.setObservacoes(rs.getString("observacoes"));
+				transportadora.setNatureza(rs.getString("natureza"));
+				transportadora.setRg(rs.getString("rg"));
+				transportadora.setTelefone(rs.getString("telefone"));
+
+				transportadora.setEndereco(endereco);
+				transportadora.setCidade(endereco.getCidade().getNome());
+				transportadora.setEstado(endereco.getCidade().getEstado().getNome());
+
+				lstTransportadora.add(transportadora);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lstTransportadora;
+	}
 }
