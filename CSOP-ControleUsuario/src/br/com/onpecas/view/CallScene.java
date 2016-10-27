@@ -3,24 +3,24 @@ package br.com.onpecas.view;
 import java.io.IOException;
 
 import br.com.onpecas.controller.*;
-import br.com.onpecas.model.Grupo;
-import br.com.onpecas.model.Usuario;
+import br.com.onpecas.model.*;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
 import javafx.stage.*;
 
 //Classe que serve para carregar e controlar as telas
 
 public class CallScene {
 
+	public static Stage secondStage;
+
 	/*Esse método serve para carregar a tela de controle de permissões*/
 	public void LoadPermission(Grupo grupo){
-
-		Stage secondStage = new Stage();
-
+		
+		secondStage = new Stage();
+		
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("Permissoes.fxml"));
 	    loader.setController(new PermissaoController(secondStage, grupo));
@@ -45,19 +45,10 @@ public class CallScene {
 	 * */
 	public  void LoadGroup(Grupo grupo){
 
-		Stage secondStage = new Stage();
-
+		secondStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("GrupoCRUD.fxml"));
-
-
-		if(grupo == null){
-
-	        loader.setController(new GrupoController(secondStage));
-		}else{
-
-	        loader.setController(new GrupoController(secondStage, grupo));
-		}
+        loader.setController(new GrupoController(grupo));
 
 		AnchorPane module;
 		try {
@@ -81,18 +72,10 @@ public class CallScene {
 	 * */
 	public void LoadUser(Usuario usuario){
 
-		Stage secondStage = new Stage();
-
+		secondStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("UsuarioCRUD.fxml"));
-
-        if(usuario == null){
-
-	        loader.setController(new UserController(secondStage));
-		}else{
-
-	        loader.setController(new UserController(secondStage, usuario));
-		}
+        loader.setController(new UserController(usuario));
 
 		AnchorPane module;
 		try {
@@ -107,18 +90,5 @@ public class CallScene {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-
-	//Esse método serve para carregar a tela inicial do módulo Controle de Usuario
-	public void LoadMain(BorderPane border) throws IOException{
-
-		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("UsuariosGrupos.fxml"));
-        loader.setController(new UsuariosGruposController());
-
-		ScrollPane module= (ScrollPane) loader.load();
-		border.setCenter(module);
-
 	}
 }

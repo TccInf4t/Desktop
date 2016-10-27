@@ -2,9 +2,11 @@ package br.com.onpecas.view;
 
 import java.io.IOException;
 
+import br.com.onpecas.controller.UsuariosGruposController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
@@ -18,27 +20,23 @@ public class CSOPControllerUsers extends Application {
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
 
-		scene = new CallScene();
-
-		LoadBorder();
-		scene.LoadMain(this.border);
-
+		LoadMain();
 	}
 
-	//Esse método serve para carregar a estrutura de borda do sistema
-		public void LoadBorder() throws IOException{
+	//Esse método serve para carregar a tela inicial do módulo Controle de Usuario
+	public void LoadMain() throws IOException{
 
-			FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(getClass().getResource("PainelPrincipal.fxml"));
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("UsuariosGrupos.fxml"));
+        loader.setController(new UsuariosGruposController());
 
-			border = (BorderPane) loader.load();
-	        Scene scene = new Scene(border);
+		ScrollPane module= (ScrollPane) loader.load();
+		Scene scene = new Scene(module);
 
-	        primaryStage.setScene(scene);
-	        primaryStage.show();
+        primaryStage.setScene(scene);
+        primaryStage.show();
 
-		}
-
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}

@@ -3,12 +3,11 @@ package br.com.onpecas.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import br.com.onpecas.helper.Alerta;
-import br.com.onpecas.helper.Helper;
+import br.com.onpecas.helper.*;
 import br.com.onpecas.model.*;
+import br.com.onpecas.view.CallScene;
 import javafx.fxml.*;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
 //classe de "controller" para usuários
 public class UserController implements Initializable{
@@ -21,7 +20,6 @@ public class UserController implements Initializable{
 
 	@FXML Button btnCadastrar, btnCancelar;
 
-	Stage myStage;
 	Usuario usuario;
 
 	static int OID_USUARIOAUXILIO;
@@ -43,19 +41,14 @@ public class UserController implements Initializable{
 		}
 	}
 
-	public UserController(Stage myStage) {
-		this.myStage = myStage;
-	}
-
-	public UserController(Stage myStage, Usuario usuario) {
-		this.myStage = myStage;
+	public UserController(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
 	/* Método que serve para atribuir os botões às suas respectivas funções*/
 	public void AtribuirBotoes(){
 		btnCadastrar.setOnAction(l-> InserirAtualizarGrupo());
-		btnCancelar.setOnAction(l-> myStage.close());
+		btnCancelar.setOnAction(l-> CallScene.secondStage.close());
 	}
 
 	/* Método utilizado tanto para inserir quanto para atualizar um usuario
@@ -88,7 +81,7 @@ public class UserController implements Initializable{
 
 						Usuario.Insert(usuario);
 						Helper.AUXUSER.setValue(1);
-						myStage.close();
+						CallScene.secondStage.close();
 					}else{
 						Alerta.showError("Não é possível cadastrar", "O usuario precisa de um grupo.");
 					}
@@ -112,7 +105,7 @@ public class UserController implements Initializable{
 
 						Usuario.Update(usuario);
 						Helper.AUXUSER.setValue(1);
-						myStage.close();
+						CallScene.secondStage.close();
 					}else{
 						Alerta.showError("Não é possível atualizar", "O usuario precisa de um grupo.");
 					}

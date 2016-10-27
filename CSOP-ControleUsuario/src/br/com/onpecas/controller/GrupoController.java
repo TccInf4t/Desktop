@@ -3,15 +3,13 @@ package br.com.onpecas.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import br.com.onpecas.helper.Alerta;
-import br.com.onpecas.helper.Helper;
+import br.com.onpecas.helper.*;
 import br.com.onpecas.model.Grupo;
+import br.com.onpecas.view.CallScene;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.control.*;
+
 
 //Classe de "controller" para grupos de usuários
 public class GrupoController implements Initializable {
@@ -20,7 +18,6 @@ public class GrupoController implements Initializable {
 	@FXML TextField txtNome;
 	@FXML TextArea txtDescricao;
 
-	Stage myStage;
 	Grupo grupo;
 
 	static int OID_GRUPOAUXILIO;
@@ -38,23 +35,15 @@ public class GrupoController implements Initializable {
 
 	}
 
-	//Terá a opção de instanciar dois modelos da classe
-	//O primeiro modelo só será passado o Stage, para que possa ser fechado depois
-	public GrupoController(Stage myStage) {
-		this.myStage = myStage;
-	}
-
 	//O segundo é passado, alem do stage, um objeto do tipo Grupo, para ser usado na edição
-	public GrupoController(Stage myStage, Grupo grupo) {
-		this.myStage = myStage;
+	public GrupoController(Grupo grupo) {
 		this.grupo = grupo;
-		//PrepararUpdate(grupo);
 	}
 
 	//Esse método serve para atribuir os botões à suas funcionalidade
 	private void AtribuirBotoes() {
 		btnCadastrarGrupo.setOnAction(l-> InserirAtualizarGrupo());
-		btnCancelar.setOnAction(l-> myStage.close());
+		btnCancelar.setOnAction(l-> CallScene.secondStage.close());
 	}
 
 	/* Método utilizado tanto para inserir quanto para atualizar um grupo
@@ -79,7 +68,7 @@ public class GrupoController implements Initializable {
 
 					Grupo.Insert(grupo);
 					Helper.AUXGROUP.setValue(1);
-					myStage.close();
+					CallScene.secondStage.close();
 
 				}else{
 					Alerta.showError("Não é possível criar o grupo", "O grupo precisa de um nome para ser criado.");
@@ -96,7 +85,7 @@ public class GrupoController implements Initializable {
 
 					Grupo.Update(grupo);
 					Helper.AUXGROUP.setValue(1);
-					myStage.close();
+					CallScene.secondStage.close();
 
 				}else{
 					Alerta.showError("Não é possível criar o grupo", "O grupo precisa de um nome para ser atualizado.");
