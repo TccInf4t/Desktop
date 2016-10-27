@@ -61,9 +61,6 @@ public class PedidoSemLoteInicialController implements Initializable{
 		btnVisualizar.setOnAction(l-> VisualizarPedido());
 		btnGerarLote.setOnAction(l-> GerarLote());
 		cboEstado.getItems().addAll(Estado.Select());
-		btnLimparFiltro.setOnAction(l-> LimparFiltro());
-		btnFiltrar.setOnAction(l-> Filtrar());
-
 		Mascaras.mascaraNumeroInteiro(txtNumPedido);
 	}
 
@@ -71,38 +68,25 @@ public class PedidoSemLoteInicialController implements Initializable{
 		String numPedido = txtNumPedido.getText();
 		Cidade cidade = cboCidade.getSelectionModel().getSelectedItem();
 		Estado estado = cboEstado.getSelectionModel().getSelectedItem();
-
-		String dataCompra = "";
-		try {
-			dataCompra= dtpDataCompra.getValue().toString();
-		} catch (NullPointerException e) {
-			// TODO: handle exception
-		}
+		String dataRealizado = dtpDataCompra.getValue().toString();
 
 		if(!numPedido.isEmpty()){
 			//Filtrar pelo numero do pedido
-			int numeroPedido = Integer.parseInt(numPedido);
-			Pedido.Filtrar(true, false, false, false, numeroPedido, null, null, null);
-		}else if(!dataCompra.isEmpty()){
+		}else if(!dataRealizado.isEmpty()){
 			if(estado!=null){
 				if(cidade!=null){
 					//Filtrar pela data realizado e pela cidade
-					Pedido.Filtrar(false, true, true, true, 0, dataCompra, estado, cidade);
 				}else{
 					//Filtrar pela data realizado e pelo estado
-					Pedido.Filtrar(false, true, true, false, 0, dataCompra, estado, null);
 				}
 			}else{
-				//Filtrar pela data realizado
-				Pedido.Filtrar(false, true, false, false, 0, dataCompra, null, null);
+				//Filtrar pela data realizad0
 			}
 		}else if(estado!=null){
 			if(cidade!=null){
 				//Filtrar pela cidade
-				Pedido.Filtrar(false, false, true, true, 0, null, estado, cidade);
 			}else{
 				//Filtrar pelo estado
-				Pedido.Filtrar(false, false, true, false, 0, null, estado, null);
 			}
 		}else{
 			Alerta.showError("Não foi possivel filtrar", "É preciso selecionar/preencher algum campo de filtro");
@@ -111,15 +95,6 @@ public class PedidoSemLoteInicialController implements Initializable{
 
 	public void LimparFiltro(){
 		AtualizarTblPedido();
-
-		cboCidade.setDisable(false);
-		cboEstado.setDisable(false);
-		dtpDataCompra.setDisable(false);
-
-		txtNumPedido.setText("");
-		cboCidade.getSelectionModel().clearSelection();
-		cboEstado.getSelectionModel().clearSelection();
-		dtpDataCompra.getEditor().clear();
 	}
 
 	@FXML

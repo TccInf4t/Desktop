@@ -21,38 +21,33 @@
             <TableColumn fx:id="clnCidade" prefWidth="131.0" resizable="false" sortable="false" text="Cidade" />
         </columns>
       </TableView>
-      <DatePicker layoutX="206.0" layoutY="99.0" AnchorPane.leftAnchor="200.0" />
-      <TextField layoutX="200.0" layoutY="68.0" prefHeight="25.0" prefWidth="214.0" AnchorPane.leftAnchor="200.0" />
-      <Label layoutX="32.0" layoutY="128.0" text="Cidade:" AnchorPane.leftAnchor="30.0">
+      <DatePicker fx:id="dtpDataCompra" layoutX="200.0" layoutY="54.0" AnchorPane.leftAnchor="200.0" />
+      <TextField fx:id="txtNumPedido" layoutX="200.0" layoutY="23.0" prefHeight="25.0" prefWidth="214.0" AnchorPane.leftAnchor="200.0" />
+      <Label layoutX="30.0" layoutY="123.0" text="Cidade:" AnchorPane.leftAnchor="30.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="30.0" layoutY="98.0" text="Data de Compra:" AnchorPane.leftAnchor="30.0">
+      <Label layoutX="30.0" layoutY="53.0" text="Data de Compra:" AnchorPane.leftAnchor="30.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="30.0" layoutY="67.0" text="Numero do pedido:" AnchorPane.leftAnchor="30.0">
+      <Label layoutX="30.0" layoutY="22.0" text="Numero do pedido:" AnchorPane.leftAnchor="30.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="37.0" layoutY="34.0" text="Nome do Cliente" AnchorPane.leftAnchor="30.0">
+      <ComboBox fx:id="cboCidade" layoutX="200.0" layoutY="124.0" prefHeight="25.0" prefWidth="214.0" promptText="Todos" AnchorPane.leftAnchor="200.0" />
+      <ComboBox fx:id="cboEstado" layoutX="200.0" layoutY="89.0" onAction="#handleComboBoxAction" prefHeight="25.0" prefWidth="214.0" promptText="Todos" AnchorPane.leftAnchor="200.0" />
+      <Label layoutX="30.0" layoutY="88.0" text="Estado:" AnchorPane.leftAnchor="30.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <ComboBox layoutX="206.0" layoutY="129.0" prefHeight="25.0" prefWidth="214.0" promptText="Todos" AnchorPane.leftAnchor="200.0" />
-      <ComboBox layoutX="200.0" layoutY="160.0" prefHeight="25.0" prefWidth="214.0" promptText="Todos" AnchorPane.leftAnchor="200.0" />
-      <Label layoutX="30.0" layoutY="159.0" text="Estado:" AnchorPane.leftAnchor="30.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Button layoutX="926.0" layoutY="195.0" mnemonicParsing="false" text="FILTRAR" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="195.0" />
-      <TextField layoutX="200.0" layoutY="35.0" prefHeight="25.0" prefWidth="443.0" />
+      <Button fx:id="btnFiltrar" layoutX="926.0" layoutY="195.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="FILTRAR" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="195.0" />
       <Button fx:id="btnVisualizar" layoutX="14.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: #32CD32;" text="Visualizar" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="231.0" />
       <Button fx:id="btnGerarLote" layoutX="148.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" style="-fx-background-color: #00BFFF;" text="Gerar Lote" AnchorPane.leftAnchor="148.0" AnchorPane.topAnchor="231.0" />
+      <Button fx:id="btnLimparFiltro" layoutX="769.0" layoutY="195.0" mnemonicParsing="false" text="LIMPAR FILTRO" />
    </children>
 </AnchorPane>

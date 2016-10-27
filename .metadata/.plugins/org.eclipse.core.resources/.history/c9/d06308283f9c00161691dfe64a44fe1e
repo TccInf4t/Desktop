@@ -119,7 +119,6 @@ public class PedidoSemLoteInicialController implements Initializable{
 		txtNumPedido.setText("");
 		cboCidade.getSelectionModel().clearSelection();
 		cboEstado.getSelectionModel().clearSelection();
-		dtpDataCompra.getEditor().clear();
 	}
 
 	@FXML

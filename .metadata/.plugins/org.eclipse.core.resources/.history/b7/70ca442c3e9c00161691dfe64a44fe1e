@@ -241,7 +241,7 @@ public class Pedido {
 		return lstPedidos;
 	}
 
-	public static List<Pedido> Filtrar(boolean temNumPedido, boolean temDataCompra, boolean temEstado, boolean temCidade,
+	public List<Pedido> Filtrar(boolean temNumPedido, boolean temDataCompra, boolean temEstado, boolean temCidade,
 			int numPedido, String dataCompra, Estado estado, Cidade cidade){
 
 		Connection con = MySqlConnect.ConectarDb();

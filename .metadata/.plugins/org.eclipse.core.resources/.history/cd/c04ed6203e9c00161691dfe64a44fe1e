@@ -241,7 +241,7 @@ public class Pedido {
 		return lstPedidos;
 	}
 
-	public static List<Pedido> Filtrar(boolean temNumPedido, boolean temDataCompra, boolean temEstado, boolean temCidade,
+	public List<Pedido> Filtrar(boolean temNumPedido, boolean temDataCompra, boolean temEstado, boolean temCidade,
 			int numPedido, String dataCompra, Estado estado, Cidade cidade){
 
 		Connection con = MySqlConnect.ConectarDb();
@@ -259,8 +259,6 @@ public class Pedido {
 							+ "where e.oid_cidade ="+cidade.getOid_cidade()+" and dtrealizado = "+dataCompra;
 				}else{
 					//Filtrar pela data realizado e pelo estado
-					sql = "select p.* from pedido as p inner join endereco as e on (p.oid_endereco = e.oid_endereco) inner join cidade as c "+
-						"on (e.oid_cidade = c.oid_cidade) where c.oid_estado = "+estado.getOid_estado()+" and dtrealizado = "+dataCompra;
 				}
 			}else{
 				//Filtrar pela data realizad0
@@ -269,12 +267,11 @@ public class Pedido {
 		}else if(temEstado){
 			if(temCidade){
 				//Filtrar pela cidade
+
 				sql="select p.* from pedido as p inner join endereco as e on (p.oid_endereco = e.oid_endereco) "
 						+ "where e.oid_cidade ="+cidade.getOid_cidade();
 			}else{
 				//Filtrar pelo estado
-				sql = "select p.* from pedido as p inner join endereco as e on (p.oid_endereco = e.oid_endereco) inner join cidade as c "+
-						"on (e.oid_cidade = c.oid_cidade) where c.oid_estado = "+estado.getOid_estado();
 			}
 		}
 
