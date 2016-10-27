@@ -328,8 +328,6 @@ public class Transportadora {
 			if(temEstado){
 				if(temCidade){
 					//Filtrar pelo nome da transportadora e pela cidade
-					sql ="select * from transportadora where oid_cidade = "+cidade.getOid_cidade()+" and nome like '%"+nomeTransp+"%'";
-
 					sql="select t.* from transportadora as t inner join endereco as e on (e.oid_endereco = t.oid_endereco) "
 							+ "where e.oid_cidade ="+cidade.getOid_cidade()
 							+ " and nome like '%"+nomeTransp+"%'";
@@ -350,7 +348,7 @@ public class Transportadora {
 			if(temCidade){
 				//Filtrar pelas cidade
 				sql ="select * from transportadora where oid_cidade = "+cidade.getOid_cidade()+";";
-				
+
 				sql="select t.* from transportadora as t inner join endereco as e on (e.oid_endereco = t.oid_endereco) "
 						+ "where e.oid_cidade ="+cidade.getOid_cidade();
 			}else{
@@ -382,10 +380,37 @@ public class Transportadora {
 				transportadora.setEstado(endereco.getCidade().getEstado().getNome());
 
 				lstTransportadora.add(transportadora);
+				con.close();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+
 		}
+
 		return lstTransportadora;
+	}
+
+	public static void IniciarTransporte(int oid_transportadora){
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql ="update transportadora set emtransp =? where oid_transportadora = ?; ";
+
+		PreparedStatement parametros;
+
+		try {
+			parametros = con.prepareStatement(sql);
+
+			parametros.setInt(1, 1);
+			parametros.setInt(2, oid_transportadora);
+
+			parametros.executeUpdate();
+			con.close();
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
+		}
+
 	}
 }

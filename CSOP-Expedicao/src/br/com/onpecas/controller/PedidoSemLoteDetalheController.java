@@ -23,14 +23,21 @@ public class PedidoSemLoteDetalheController implements Initializable{
 	@FXML ComboBox<Status> cboStatus;
 
 	Pedido pedido;
-	Lote lote;
+	boolean lote;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		PreecherCampos();
 		btnVoltar.setOnAction(l-> CallScene.thirdStage.close());
 		btnAlterar.setOnAction(l-> AlterarStatus());
 		cboStatus.getItems().addAll(Status.Select());
+		if(!lote){
+			cboStatus.setDisable(true);
+		}
+	}
 
+	public PedidoSemLoteDetalheController(Pedido pedido, boolean lote) {
+		this.pedido = pedido;
+		this.lote = lote;
 	}
 
 	@FXML
@@ -39,9 +46,7 @@ public class PedidoSemLoteDetalheController implements Initializable{
 	}
 
 	public void PreecherCampos(){
-		if(pedido == null){
-
-		}else{
+		if(pedido != null){
 			txtCliente.setText(pedido.getCliente().getNome());
 			txtNumPedido.setText(""+pedido.getOid_pedido());
 			txtDataPedido.setText(pedido.getDtRealizada());
@@ -64,11 +69,6 @@ public class PedidoSemLoteDetalheController implements Initializable{
 
 		Helper.AUXPEDIDOLOTEDET.setValue(1);
 		CallScene.thirdStage.close();
-	}
-
-	public PedidoSemLoteDetalheController(Pedido pedido, Lote lote) {
-		this.pedido = pedido;
-		this.lote = lote;
 	}
 
 	public void CarregarTblPeca(List<Produto> lstProduto){

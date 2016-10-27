@@ -246,35 +246,36 @@ public class Pedido {
 
 		Connection con = MySqlConnect.ConectarDb();
 		List<Pedido> lstPedidos = new ArrayList<Pedido>();
-		String sql = "";
+		String sql = null;
 
 		if(temNumPedido){
 			//Filtrar pelo numero do pedido
 			sql ="select * from pedido where oid_status =2 and oid_pedido = "+numPedido;
+
 		}else if(temDataCompra){
 			if(temEstado){
 				if(temCidade){
 					//Filtrar pela data realizado e pela cidade
 					sql="select p.* from pedido as p inner join endereco as e on (p.oid_endereco = e.oid_endereco) "
-							+ "where e.oid_cidade ="+cidade.getOid_cidade()+" and dtrealizado = "+dataCompra;
+							+ "where e.oid_cidade ="+cidade.getOid_cidade()+" and oid_status =2 and dtrealizado = '"+dataCompra+"';";
 				}else{
 					//Filtrar pela data realizado e pelo estado
 					sql = "select p.* from pedido as p inner join endereco as e on (p.oid_endereco = e.oid_endereco) inner join cidade as c "+
-						"on (e.oid_cidade = c.oid_cidade) where c.oid_estado = "+estado.getOid_estado()+" and dtrealizado = "+dataCompra;
+						"on (e.oid_cidade = c.oid_cidade) where c.oid_estado = "+estado.getOid_estado()+" and oid_status =2 and dtrealizado = '"+dataCompra+"';";
 				}
 			}else{
 				//Filtrar pela data realizad0
-				sql ="select * from pedido where oid_status =2 and dtrealizado = "+dataCompra;
+				sql ="select * from pedido where oid_status =2 and dtrealizado = '"+dataCompra+"';";
 			}
 		}else if(temEstado){
 			if(temCidade){
 				//Filtrar pela cidade
 				sql="select p.* from pedido as p inner join endereco as e on (p.oid_endereco = e.oid_endereco) "
-						+ "where e.oid_cidade ="+cidade.getOid_cidade();
+						+ "where oid_status =2 and e.oid_cidade ="+cidade.getOid_cidade();
 			}else{
 				//Filtrar pelo estado
 				sql = "select p.* from pedido as p inner join endereco as e on (p.oid_endereco = e.oid_endereco) inner join cidade as c "+
-						"on (e.oid_cidade = c.oid_cidade) where c.oid_estado = "+estado.getOid_estado();
+						"on (e.oid_cidade = c.oid_cidade) where oid_status =2 and c.oid_estado = "+estado.getOid_estado();
 			}
 		}
 
@@ -311,7 +312,14 @@ public class Pedido {
 				pedido.setNomeCliente(pedido.getCliente().getNome());
 				pedido.setStatusedt(pedido.getStatus().getNome());
 				lstPedidos.add(pedido);
+
 			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

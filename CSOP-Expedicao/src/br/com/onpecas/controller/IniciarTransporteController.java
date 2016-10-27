@@ -42,14 +42,16 @@ public class IniciarTransporteController implements Initializable{
 
 			if(valorFrete != 0){
 				Pedido.MudarStatusPedido(loteSelecionado.getLstPedido(), 4);
-				
+
 				loteSelecionado.setFrete(""+valorFrete);
 				loteSelecionado.setTransportadora(transpSelecionado);
 				loteSelecionado.setData_entrega(dtpDataPrevChegada.getValue().toString());
 				loteSelecionado.setData_saida(dtpDataPrevSaida.getValue().toString());
-				
+
 				Lote.IniciarTransporte(loteSelecionado);
-				
+
+				CallScene.secondStage.close();
+
 			}else{
 				Alerta.showError("Não foi possivel Iniciar", "É preciso atribuir um frete");
 			}

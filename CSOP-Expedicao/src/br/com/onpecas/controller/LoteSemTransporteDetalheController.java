@@ -3,6 +3,7 @@ package br.com.onpecas.controller;
 import java.net.URL;
 import java.util.*;
 
+import br.com.onpecas.helper.Alerta;
 import br.com.onpecas.helper.Helper;
 import br.com.onpecas.model.*;
 import br.com.onpecas.view.CallScene;
@@ -21,7 +22,7 @@ public class LoteSemTransporteDetalheController implements Initializable{
 	@FXML Button btnVoltar;
 
 	@FXML TableView<Pedido> tblPedido;
-	@FXML TableColumn<Pedido, String> clnNumPedido, clnDtCompra, clnStatus, clnCliente, clnQtdItens,clnFormaPagamento;
+	@FXML TableColumn<Pedido, String> clnNumPedido, clnDtCompra, clnStatus, clnCliente, clnQtdItens, clnFormaPagamento;
 
 	static Lote lote;
 
@@ -35,8 +36,10 @@ public class LoteSemTransporteDetalheController implements Initializable{
 		        if (click.getClickCount() == 2) {
 		        	CallScene callScene = new CallScene();
 		        	Pedido pedido = tblPedido.getSelectionModel().getSelectedItem();
-		        	if(pedido!= null){
-		        		callScene.LoadPedidoSemLoteDetalhe(pedido, lote);
+		        	if(pedido!= null && pedido.getStatus().getOid_status() != 5){
+		        		callScene.LoadPedidoSemLoteDetalhe(pedido, true);
+		        	}else{
+		        		Alerta.showError("Não foi possível detalhar", "O pedido selecionado já foi entregue");
 		        	}
 		        }else if(click.getClickCount() == 1){
 

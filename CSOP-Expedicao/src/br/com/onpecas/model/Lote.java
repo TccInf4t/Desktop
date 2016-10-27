@@ -149,7 +149,6 @@ public class Lote {
 			}
 			con.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return lote.getOid_lote();
@@ -178,12 +177,13 @@ public class Lote {
 					lote.setTransportadora(Transportadora.Buscar(rs.getInt("oid_transportadora")));
 					lote.setNomeTransp(lote.getTransportadora().getNome());
 				}
-
+				lote.setStatus(rs.getString("status"));
 				lote.setLstPedido(Pedido.Buscar(rs.getInt("oid_lote")));
 				lote.setQtdItens(lote.getLstPedido().size());
 
 				lstLote.add(lote);
 			}
+			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -214,7 +214,8 @@ public class Lote {
 					lote.setTransportadora(Transportadora.Buscar(rs.getInt("oid_transportadora")));
 					lote.setNomeTransp(lote.getTransportadora().getNome());
 				}
-
+				
+				lote.setStatus(rs.getString("status"));
 				lote.setLstPedido(Pedido.Buscar(rs.getInt("oid_lote")));
 				lote.setQtdItens(lote.getLstPedido().size());
 
@@ -230,8 +231,7 @@ public class Lote {
 	public static void IniciarTransporte(Lote lote){
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql ="update lote set oid_transportadora = ?, dt_saida = ?, dt_entrega = ?, frete = ?, emtransp = ? where oid_lote = ?; "
-				+ "update transportadora set emtransp =? where oid_transportadora = ?; ";
+		String sql ="update lote set oid_transportadora = ?, dt_saida = ?, dt_entrega = ?, frete = ?, emtransp = ? where oid_lote = ?; ";
 
 		PreparedStatement parametros;
 
@@ -245,9 +245,7 @@ public class Lote {
 			parametros.setInt(5, 1);
 
 			parametros.setInt(6, lote.getOid_lote());
-			parametros.setInt(7, 1);
-			parametros.setInt(8, lote.getTransportadora().getOid_transportadora());
-
+			Transportadora.IniciarTransporte(lote.getTransportadora().getOid_transportadora());
 			parametros.executeUpdate();
 			con.close();
 
@@ -318,7 +316,8 @@ public class Lote {
 					lote.setTransportadora(Transportadora.Buscar(rs.getInt("oid_transportadora")));
 					lote.setNomeTransp(lote.getTransportadora().getNome());
 				}
-
+				
+				lote.setStatus(rs.getString("status"));
 				lote.setLstPedido(Pedido.Buscar(rs.getInt("oid_lote")));
 				lote.setQtdItens(lote.getLstPedido().size());
 

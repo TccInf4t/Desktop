@@ -83,7 +83,7 @@ public class CallScene {
 		}
 	}
 
-	public void LoadPedidoSemLoteDetalhe(Pedido pedido, Lote lote){
+	public void LoadPedidoSemLoteDetalhe(Pedido pedido, boolean lote){
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("PedidoSemLoteDetalhe.fxml"));
         loader.setController(new PedidoSemLoteDetalheController(pedido, lote));

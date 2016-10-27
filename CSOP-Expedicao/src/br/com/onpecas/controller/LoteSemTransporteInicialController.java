@@ -17,9 +17,9 @@ import javafx.scene.input.*;
 public class LoteSemTransporteInicialController implements Initializable {
 
 	@FXML TableView<Lote> tblLote;
-	@FXML TableColumn<Lote, String> clnNumLote, clnDataPrevSaida, clnDataPrevFinal, clnQtdPedido, clnDataCriacao, clnTransportadora;
+	@FXML TableColumn<Lote, String> clnNumLote, clnDataPrevSaida, clnDataPrevFinal, clnQtdPedido, clnDataCriacao, clnTransportadora, clnStatusLote;
 	@FXML Button btnIniciarTransporte, btnVisualizar, btnLimparFiltro, btnFiltrar;
-	@FXML CheckBox chbEmTransporte;
+	@FXML CheckBox chbEmTransporte, chbFinalizado;
 	@FXML ComboBox<Transportadora> cboTransportadora;
 	@FXML TextField txtNumLote;
 
@@ -31,11 +31,10 @@ public class LoteSemTransporteInicialController implements Initializable {
 		cboTransportadora.setOnKeyPressed(k-> {
 			KeyCombination  backspace = new KeyCodeCombination(KeyCode.BACK_SPACE);
 			if(backspace.match(k)){
-				System.out.println("Estou selecionando");
-				cboTransportadora.getItems().clear();
-				cboTransportadora.getItems().addAll(Transportadora.Select());
+				cboTransportadora.getSelectionModel().clearSelection();
 				txtNumLote.setDisable(false);
 				chbEmTransporte.setDisable(false);
+				chbFinalizado.setDisable(false);
 
 			}
 		});
@@ -44,9 +43,11 @@ public class LoteSemTransporteInicialController implements Initializable {
 		    if(newValue.isEmpty()){
 		    	chbEmTransporte.setDisable(false);
 				cboTransportadora.setDisable(false);
+				chbFinalizado.setDisable(false);
 		    }else{
 		    	chbEmTransporte.setDisable(true);
 				cboTransportadora.setDisable(true);
+				chbFinalizado.setDisable(true);
 		    }
 		});
 	}
@@ -72,16 +73,33 @@ public class LoteSemTransporteInicialController implements Initializable {
 		if(chbEmTransporte.isSelected()){
 			txtNumLote.setDisable(true);
 			cboTransportadora.setDisable(true);
+			chbFinalizado.setDisable(true);
 		}else{
 			txtNumLote.setDisable(false);
 			cboTransportadora.setDisable(false);
+			chbFinalizado.setDisable(false);
 		}
 	}
+
+	@FXML
+	private void handleCheckBoxActionFinalizado() {
+		if(chbFinalizado.isSelected()){
+			txtNumLote.setDisable(true);
+			cboTransportadora.setDisable(true);
+			chbEmTransporte.setDisable(true);
+		}else{
+			txtNumLote.setDisable(false);
+			cboTransportadora.setDisable(false);
+			chbEmTransporte.setDisable(false);
+		}
+	}
+
 
 	@FXML
 	private void handleComboBoxAction() {
 		txtNumLote.setDisable(true);
 		chbEmTransporte.setDisable(true);
+		chbFinalizado.setDisable(true);
 	}
 
 	public void CarregarLoteDetalhe(){
@@ -100,14 +118,14 @@ public class LoteSemTransporteInicialController implements Initializable {
 		txtNumLote.setText("");
 		cboTransportadora.getSelectionModel().clearSelection();
 		chbEmTransporte.setSelected(false);
-		
+
 		txtNumLote.setDisable(false);
 		chbEmTransporte.setDisable(false);
 		cboTransportadora.setDisable(false);
-		
+
 		AtualizarTblLote();
 	}
-	
+
 	public void Filtrar(){
 		String numLote = txtNumLote.getText();
 		Transportadora transportadora = cboTransportadora.getSelectionModel().getSelectedItem();
@@ -136,6 +154,7 @@ public class LoteSemTransporteInicialController implements Initializable {
 		clnQtdPedido.setCellValueFactory(new PropertyValueFactory<Lote, String>("qtdItens"));
 		clnDataCriacao.setCellValueFactory(new PropertyValueFactory<Lote, String>("data_criacao"));
 		clnTransportadora.setCellValueFactory(new PropertyValueFactory<Lote, String>("nomeTransp"));
+		clnStatusLote.setCellValueFactory(new PropertyValueFactory<Lote, String>("status"));
 
 		List<Lote> lstLote = Lote.Select();
         ObservableList<Lote> data = FXCollections.observableList(lstLote);
@@ -151,6 +170,7 @@ public class LoteSemTransporteInicialController implements Initializable {
 		clnQtdPedido.setCellValueFactory(new PropertyValueFactory<Lote, String>("qtdItens"));
 		clnDataCriacao.setCellValueFactory(new PropertyValueFactory<Lote, String>("data_criacao"));
 		clnTransportadora.setCellValueFactory(new PropertyValueFactory<Lote, String>("nomeTransp"));
+		clnStatusLote.setCellValueFactory(new PropertyValueFactory<Lote, String>("status"));
 
         ObservableList<Lote> data = FXCollections.observableList(lstLote);
 
