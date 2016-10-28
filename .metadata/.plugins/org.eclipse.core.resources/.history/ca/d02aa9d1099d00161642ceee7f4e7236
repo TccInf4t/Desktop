@@ -154,7 +154,6 @@ public class Pedido {
 				pedido.setStatusedt(pedido.getStatus().getNome());
 				lstPedidos.add(pedido);
 			}
-			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -188,7 +187,6 @@ public class Pedido {
 		try {
 			parametros = con.prepareStatement(sql);
 			parametros.executeUpdate();
-			con.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -314,7 +312,13 @@ public class Pedido {
 				pedido.setNomeCliente(pedido.getCliente().getNome());
 				pedido.setStatusedt(pedido.getStatus().getNome());
 				lstPedidos.add(pedido);
+
 			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
 			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

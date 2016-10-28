@@ -156,7 +156,7 @@ public class Transportadora {
 
 				lstTransportadora.add(transportadora);
 			}
-
+			
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -276,9 +276,9 @@ public class Transportadora {
 				transportadora.setEndereco(endereco);
 				transportadora.setCidade(endereco.getCidade().getNome());
 				transportadora.setEstado(endereco.getCidade().getEstado().getNome());
-
+				
 			}
-
+			
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -314,9 +314,9 @@ public class Transportadora {
 				transportadora.setEstado(endereco.getCidade().getEstado().getNome());
 
 				lstTransportadora.add(transportadora);
-
+				
 			}
-
+			
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -361,6 +361,7 @@ public class Transportadora {
 						+ "inner join cidade as c on (e.oid_cidade = c.oid_cidade) where c.oid_estado = "+estado.getOid_estado();
 			}
 		}
+		System.out.println(sql);
 		try {
 			ResultSet rs = con.createStatement().executeQuery(sql);
 
@@ -383,6 +384,7 @@ public class Transportadora {
 				transportadora.setEstado(endereco.getCidade().getEstado().getNome());
 
 				lstTransportadora.add(transportadora);
+				
 			}
 			con.close();
 		} catch (SQLException e) {

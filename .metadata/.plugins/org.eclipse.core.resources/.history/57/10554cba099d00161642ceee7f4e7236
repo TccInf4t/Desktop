@@ -159,7 +159,6 @@ public class Endereco {
 				endereco.setOid_endereco(rs.getInt("oid_endereco"));
 				endereco.setCidade(Cidade.BuscarCidadeUnica(rs.getInt("oid_cidade")));
 			}
-			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -188,7 +187,6 @@ public class Endereco {
 				endereco.setOid_endereco(rs.getInt("oid_endereco"));
 				endereco.setCidade(Cidade.BuscarCidadeUnica(rs.getInt("oid_cidade")));
 			}
-			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

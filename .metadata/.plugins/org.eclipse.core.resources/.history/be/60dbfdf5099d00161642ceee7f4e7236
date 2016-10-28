@@ -214,14 +214,13 @@ public class Lote {
 					lote.setTransportadora(Transportadora.Buscar(rs.getInt("oid_transportadora")));
 					lote.setNomeTransp(lote.getTransportadora().getNome());
 				}
-
+				
 				lote.setStatus(rs.getString("status"));
 				lote.setLstPedido(Pedido.Buscar(rs.getInt("oid_lote")));
 				lote.setQtdItens(lote.getLstPedido().size());
 
 				lstLote.add(lote);
 			}
-			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -317,14 +316,13 @@ public class Lote {
 					lote.setTransportadora(Transportadora.Buscar(rs.getInt("oid_transportadora")));
 					lote.setNomeTransp(lote.getTransportadora().getNome());
 				}
-
+				
 				lote.setStatus(rs.getString("status"));
 				lote.setLstPedido(Pedido.Buscar(rs.getInt("oid_lote")));
 				lote.setQtdItens(lote.getLstPedido().size());
 
 				lstLote.add(lote);
 			}
-			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

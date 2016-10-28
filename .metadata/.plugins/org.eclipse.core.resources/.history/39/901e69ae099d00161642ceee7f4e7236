@@ -76,7 +76,6 @@ public class Cliente {
 				cliente.setNome(rs.getString("nome"));
 				cliente.setEndereco(Endereco.BuscarEndereco(rs.getInt("oid_endereco")));
 			}
-			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

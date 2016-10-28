@@ -52,7 +52,6 @@ public class Status {
 				status.setOid_status(rs.getInt("oid_status"));
 				status.setDescricao(rs.getString("descricao"));
 			}
-			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,7 +75,6 @@ public class Status {
 				status.setDescricao(rs.getString("descricao"));
 				lstStatus.add(status);
 			}
-			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

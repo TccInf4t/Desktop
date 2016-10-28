@@ -383,6 +383,7 @@ public class Transportadora {
 				transportadora.setEstado(endereco.getCidade().getEstado().getNome());
 
 				lstTransportadora.add(transportadora);
+				System.out.println(transportadora.getNome());
 			}
 			con.close();
 		} catch (SQLException e) {

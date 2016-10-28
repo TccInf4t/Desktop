@@ -156,8 +156,6 @@ public class Transportadora {
 
 				lstTransportadora.add(transportadora);
 			}
-
-			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -278,8 +276,6 @@ public class Transportadora {
 				transportadora.setEstado(endereco.getCidade().getEstado().getNome());
 
 			}
-
-			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -314,10 +310,7 @@ public class Transportadora {
 				transportadora.setEstado(endereco.getCidade().getEstado().getNome());
 
 				lstTransportadora.add(transportadora);
-
 			}
-
-			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -329,7 +322,7 @@ public class Transportadora {
 		Connection con = MySqlConnect.ConectarDb();
 
 		List<Transportadora> lstTransportadora = new ArrayList<Transportadora>();
-		String sql ="";
+		String sql =null;
 
 		if(temNome){
 			if(temEstado){
@@ -345,14 +338,17 @@ public class Transportadora {
 					sql="select t.* from transportadora as t inner join endereco as e on (e.oid_endereco = t.oid_endereco) "
 							+ "inner join cidade as c on (e.oid_cidade = c.oid_cidade) where c.oid_estado = "+estado.getOid_estado()
 							+ " and nome like '%"+nomeTransp+"%'";
+
 				}
 			}else{
 				//Filtrar por nome da transportadora
-				sql ="select * from transportadora where nome like '%"+nomeTransp+"%';";
+				sql ="select * from transportadora where nome like '%"+nomeTransp+"%'";
 			}
 		}else if(temEstado){
 			if(temCidade){
 				//Filtrar pelas cidade
+				sql ="select * from transportadora where oid_cidade = "+cidade.getOid_cidade()+";";
+
 				sql="select t.* from transportadora as t inner join endereco as e on (e.oid_endereco = t.oid_endereco) "
 						+ "where e.oid_cidade ="+cidade.getOid_cidade();
 			}else{
@@ -361,6 +357,7 @@ public class Transportadora {
 						+ "inner join cidade as c on (e.oid_cidade = c.oid_cidade) where c.oid_estado = "+estado.getOid_estado();
 			}
 		}
+
 		try {
 			ResultSet rs = con.createStatement().executeQuery(sql);
 
@@ -383,10 +380,11 @@ public class Transportadora {
 				transportadora.setEstado(endereco.getCidade().getEstado().getNome());
 
 				lstTransportadora.add(transportadora);
+				con.close();
 			}
-			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+
 		}
 
 		return lstTransportadora;

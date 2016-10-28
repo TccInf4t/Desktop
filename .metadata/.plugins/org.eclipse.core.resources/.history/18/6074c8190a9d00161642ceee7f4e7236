@@ -221,7 +221,6 @@ public class Lote {
 
 				lstLote.add(lote);
 			}
-			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -324,7 +323,6 @@ public class Lote {
 
 				lstLote.add(lote);
 			}
-			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

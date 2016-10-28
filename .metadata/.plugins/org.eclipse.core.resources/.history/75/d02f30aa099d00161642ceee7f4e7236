@@ -56,7 +56,6 @@ public class Cidade {
 
 				lstCidade.add(cidade);
 			}
-			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,14 +75,13 @@ public class Cidade {
 			ResultSet rs = con.createStatement().executeQuery(sql);
 
 			while(rs.next()){
-
+				
 				cidade.setNome(rs.getString("nome"));
 				cidade.setOid_cidade(rs.getInt("oid_cidade"));
 				cidade.setEstado(Estado.BuscarEstado(rs.getInt("oid_estado")));
 
 				lstCidade.add(cidade);
 			}
-			con.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
