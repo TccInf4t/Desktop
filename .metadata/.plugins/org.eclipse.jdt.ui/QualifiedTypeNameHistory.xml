@@ -56,8 +56,8 @@
 <fullyQualifiedTypeName name="javafx.scene.input.KeyCombination"/>
 <fullyQualifiedTypeName name="java.lang.Boolean"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Lote"/>
-<fullyQualifiedTypeName name="br.com.onpecas.helper.Mascaras"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TextField"/>
 <fullyQualifiedTypeName name="br.com.onpecas.helper.Alerta"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Transportadora"/>
+<fullyQualifiedTypeName name="br.com.onpecas.helper.Mascaras"/>
 </qualifiedTypeNameHistroy>

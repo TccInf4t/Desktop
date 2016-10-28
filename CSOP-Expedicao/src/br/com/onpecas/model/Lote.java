@@ -281,7 +281,7 @@ public class Lote {
 
 	}
 
-	public static List<Lote> Filtrar(boolean temNumLote, boolean temTransp, boolean taEmTransp,
+	public static List<Lote> Filtrar(boolean temNumLote, boolean temTransp, boolean taEmTransp, boolean taFinalizado,
 			int numLote, Transportadora transportadora ){
 
 		Connection con =  MySqlConnect.ConectarDb();
@@ -297,6 +297,9 @@ public class Lote {
 		}else if(taEmTransp){
 			//Filtrar se estiver em transporte
 			sqlLote ="select * from lote where emTransp = 1;";
+		}else if(taFinalizado){
+			//Filtrar se estiver em transporte
+			sqlLote ="select * from lote where status = 'Finalizado';";
 		}
 
 		List<Lote> lstLote = new ArrayList<Lote>();

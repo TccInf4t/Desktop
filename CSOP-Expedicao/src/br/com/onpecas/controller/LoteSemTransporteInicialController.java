@@ -118,10 +118,12 @@ public class LoteSemTransporteInicialController implements Initializable {
 		txtNumLote.setText("");
 		cboTransportadora.getSelectionModel().clearSelection();
 		chbEmTransporte.setSelected(false);
+		chbFinalizado.setSelected(false);
 
 		txtNumLote.setDisable(false);
 		chbEmTransporte.setDisable(false);
 		cboTransportadora.setDisable(false);
+		chbFinalizado.setDisable(false);
 
 		AtualizarTblLote();
 	}
@@ -130,18 +132,22 @@ public class LoteSemTransporteInicialController implements Initializable {
 		String numLote = txtNumLote.getText();
 		Transportadora transportadora = cboTransportadora.getSelectionModel().getSelectedItem();
 		boolean emTransp = chbEmTransporte.isSelected();
+		boolean finalizado = chbFinalizado.isSelected();
 
 		if(!numLote.isEmpty()){
 			//Filtrar pelo numero do
 			int numeroLote = Integer.parseInt(numLote);
-			AtualizarTblLoteComFiltro(Lote.Filtrar(true, false, false, numeroLote, null));
+			AtualizarTblLoteComFiltro(Lote.Filtrar(true, false, false, false, numeroLote, null));
 
 		}else if(transportadora != null){
 			//Filtrar apenas pelo nome da transportadora
-			AtualizarTblLoteComFiltro(Lote.Filtrar(false, true, false, 0, transportadora));
+			AtualizarTblLoteComFiltro(Lote.Filtrar(false, true, false, false, 0, transportadora));
 		}else if(emTransp){
 			//Filtrar se estiver em transporte
-			AtualizarTblLoteComFiltro(Lote.Filtrar(false, false, true, 0, null));
+			AtualizarTblLoteComFiltro(Lote.Filtrar(false, false, true, false, 0, null));
+		}else if(finalizado){
+			//Filtrar se estiver em transporte
+			AtualizarTblLoteComFiltro(Lote.Filtrar(false, false, false, true, 0, null));
 		}else{
 			Alerta.showError("Não foi possivel filtrar", "É preciso selecionar/preencher algum campo de filtro");
 		}

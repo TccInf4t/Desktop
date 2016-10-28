@@ -59,8 +59,6 @@ public class Mascaras {
                     textField.setText(textField.getText()+"-");
                     textField.positionCaret(textField.getText().length());
                 }
-
-
             }
         });
 
@@ -72,6 +70,16 @@ public class Mascaras {
             }
         });
 
+    }
+
+    public static void mascaraLimite(TextField textField, int limite){
+    	 textField.setOnKeyTyped((KeyEvent event) -> {
+    		 if(",+=_/*)(&¨%$#@!<>:;?°~^´`[{}]ºª".contains(event.getCharacter())==true){
+                 event.consume();
+             }
+             if(textField.getText().length()==limite) event.consume();
+
+         });
     }
 
     public static void mascaraData(TextField textField){

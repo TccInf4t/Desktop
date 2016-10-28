@@ -12,42 +12,42 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="34.0" layoutY="88.0" text="Bairro" AnchorPane.leftAnchor="30.0">
+      <Label layoutX="30.0" layoutY="123.0" text="Bairro" AnchorPane.leftAnchor="30.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="160.0" text="Numero" AnchorPane.leftAnchor="31.0">
+      <Label layoutX="543.0" layoutY="45.0" text="Número" AnchorPane.leftAnchor="543.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="204.0" text="CEP" AnchorPane.leftAnchor="31.0">
+      <Label layoutX="31.0" layoutY="164.0" text="CEP" AnchorPane.leftAnchor="31.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="245.0" text="Estado" AnchorPane.leftAnchor="31.0">
+      <Label layoutX="31.0" layoutY="203.0" text="Estado" AnchorPane.leftAnchor="31.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="30.0" layoutY="284.0" text="Cidade" AnchorPane.leftAnchor="30.0">
+      <Label layoutX="30.0" layoutY="242.0" text="Cidade" AnchorPane.leftAnchor="30.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="txtLogradouro" layoutX="179.0" layoutY="46.0" prefHeight="25.0" prefWidth="501.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="120.0" />
-      <TextField fx:id="txtBairro" layoutX="179.0" layoutY="89.0" prefHeight="25.0" prefWidth="367.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="300.0" />
-      <TextField fx:id="txtComplemento" layoutX="179.0" layoutY="127.0" prefHeight="25.0" prefWidth="321.0" />
-      <TextField fx:id="txtNumero" layoutX="180.0" layoutY="161.0" prefHeight="25.0" prefWidth="116.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="419.0" />
-      <TextField fx:id="txtCEP" layoutX="180.0" layoutY="205.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="499.0" />
-      <ComboBox fx:id="cboEstado" layoutX="180.0" layoutY="246.0" onAction="#handleComboBoxAction" prefHeight="25.0" prefWidth="207.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="413.0" />
-      <ComboBox fx:id="cboCidade" layoutX="180.0" layoutY="285.0" prefHeight="25.0" prefWidth="207.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="413.0" />
+      <TextField fx:id="txtLogradouro" layoutX="179.0" layoutY="46.0" prefHeight="25.0" prefWidth="321.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="300.0" />
+      <TextField fx:id="txtBairro" layoutX="179.0" layoutY="124.0" prefHeight="25.0" prefWidth="233.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="388.0" />
+      <TextField fx:id="txtComplemento" layoutX="179.0" layoutY="83.0" prefHeight="25.0" prefWidth="321.0" />
+      <TextField fx:id="txtNumero" layoutX="630.0" layoutY="46.0" prefHeight="25.0" prefWidth="79.0" AnchorPane.leftAnchor="630.0" AnchorPane.rightAnchor="91.0" />
+      <TextField fx:id="txtCEP" layoutX="180.0" layoutY="165.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="499.0" />
+      <ComboBox fx:id="cboEstado" layoutX="180.0" layoutY="204.0" onAction="#handleComboBoxAction" prefHeight="25.0" prefWidth="207.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="413.0" />
+      <ComboBox fx:id="cboCidade" layoutX="180.0" layoutY="243.0" prefHeight="25.0" prefWidth="207.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="413.0" />
       <Button fx:id="btnCancelar" layoutX="707.0" layoutY="567.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #FA8072;" text="CANCELAR" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="14.0" />
       <Button fx:id="btnConfirmar" layoutX="607.0" layoutY="567.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #32CD32;" text="SALVAR" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="114.0" />
       <Separator layoutX="6.0" layoutY="558.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <Label layoutX="30.0" layoutY="126.0" text="Complemento">
+      <Label layoutX="30.0" layoutY="82.0" text="Complemento">
          <font>
             <Font size="18.0" />
          </font>

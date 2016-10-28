@@ -3,9 +3,7 @@ package br.com.onpecas.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import br.com.onpecas.helper.Alerta;
-import br.com.onpecas.helper.Helper;
-import br.com.onpecas.helper.Mascaras;
+import br.com.onpecas.helper.*;
 import br.com.onpecas.model.*;
 import br.com.onpecas.view.CallScene;
 import javafx.fxml.*;
@@ -91,8 +89,9 @@ public class EnderecoController implements Initializable{
 	private void Adicionar() {
 
 		if(btnConfirmar.getText().equals("SALVAR")){
-			if(cboCidade.getSelectionModel().getSelectedItem() == null){
-				Alerta.showError("Erro no cadastro", "Selecione um estado e uma cidade");
+			if(cboCidade.getSelectionModel().getSelectedItem() == null || txtBairro.getText().isEmpty() || txtLogradouro.getText().isEmpty()
+					|| txtNumero.getText().isEmpty() || txtCEP.getText().isEmpty()){
+				Alerta.showError("Erro no cadastro", "Preencha todos os campos");
 			}else{
 
 				Endereco endereco = new Endereco();
