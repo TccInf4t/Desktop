@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.*;
 
 import br.com.onpecas.helper.Alerta;
+import br.com.onpecas.helper.Helper;
 import br.com.onpecas.model.*;
 import br.com.onpecas.view.CallScene;
 import javafx.collections.FXCollections;
@@ -98,7 +99,9 @@ public class GerarLoteController implements Initializable{
 			Lote lote = new Lote();
 			lote.setLstPedido(lstItensPassados);
 			Lote.Insert(lote);
+			Helper.AUXPEDIDOLOTE.setValue(1);
 			CallScene.secondStage.close();
+
 		}
 
 	}

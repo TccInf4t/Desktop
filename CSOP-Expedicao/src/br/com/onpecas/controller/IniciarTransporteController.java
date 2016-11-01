@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.*;
 
 import br.com.onpecas.helper.Alerta;
+import br.com.onpecas.helper.Helper;
 import br.com.onpecas.helper.Mascaras;
 import br.com.onpecas.model.*;
 import br.com.onpecas.view.CallScene;
@@ -49,7 +50,7 @@ public class IniciarTransporteController implements Initializable{
 				loteSelecionado.setData_saida(dtpDataPrevSaida.getValue().toString());
 
 				Lote.IniciarTransporte(loteSelecionado);
-
+				Helper.AUXLOTETRANSPORTE.setValue(1);
 				CallScene.secondStage.close();
 
 			}else{

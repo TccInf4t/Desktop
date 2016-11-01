@@ -232,7 +232,7 @@ public class Lote {
 	public static void IniciarTransporte(Lote lote){
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql ="update lote set oid_transportadora = ?, dt_saida = ?, dt_entrega = ?, frete = ?, emtransp = ? where oid_lote = ?; ";
+		String sql ="update lote set oid_transportadora = ?, dt_saida = ?, dt_entrega = ?, frete = ?, emtransp = ?, status='Em Transporte' where oid_lote = ?; ";
 
 		PreparedStatement parametros;
 

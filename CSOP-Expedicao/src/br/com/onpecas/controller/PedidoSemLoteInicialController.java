@@ -34,13 +34,8 @@ public class PedidoSemLoteInicialController implements Initializable{
 		     @Override
 		     public void changed(ObservableValue<?> observableValue, Object oldValue,
 		         Object newValue) {
-		         int newValuenovo =Integer.parseInt(newValue.toString());
-		         if(newValuenovo == 1){
 		            AtualizarTblPedido();
 		            Helper.AUXPEDIDOLOTE.setValue(0);
-		         }else{
-
-		         }
 		     }
 		   });
 

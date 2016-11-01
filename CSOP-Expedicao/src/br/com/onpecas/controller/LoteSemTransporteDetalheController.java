@@ -36,8 +36,17 @@ public class LoteSemTransporteDetalheController implements Initializable{
 		        if (click.getClickCount() == 2) {
 		        	CallScene callScene = new CallScene();
 		        	Pedido pedido = tblPedido.getSelectionModel().getSelectedItem();
+		        	
 		        	if(pedido!= null && pedido.getStatus().getOid_status() != 5){
-		        		callScene.LoadPedidoSemLoteDetalhe(pedido, true);
+		        		if(lote.getStatus() == null){
+			        		callScene.LoadPedidoSemLoteDetalhe(pedido, false);
+			        	}else{
+			        		if(!lote.getStatus().equals("Finalizado")){
+			        			callScene.LoadPedidoSemLoteDetalhe(pedido, true);
+			        		}else{
+			        			callScene.LoadPedidoSemLoteDetalhe(pedido, false);
+			        		}
+			        	}
 		        	}else{
 		        		Alerta.showError("Não foi possível detalhar", "O pedido selecionado já foi entregue");
 		        	}
@@ -52,25 +61,21 @@ public class LoteSemTransporteDetalheController implements Initializable{
 		     @Override
 		     public void changed(ObservableValue<?> observableValue, Object oldValue,
 		         Object newValue) {
-		         int newValuenovo =Integer.parseInt(newValue.toString());
-		         if(newValuenovo == 1){
-		        	lote.setLstPedido(Pedido.Buscar(lote.getOid_lote()));
-		            AtualizarTblPedido(lote.getLstPedido());
-		            Helper.AUXPEDIDOLOTEDET.setValue(0);
+	        	lote.setLstPedido(Pedido.Buscar(lote.getOid_lote()));
+	            AtualizarTblPedido(lote.getLstPedido());
+	            Helper.AUXPEDIDOLOTEDET.setValue(0);
 
-		            int cont=0;
-		            for(Pedido item : lote.getLstPedido()){
-		            	if(item.getStatus().getOid_status() == 5){
-		            		cont ++;
-		            	}
-		            }
+	            int cont=0;
+	            for(Pedido item : lote.getLstPedido()){
+	            	if(item.getStatus().getOid_status() == 5){
+	            		cont ++;
+	            	}
+	            }
 
-		            if(cont >0 && cont == lote.getLstPedido().size()){
-		            	Lote.FinalizarLote(lote);
-		            }
-		         }else{
-
-		         }
+	            if(cont >0 && cont == lote.getLstPedido().size()){
+	            	Lote.FinalizarLote(lote);
+	            }
+	            PreecherCampos();
 		     }
 		   });
 
@@ -86,7 +91,7 @@ public class LoteSemTransporteDetalheController implements Initializable{
 			txtDataPrevSaida.setText(lote.getData_saida());
 			txtDataPrevFinal.setText(lote.getData_entrega());
 			txtValorFrete.setText(lote.getFrete());
-
+			txtStatusLote.setText(lote.getStatus());
 			AtualizarTblPedido(lote.getLstPedido());
 		}
 	}

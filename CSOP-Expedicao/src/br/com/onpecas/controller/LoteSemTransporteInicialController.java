@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import br.com.onpecas.helper.Alerta;
+import br.com.onpecas.helper.Helper;
 import br.com.onpecas.helper.Mascaras;
 import br.com.onpecas.model.*;
 import br.com.onpecas.view.CallScene;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
@@ -50,6 +53,20 @@ public class LoteSemTransporteInicialController implements Initializable {
 				chbFinalizado.setDisable(true);
 		    }
 		});
+
+		Helper.AUXLOTETRANSPORTE.addListener(new ChangeListener<Object>() {
+		     @Override
+		     public void changed(ObservableValue<?> observableValue, Object oldValue,
+		         Object newValue) {
+		         int newValuenovo =Integer.parseInt(newValue.toString());
+		         if(newValuenovo == 1){
+		            AtualizarTblLote();
+		            Helper.AUXLOTETRANSPORTE.setValue(0);
+		         }else{
+
+		         }
+		     }
+		   });
 	}
 
 	public void IniciarTransporte(){

@@ -10,4 +10,5 @@ public class Helper {
 	public static IntegerProperty AUXENDERECOCOMPLETO = new SimpleIntegerProperty();
 	public static IntegerProperty AUXPEDIDOLOTE = new SimpleIntegerProperty();
 	public static IntegerProperty AUXPEDIDOLOTEDET = new SimpleIntegerProperty();
+	public static IntegerProperty AUXLOTETRANSPORTE = new SimpleIntegerProperty();
 }
