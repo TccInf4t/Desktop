@@ -42,9 +42,9 @@
             </Label>
          </children>
       </Pane>
-      <TabPane layoutX="140.0" layoutY="315.0" prefHeight="560.0" prefWidth="972.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="226.0">
+      <TabPane fx:id="tabPane" layoutX="140.0" layoutY="315.0" prefHeight="560.0" prefWidth="972.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="226.0">
         <tabs>
-          <Tab text="Linha">
+          <Tab fx:id="tabLinha" text="Linha">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -60,7 +60,7 @@
                </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Barra">
+          <Tab fx:id="tabBarra" text="Barra">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -76,7 +76,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Tabela">
+            <Tab fx:id="tabTabela" text="Tabela">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

@@ -31,6 +31,9 @@ public class RelatorioController implements Initializable{
 
 	@FXML Pane panePedido;
 
+	@FXML Tab tabTabela, tabLinha, tabBarra;
+	@FXML TabPane tabPane;
+
 	List<HashMap<Integer,String>> lstHash;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -58,8 +61,11 @@ public class RelatorioController implements Initializable{
 		cboPeriodoRelatório.setDisable(true);
 		datePickerInicial.setDisable(true);
 		datePickerFinal.setDisable(true);
-
 		panePedido.setVisible(false);
+		tabTabela.setDisable(true);
+		tabLinha.setDisable(true);
+		tabBarra.setDisable(true);
+		btnExportarExcel.setDisable(true);
 	}
 
 
@@ -69,7 +75,7 @@ public class RelatorioController implements Initializable{
 	private void handleButtonAction(ActionEvent event) {
 	    // Button was clicked, do something...
 		String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();
-		if(!sltComboTipo.equals("Venda")){
+		if(sltComboTipo.equals("Faturamento")){
 
 			panePedido.setVisible(true);
 			cboPeriodoRelatório.setDisable(false);;
@@ -77,13 +83,8 @@ public class RelatorioController implements Initializable{
 			cboPeriodoRelatório.getItems().clear();
 			cboPeriodoRelatório.getItems().addAll("Diario", "Semanal", "Mensal", "Anual");
 
-		}else if(sltComboTipo.equals("Venda")){
-			panePedido.setVisible(false);
-
-			cboPeriodoRelatório.setDisable(false);;
-			cboPeriodoRelatório.setPromptText("Selecione");
-			cboPeriodoRelatório.getItems().clear();
-			cboPeriodoRelatório.getItems().addAll("Diario", "Semanal", "Mensal", "Anual");
+		}else if(sltComboTipo.equals("Pedido")){
+			FiltrarPorPedido();
 		}
 	}
 
@@ -129,38 +130,49 @@ public class RelatorioController implements Initializable{
 					if(dataFinal.isEmpty() || dataInicial.isEmpty()){
 						Alerta.showError("Erro ao filtrar", "Preencha a Data Inicial (De) e a Data Final (Até)");
 					}else{
+
 						List<HashMap<Integer,String>> lstHash = Relatorio.FiltarFaturamento(periodo, true, dataInicial, dataFinal);
 
-						cln1.textProperty().set("Data");
-						cln2.textProperty().set("Valor");
+						if(lstHash.size()<=0){
+							Alerta.showError("Erro ao gerar", "Não há registro neste período");
+						}else{
+							cln1.textProperty().set("Data");
+							cln2.textProperty().set("Valor");
 
+							tabTabela.setDisable(false);
+							tabLinha.setDisable(false);
+							tabBarra.setDisable(false);
+							btnExportarExcel.setDisable(false);
 
-						lineChart.getData().clear();
-						barChart.getData().clear();
+							lineChart.getData().clear();
+							barChart.getData().clear();
 
-						XYChart.Series lucroLine = new XYChart.Series();
-						XYChart.Series lucroBar = new XYChart.Series();
+							XYChart.Series lucroLine = new XYChart.Series();
+							XYChart.Series lucroBar = new XYChart.Series();
 
-						lucroBar.setName(cboTipoRelatorio.getValue().toString()+" - "+ cboPeriodoRelatório.getValue().toString());
-						lucroLine.setName(cboTipoRelatorio.getValue().toString()+" - "+ cboPeriodoRelatório.getValue().toString());
-						for(int i = 0; i<lstHash.size(); i++ ){
+							lucroBar.setName(cboTipoRelatorio.getValue().toString()+" - "+ cboPeriodoRelatório.getValue().toString());
+							lucroLine.setName(cboTipoRelatorio.getValue().toString()+" - "+ cboPeriodoRelatório.getValue().toString());
+							for(int i = 0; i<lstHash.size(); i++ ){
 
-							double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
-							lucroLine.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
-							lucroBar.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+								double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
+								lucroLine.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+								lucroBar.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+							}
+
+							barChart.getData().addAll(lucroBar);
+							lineChart.getData().addAll(lucroLine);
+
+							this.lstHash = lstHash;
 						}
-
-						barChart.getData().addAll(lucroBar);
-						lineChart.getData().addAll(lucroLine);
-
-
-
-
-						this.lstHash = lstHash;
 					}
 				}
 			}else{
 				List<HashMap<Integer,String>> lstHash = Relatorio.FiltarFaturamento(periodo, false, null, null);
+
+				tabTabela.setDisable(false);
+				tabLinha.setDisable(false);
+				tabBarra.setDisable(false);
+				btnExportarExcel.setDisable(false);
 
 				lineChart.getData().clear();
 				barChart.getData().clear();
@@ -184,8 +196,33 @@ public class RelatorioController implements Initializable{
 		}
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void FiltrarPorPedido(){
+		System.out.println("TA FILTRANDO BOY");
+		panePedido.setVisible(false);
+		tabTabela.setDisable(false);
+		tabBarra.setDisable(false);
+		btnExportarExcel.setDisable(false);
+		tabPane.getSelectionModel().select(tabBarra);
 
+		List<HashMap<Integer,String>> lstHash = Relatorio.FiltrarPedido();
+
+		barChart.getData().clear();
+
+		XYChart.Series lucroBar = new XYChart.Series();
+
+		lucroBar.setName("Quantidade de Pedido por Status");
+		for(int i = 0; i<lstHash.size(); i++ ){
+
+			String status =lstHash.get(i).get(1).toString();
+			int quantidade =Integer.parseInt(lstHash.get(i).get(2).toString());
+
+			System.out.println("Nome Status: "+lstHash.get(i).get(1)+" - Quantidade: "+quantidade);
+			lucroBar.getData().add(new XYChart.Data(status, quantidade));
+		}
+
+		barChart.getData().addAll(lucroBar);
+		this.lstHash = lstHash;
 	}
 
 	public void FiltrarPorVenda(){
@@ -205,7 +242,12 @@ public class RelatorioController implements Initializable{
 						Alerta.showError("Erro ao exportar", "Nenhum relatório realizado");
 					}
 				}else if(sltComboTipo.equals("Pedido")){
-
+					if(this.lstHash != null){
+						CreateExlFile.Gerar(lstHash, "Pedido", cboPeriodoRelatório.getValue());
+						Alerta.showInformation("Sucesso", "Planilha gerada com sucesso\n Você pode visualizá-la em C:/OnPecaControl/planilhas/");
+					}else{
+						Alerta.showError("Erro ao exportar", "Nenhum relatório realizado");
+					}
 				}else if(sltComboTipo.equals("Venda")){
 				}
 			}else{

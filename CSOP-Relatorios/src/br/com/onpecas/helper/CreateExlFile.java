@@ -36,28 +36,23 @@ public class CreateExlFile {
 			 // definindo seus valores
 			 // por exemplo protocolo.getProtocolo();
 
-
 			 for(int i =0; i<lstHash.size(); i++){
 				 HSSFRow row=   sheet.createRow((short)i+2);
 				 row.createCell(0).setCellValue(lstHash.get(i).get(1));
 				 row.createCell(1).setCellValue(lstHash.get(i).get(2));
 			 }
-
-
-
 		 }else if(tipo.equals("Pedido")){
 			 HSSFRow rowDetalhe = sheet.createRow((short)0);
-			 rowDetalhe.createCell(0).setCellValue("Periodo: ");
-			 rowDetalhe.createCell(1).setCellValue(periodoRelatorio);
+			 rowDetalhe.createCell(0).setCellValue("Tipo: ");
+			 rowDetalhe.createCell(1).setCellValue("Quantidade de pedido agrupado pelo status");
 
 			// criando as linhas
 			 HSSFRow rowhead = sheet.createRow((short)1);
-			 rowhead.createCell(0).setCellValue("data");
-			 rowhead.createCell(1).setCellValue("valor");
+			 rowhead.createCell(0).setCellValue("Status");
+			 rowhead.createCell(1).setCellValue("Quantidade");
 
 			 // definindo seus valores
 			 // por exemplo protocolo.getProtocolo();
-
 
 			 for(int i =0; i<lstHash.size(); i++){
 				 HSSFRow row=   sheet.createRow((short)i+2);
