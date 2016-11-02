@@ -1,0 +1,42 @@
+package br.com.onpecas.helper;
+
+import java.io.FileOutputStream;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
+public class CreateExlFile {
+	@SuppressWarnings({ "deprecation", "resource" })
+	public static void Gerar(List<HashMap<Integer, String>> lstHash, String tipo){
+	 try{
+		 Date data = new Date();
+		 String dataAtual = data.toLocaleString();
+	     // local do arquivo
+		 String filename="C:/OnPecaControl/"+tipo+"-"+dataAtual ;
+		 HSSFWorkbook workbook=new HSSFWorkbook();
+		 HSSFSheet sheet =  workbook.createSheet("FirstSheet");
+		 // criando as linhas
+		 HSSFRow rowhead=   sheet.createRow((short)0);
+		 rowhead.createCell(0).setCellValue("protocolo");
+		 rowhead.createCell(1).setCellValue("codigonumerico");
+		 // definindo seus valores
+		 // por exemplo protocolo.getProtocolo();
+		 HSSFRow row=   sheet.createRow((short)1);
+		 row.createCell(0).setCellValue("Cedudi");
+		 row.createCell(1).setCellValue("nossa");
+
+		 FileOutputStream fileOut =  new FileOutputStream(filename);
+		 workbook.write(fileOut);
+		 fileOut.close();
+		 System.out.println("Seu arquivo excel foi gerado!");
+
+	 } catch ( Exception ex ) {
+	     System.out.println(ex);
+
+	 }
+	}
+}

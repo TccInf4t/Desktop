@@ -165,4 +165,87 @@ public class Relatorio {
 
 		return lstMap;
 	}
+
+	public static List<HashMap<Integer,String>> FiltarFaturamento(String periodo, boolean temData, String dataInicial, String dataFinal){
+		Connection con = MySqlConnect.ConectarDb();
+		List<HashMap<Integer,String>> lstMap = new ArrayList<>();
+		String sql = "";
+
+		if(temData){
+			if(periodo.equals("Semanal")){
+				sql = "select *,"
+						+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Sunday'), '%X%V %W'), '%d/%m/%y') as semanainicial, "
+						+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y') as semanafinal, "
+						+"concat('De: ', date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Sunday'), '%X%V %W'), '%d/%m/%y'), ' - Até: ',"
+						+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y')) as datareferencia,"
+						+"sum(valortotal)+sum(frete) as valorfaturado "
+						+"from visualizacaorelatorios "
+						+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' "
+						+ "group by yearweek(dtrealizado) ;";
+
+			}else if(periodo.equals("Mensal")){
+				sql ="select *,concat(extract(month from dtrealizado),' - ', extract(year from dtrealizado)) as datareferencia, "
+						+ "sum(valortotal)+sum(frete) as valorfaturado from visualizacaorelatorios "
+						+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' "
+						+ "group by extract(year from dtrealizado), "
+						+ "extract(month from dtrealizado) ;";
+
+			}else if(periodo.equals("Anual")){
+				sql ="select *, extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado "
+						+ "from visualizacaorelatorios "
+						+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' "
+						+ "group by extract(year from dtrealizado) ;";
+
+			}else if(periodo.equals("Diario")){
+				sql = "select *, dtrealizado as datareferencia, "
+						+"sum(valortotal)+sum(frete) as valorfaturado "
+						+"from visualizacaorelatorios "
+						+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' "
+						+ "group by dtrealizado ;";
+
+			}
+		}else{
+			if(periodo.equals("Semanal")){
+				sql = "select *,"
+						+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Sunday'), '%X%V %W'), '%d/%m/%y') as semanainicial, "
+						+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y') as semanafinal, "
+						+"concat('De: ', date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Sunday'), '%X%V %W'), '%d/%m/%y'), ' - Até: ',"
+						+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y')) as datareferencia,"
+						+"sum(valortotal)+sum(frete) as valorfaturado "+
+						"from visualizacaorelatorios group by yearweek(dtrealizado) ;";
+
+			}else if(periodo.equals("Mensal")){
+				sql ="select *,concat(extract(month from dtrealizado),' - ', extract(year from dtrealizado)) as datareferencia, "
+						+ "sum(valortotal)+sum(frete) as valorfaturado from visualizacaorelatorios group by extract(year from dtrealizado), "
+						+ "extract(month from dtrealizado) ;";
+
+			}else if(periodo.equals("Anual")){
+				sql ="select *, extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado "
+						+ "from visualizacaorelatorios group by extract(year from dtrealizado) ;";
+
+			}else if(periodo.equals("Diario")){
+				sql = "select *, dtrealizado as datareferencia, "
+						+"sum(valortotal)+sum(frete) as valorfaturado "
+						+"from visualizacaorelatorios group by dtrealizado ;";
+
+			}
+		}
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sql);
+
+			while(rs.next()){
+				HashMap<Integer,String> itemHash = new HashMap<>();
+
+				itemHash.put(1, rs.getString("datareferencia"));
+				itemHash.put(2, rs.getString("ValorFaturado"));
+
+				lstMap.add(itemHash);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return lstMap;
+	}
 }

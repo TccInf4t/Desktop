@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.sql.ResultSet"/>
-<fullyQualifiedTypeName name="br.com.onpecas.model.Cidade"/>
-<fullyQualifiedTypeName name="javafx.stage.Stage"/>
-<fullyQualifiedTypeName name="java.lang.Void"/>
-<fullyQualifiedTypeName name="javafx.scene.control.TextArea"/>
-<fullyQualifiedTypeName name="javafx.beans.property.ReadOnlyIntegerWrapper"/>
 <fullyQualifiedTypeName name="javafx.util.Callback"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TableColumn.CellDataFeatures"/>
 <fullyQualifiedTypeName name="javafx.scene.chart.LineChart"/>
-<fullyQualifiedTypeName name="br.com.onpecas.controller.RelatorioController"/>
 <fullyQualifiedTypeName name="javafx.scene.layout.AnchorPane"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Relatorio"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="javafx.beans.value.ObservableValue"/>
 <fullyQualifiedTypeName name="javafx.beans.value.ChangeListener"/>
 <fullyQualifiedTypeName name="javafx.event.ActionEvent"/>
@@ -32,8 +24,6 @@
 <fullyQualifiedTypeName name="java.sql.Connection"/>
 <fullyQualifiedTypeName name="br.com.onpecas.helper.MySqlConnect"/>
 <fullyQualifiedTypeName name="br.com.onpecas.helper.Helper"/>
-<fullyQualifiedTypeName name="javafx.scene.control.TableView"/>
-<fullyQualifiedTypeName name="javafx.scene.control.TableColumn"/>
 <fullyQualifiedTypeName name="br.com.onpecas.controller.LoteSemTransporteInicialController"/>
 <fullyQualifiedTypeName name="br.com.onpecas.controller.LoteSemTransporteDetalheController"/>
 <fullyQualifiedTypeName name="javafx.scene.input.MouseEvent"/>
@@ -41,10 +31,8 @@
 <fullyQualifiedTypeName name="javafx.scene.control.DatePicker"/>
 <fullyQualifiedTypeName name="com.sun.media.jfxmedia.events.NewFrameEvent"/>
 <fullyQualifiedTypeName name="br.com.onpecas.controller.IniciarTransporteController"/>
-<fullyQualifiedTypeName name="javafx.scene.control.CheckBox"/>
 <fullyQualifiedTypeName name="javafx.scene.control.Alert"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Status"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="org.w3c.dom.ls.LSInput"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
@@ -60,4 +48,16 @@
 <fullyQualifiedTypeName name="br.com.onpecas.helper.Alerta"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Transportadora"/>
 <fullyQualifiedTypeName name="br.com.onpecas.helper.Mascaras"/>
+<fullyQualifiedTypeName name="javafx.scene.control.CheckBox"/>
+<fullyQualifiedTypeName name="br.com.onpecas.controller.RelatorioController"/>
+<fullyQualifiedTypeName name="javafx.scene.control.TableView"/>
+<fullyQualifiedTypeName name="org.apache.poi.hssf.usermodel.HSSFWorkbook"/>
+<fullyQualifiedTypeName name="org.apache.poi.hssf.usermodel.HSSFSheet"/>
+<fullyQualifiedTypeName name="org.apache.poi.hssf.usermodel.HSSFRow"/>
+<fullyQualifiedTypeName name="java.io.FileOutputStream"/>
+<fullyQualifiedTypeName name="br.com.onpecas.helper.CreateExlFile"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="javafx.scene.control.TableColumn"/>
 </qualifiedTypeNameHistroy>
