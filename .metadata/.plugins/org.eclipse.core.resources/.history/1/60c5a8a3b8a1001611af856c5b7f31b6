@@ -254,7 +254,7 @@ public class RelatorioController implements Initializable{
 					Alerta.showError("Erro ao filtrar", "Selecione um Periodo");
 				}else{
 					if(chbDataSelecionavel.isSelected()){
-						if(datePickerInicial.getValue() ==  null || datePickerFinal.getValue() == null){
+						if(datePickerInicial.getValue() ==  null && datePickerFinal.getValue() == null){
 							Alerta.showError("Erro ao filtrar", "Preencha a Data Inicial (De) e a Data Final (Até)");
 						}else{
 							String dataInicial = datePickerInicial.getValue().toString();
@@ -263,13 +263,68 @@ public class RelatorioController implements Initializable{
 							if(dataFinal.isEmpty() || dataInicial.isEmpty()){
 								Alerta.showError("Erro ao filtrar", "Preencha a Data Inicial (De) e a Data Final (Até)");
 							}else{
-								// Se tiver a data inicial e a data final
-								System.out.println("Tem data inicial e final");
+
+								List<HashMap<Integer,String>> lstHash = Relatorio.FiltarFaturamento(periodo, true, dataInicial, dataFinal);
+
+								if(lstHash.size()<=0){
+									Alerta.showError("Erro ao gerar", "Não há registro neste período");
+								}else{
+									cln1.textProperty().set("Data");
+									cln2.textProperty().set("Valor");
+
+									tabTabela.setDisable(false);
+									tabLinha.setDisable(false);
+									tabBarra.setDisable(false);
+									btnExportarExcel.setDisable(false);
+
+									lineChart.getData().clear();
+									barChart.getData().clear();
+
+									XYChart.Series lucroLine = new XYChart.Series();
+									XYChart.Series lucroBar = new XYChart.Series();
+
+									lucroBar.setName(cboTipoRelatorio.getValue().toString()+" - "+ cboPeriodoRelatório.getValue().toString());
+									lucroLine.setName(cboTipoRelatorio.getValue().toString()+" - "+ cboPeriodoRelatório.getValue().toString());
+									for(int i = 0; i<lstHash.size(); i++ ){
+
+										double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
+										lucroLine.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+										lucroBar.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+									}
+
+									barChart.getData().addAll(lucroBar);
+									lineChart.getData().addAll(lucroLine);
+
+									this.lstHash = lstHash;
+								}
 							}
 						}
 					}else{
-						// Se tiver somente o perido selecionado
-						System.out.println("Periodo");
+						List<HashMap<Integer,String>> lstHash = Relatorio.FiltarFaturamento(periodo, false, null, null);
+
+						tabTabela.setDisable(false);
+						tabLinha.setDisable(false);
+						tabBarra.setDisable(false);
+						btnExportarExcel.setDisable(false);
+
+						lineChart.getData().clear();
+						barChart.getData().clear();
+
+						XYChart.Series lucroLine = new XYChart.Series();
+						XYChart.Series lucroBar = new XYChart.Series();
+
+						lucroBar.setName(cboTipoRelatorio.getValue().toString()+" - "+ cboPeriodoRelatório.getValue().toString());
+						lucroLine.setName(cboTipoRelatorio.getValue().toString()+" - "+ cboPeriodoRelatório.getValue().toString());
+						for(int i = 0; i<lstHash.size(); i++ ){
+
+							double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
+							lucroLine.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+							lucroBar.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+						}
+
+						barChart.getData().addAll(lucroBar);
+						lineChart.getData().addAll(lucroLine);
+						this.lstHash = lstHash;
 					}
 				}
 			}

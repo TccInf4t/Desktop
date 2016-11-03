@@ -51,7 +51,7 @@ public class RelatorioController implements Initializable{
 	}
 
 	public void CarregarBotoes(){
-		cboTipoRelatorio.getItems().addAll("Faturamento", "Pedido", "Venda");
+		cboTipoRelatorio.getItems().addAll("Faturamento", "Pedido");
 		btnFiltrar.setOnAction(l-> Filtrar());
 		btnExportarExcel.setOnAction(l-> ExportaExcel());
 	}
@@ -90,16 +90,6 @@ public class RelatorioController implements Initializable{
 
 		}else if(sltComboTipo.equals("Pedido")){
 			FiltrarPorPedido();
-		}else if(sltComboTipo.equals("Venda")){
-			paneVenda.setVisible(true);
-			panePeriodo.setVisible(true);
-
-			cboEntidade.getItems().clear();
-			cboEntidade.getItems().addAll("Cliente", "Produto", "Transportadora");
-
-			cboPeriodoRelatório.setDisable(false);;
-			cboPeriodoRelatório.getItems().clear();
-			cboPeriodoRelatório.getItems().addAll("Diario", "Semanal", "Mensal", "Anual");
 		}
 	}
 
@@ -214,6 +204,7 @@ public class RelatorioController implements Initializable{
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void FiltrarPorPedido(){
+		System.out.println("TA FILTRANDO BOY");
 		panePeriodo.setVisible(false);
 		tabTabela.setDisable(false);
 		tabBarra.setDisable(false);
@@ -240,40 +231,8 @@ public class RelatorioController implements Initializable{
 		this.lstHash = lstHash;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void FiltrarPorVenda(){
-		String entidadeSelecionada = cboEntidade.getSelectionModel().getSelectedItem();
-		if(entidadeSelecionada == null){
-			Alerta.showError("Erro ao filtrar", "Selecione uma Entidade");
-		}else{
-			if(txtNomeEntidade.getText().isEmpty()){
-				Alerta.showError("Erro ao filtrar", "Selecione preecha o nome da entidade");
-			}else{
-				String periodo = cboPeriodoRelatório.getSelectionModel().getSelectedItem();
-				if(periodo == null){
-					Alerta.showError("Erro ao filtrar", "Selecione um Periodo");
-				}else{
-					if(chbDataSelecionavel.isSelected()){
-						if(datePickerInicial.getValue() ==  null || datePickerFinal.getValue() == null){
-							Alerta.showError("Erro ao filtrar", "Preencha a Data Inicial (De) e a Data Final (Até)");
-						}else{
-							String dataInicial = datePickerInicial.getValue().toString();
-							String dataFinal = datePickerFinal.getValue().toString();
 
-							if(dataFinal.isEmpty() || dataInicial.isEmpty()){
-								Alerta.showError("Erro ao filtrar", "Preencha a Data Inicial (De) e a Data Final (Até)");
-							}else{
-								// Se tiver a data inicial e a data final
-								System.out.println("Tem data inicial e final");
-							}
-						}
-					}else{
-						// Se tiver somente o perido selecionado
-						System.out.println("Periodo");
-					}
-				}
-			}
-		}
 	}
 
 	public void ExportaExcel(){
@@ -283,12 +242,14 @@ public class RelatorioController implements Initializable{
 				if(sltComboTipo.equals("Faturamento")){
 					if(this.lstHash != null){
 						CreateExlFile.Gerar(lstHash, "Faturamento", cboPeriodoRelatório.getValue());
+						Alerta.showInformation("Sucesso", "Planilha gerada com sucesso\n Você pode visualizá-la em C:/OnPecaControl/planilhas/");
 					}else{
 						Alerta.showError("Erro ao exportar", "Nenhum relatório realizado");
 					}
 				}else if(sltComboTipo.equals("Pedido")){
 					if(this.lstHash != null){
 						CreateExlFile.Gerar(lstHash, "Pedido", cboPeriodoRelatório.getValue());
+						Alerta.showInformation("Sucesso", "Planilha gerada com sucesso\n Você pode visualizá-la em C:/OnPecaControl/planilhas/");
 					}else{
 						Alerta.showError("Erro ao exportar", "Nenhum relatório realizado");
 					}

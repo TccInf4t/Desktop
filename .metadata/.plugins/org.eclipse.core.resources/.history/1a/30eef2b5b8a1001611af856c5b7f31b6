@@ -254,7 +254,7 @@ public class RelatorioController implements Initializable{
 					Alerta.showError("Erro ao filtrar", "Selecione um Periodo");
 				}else{
 					if(chbDataSelecionavel.isSelected()){
-						if(datePickerInicial.getValue() ==  null || datePickerFinal.getValue() == null){
+						if(datePickerInicial.getValue() ==  null && datePickerFinal.getValue() == null){
 							Alerta.showError("Erro ao filtrar", "Preencha a Data Inicial (De) e a Data Final (Até)");
 						}else{
 							String dataInicial = datePickerInicial.getValue().toString();
@@ -264,12 +264,10 @@ public class RelatorioController implements Initializable{
 								Alerta.showError("Erro ao filtrar", "Preencha a Data Inicial (De) e a Data Final (Até)");
 							}else{
 								// Se tiver a data inicial e a data final
-								System.out.println("Tem data inicial e final");
 							}
 						}
 					}else{
 						// Se tiver somente o perido selecionado
-						System.out.println("Periodo");
 					}
 				}
 			}

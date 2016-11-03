@@ -41,7 +41,6 @@ public class CreateExlFile {
 				 row.createCell(0).setCellValue(lstHash.get(i).get(1));
 				 row.createCell(1).setCellValue(lstHash.get(i).get(2));
 			 }
-			Alerta.showInformation("Sucesso", "Planilha gerada com sucesso\n Você pode visualizá-la em C:/OnPecaControl/planilhas/");
 		 }else if(tipo.equals("Pedido")){
 			 HSSFRow rowDetalhe = sheet.createRow((short)0);
 			 rowDetalhe.createCell(0).setCellValue("Tipo: ");
@@ -60,7 +59,7 @@ public class CreateExlFile {
 				 row.createCell(0).setCellValue(lstHash.get(i).get(1));
 				 row.createCell(1).setCellValue(lstHash.get(i).get(2));
 			 }
-			Alerta.showInformation("Sucesso", "Planilha gerada com sucesso\n Você pode visualizá-la em C:/OnPecaControl/planilhas/");
+
 		 }else if(tipo.equals("Venda")){
 			// criando as linhas
 			 HSSFRow rowDetalhe = sheet.createRow((short)0);
@@ -81,7 +80,6 @@ public class CreateExlFile {
 				 row.createCell(0).setCellValue(lstHash.get(i).get(1));
 				 row.createCell(1).setCellValue(lstHash.get(i).get(2));
 			 }
-			Alerta.showInformation("Sucesso", "Planilha gerada com sucesso\n Você pode visualizá-la em C:/OnPecaControl/planilhas/");
 		 }
 
 
@@ -91,7 +89,7 @@ public class CreateExlFile {
 
 	 } catch ( Exception ex ) {
 	     System.out.println(ex);
-		Alerta.showError("Erro ao exportar", ex.getMessage());
+
 	 }
 	}
 }
