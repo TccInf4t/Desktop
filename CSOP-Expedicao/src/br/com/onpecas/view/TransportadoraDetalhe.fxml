@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Separator layoutX="307.0" layoutY="262.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="727.0" />
+      <Separator layoutX="307.0" layoutY="262.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Separator layoutX="317.0" layoutY="272.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
       <Label layoutX="29.0" layoutY="104.0" text="Nome Completo:" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="104.0">
          <font>
@@ -42,25 +42,50 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="txtNomeCompleto" layoutX="219.0" layoutY="104.0" prefHeight="25.0" prefWidth="544.0" AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="104.0" />
-      <ComboBox fx:id="cboTipoPessoa" layoutX="219.0" layoutY="144.0" onAction="#handleComboBoxAction" prefHeight="25.0" prefWidth="279.0" AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="144.0">
+      <TextField fx:id="txtNomeCompleto" layoutX="219.0" layoutY="104.0" prefHeight="25.0" prefWidth="544.0" AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="104.0">
+         <tooltip>
+            <Tooltip autoHide="true" graphicTextGap="1.0" text="Nome completo da transportadora" />
+         </tooltip></TextField>
+      <ComboBox fx:id="cboTipoPessoa" layoutX="219.0" layoutY="144.0" onAction="#handleComboBoxAction" prefHeight="25.0" prefWidth="279.0" promptText="Selecione..." AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="144.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <tooltip>
+            <Tooltip text="Tipo de pessoa" />
+         </tooltip>
       </ComboBox>
-      <TextField fx:id="txtCPF" layoutX="219.0" layoutY="184.0" prefHeight="25.0" prefWidth="279.0" AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="184.0" />
-      <TextField fx:id="txtRG" layoutX="219.0" layoutY="219.0" prefHeight="25.0" prefWidth="279.0" AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="219.0" />
+      <TextField fx:id="txtCPF" layoutX="219.0" layoutY="184.0" prefHeight="25.0" prefWidth="279.0" AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="184.0">
+         <tooltip>
+            <Tooltip text="CPF ou CNPJ" />
+         </tooltip></TextField>
+      <TextField fx:id="txtRG" layoutX="219.0" layoutY="219.0" prefHeight="25.0" prefWidth="279.0" AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="219.0">
+         <tooltip>
+            <Tooltip text="RG" />
+         </tooltip></TextField>
       <Button fx:id="btnAbrirEndereco" layoutX="219.0" layoutY="254.0" mnemonicParsing="false" text="..." AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="254.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <tooltip>
+            <Tooltip text="Cadastrar endereco" />
+         </tooltip>
       </Button>
-      <TextField fx:id="txtTelefone" layoutX="219.0" layoutY="289.0" prefHeight="25.0" prefWidth="279.0" AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="289.0" />
-      <Button fx:id="btnCancelar" layoutX="913.0" layoutY="749.0" mnemonicParsing="false" style="-fx-background-color: #FA8072;" text="CANCELAR" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="25.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
+      <TextField fx:id="txtTelefone" layoutX="219.0" layoutY="289.0" prefHeight="25.0" prefWidth="279.0" AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="289.0">
+         <tooltip>
+            <Tooltip text="Telefone" />
+         </tooltip></TextField>
+      <TextField fx:id="txtFrete" layoutX="219.0" layoutY="327.0" prefHeight="25.0" prefWidth="147.0">
+         <tooltip>
+            <Tooltip text="Valor padrão do frete" />
+         </tooltip></TextField>
+      <TextField fx:id="txtRamo" layoutX="219.0" layoutY="361.0" prefHeight="25.0" prefWidth="208.0">
+         <tooltip>
+            <Tooltip text="Ramo de atividadade" />
+         </tooltip></TextField>
+      <TextArea fx:id="txtObservacoes" layoutX="219.0" layoutY="402.0" prefHeight="111.0" prefWidth="392.0" wrapText="true">
+         <tooltip>
+            <Tooltip text="Observações" />
+         </tooltip></TextArea>
       <Button fx:id="btnCadastrar" layoutX="831.0" layoutY="749.0" mnemonicParsing="false" style="-fx-background-color: #32CD32;" text="SALVAR" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="110.0">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -69,12 +94,16 @@
             <ColorAdjust />
          </effect>
       </Button>
+      <Button fx:id="btnCancelar" layoutX="913.0" layoutY="749.0" mnemonicParsing="false" style="-fx-background-color: #FA8072;" text="CANCELAR" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="25.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
       <Label fx:id="lblEnderecoCompleto" layoutX="252.0" layoutY="253.0" prefHeight="27.0" prefWidth="538.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtFrete" layoutX="219.0" layoutY="327.0" prefHeight="25.0" prefWidth="147.0" />
       <Label layoutX="29.0" layoutY="327.0" text="Frete Padrão">
          <font>
             <Font size="18.0" />
@@ -85,12 +114,10 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextArea fx:id="txtObservacoes" layoutX="219.0" layoutY="402.0" prefHeight="111.0" prefWidth="392.0" wrapText="true" />
       <Label layoutX="29.0" layoutY="361.0" text="Ramo">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="txtRamo" layoutX="219.0" layoutY="361.0" prefHeight="25.0" prefWidth="208.0" />
    </children>
 </AnchorPane>

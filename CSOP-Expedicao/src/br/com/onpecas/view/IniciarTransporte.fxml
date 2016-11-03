@@ -19,8 +19,14 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cboNumLote" layoutX="309.0" layoutY="28.0" prefHeight="25.0" prefWidth="294.0" AnchorPane.leftAnchor="309.0" AnchorPane.topAnchor="28.0" />
-      <ComboBox fx:id="cboNomeTransp" layoutX="309.0" layoutY="88.0" prefHeight="25.0" prefWidth="294.0" AnchorPane.leftAnchor="309.0" AnchorPane.topAnchor="88.0" />
+      <ComboBox fx:id="cboNumLote" layoutX="309.0" layoutY="28.0" prefHeight="25.0" prefWidth="294.0" AnchorPane.leftAnchor="309.0" AnchorPane.topAnchor="28.0">
+         <tooltip>
+            <Tooltip text="Numero do lote" />
+         </tooltip></ComboBox>
+      <ComboBox fx:id="cboNomeTransp" layoutX="309.0" layoutY="88.0" prefHeight="25.0" prefWidth="294.0" AnchorPane.leftAnchor="309.0" AnchorPane.topAnchor="88.0">
+         <tooltip>
+            <Tooltip text="Nome da transportadora" />
+         </tooltip></ComboBox>
       <Label layoutX="41.0" layoutY="208.0" text="Data Prevista de Chegada:" AnchorPane.leftAnchor="41.0" AnchorPane.topAnchor="208.0">
          <font>
             <Font size="20.0" />
@@ -31,14 +37,23 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <DatePicker fx:id="dtpDataPrevSaida" layoutX="309.0" layoutY="151.0" prefHeight="25.0" prefWidth="238.0" AnchorPane.leftAnchor="309.0" AnchorPane.topAnchor="151.0" />
-      <DatePicker fx:id="dtpDataPrevChegada" layoutX="309.0" layoutY="210.0" prefHeight="25.0" prefWidth="238.0" AnchorPane.leftAnchor="309.0" AnchorPane.topAnchor="210.0" />
+      <DatePicker fx:id="dtpDataPrevSaida" layoutX="309.0" layoutY="151.0" prefHeight="25.0" prefWidth="238.0" AnchorPane.leftAnchor="309.0" AnchorPane.topAnchor="151.0">
+         <tooltip>
+            <Tooltip text="Data prevista para saida dos itens" />
+         </tooltip></DatePicker>
+      <DatePicker fx:id="dtpDataPrevChegada" layoutX="309.0" layoutY="210.0" prefHeight="25.0" prefWidth="238.0" AnchorPane.leftAnchor="309.0" AnchorPane.topAnchor="210.0">
+         <tooltip>
+            <Tooltip text="Data prevista para chegada dos itens" />
+         </tooltip></DatePicker>
       <Label layoutX="42.0" layoutY="263.0" text="Valor do Frete:" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="263.0">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="txtValorFrete" layoutX="309.0" layoutY="266.0" prefHeight="25.0" prefWidth="194.0" AnchorPane.leftAnchor="309.0" AnchorPane.topAnchor="266.0" />
+      <TextField fx:id="txtValorFrete" layoutX="309.0" layoutY="266.0" prefHeight="25.0" prefWidth="194.0" AnchorPane.leftAnchor="309.0" AnchorPane.topAnchor="266.0">
+         <tooltip>
+            <Tooltip text="Valor do frete" />
+         </tooltip></TextField>
       <Button fx:id="btnIniciar" layoutX="611.0" layoutY="367.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #32CD32;" text="INICIAR" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="14.0">
          <cursor>
             <Cursor fx:constant="HAND" />
