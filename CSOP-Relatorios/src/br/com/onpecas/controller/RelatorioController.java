@@ -5,8 +5,6 @@ import java.util.*;
 
 import br.com.onpecas.helper.*;
 import br.com.onpecas.model.*;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,7 +13,6 @@ import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
-import javafx.util.Callback;
 
 public class RelatorioController implements Initializable{
 
@@ -28,7 +25,7 @@ public class RelatorioController implements Initializable{
 	@FXML LineChart<String, String> lineChart;
 	@FXML BarChart<String, String> barChart;
 
-	@FXML TableView<HashMap<Integer, String>> table;
+	@FXML TableView<Relatorio> table;
 
 	@FXML DatePicker datePickerInicial, datePickerFinal;
 
@@ -41,7 +38,7 @@ public class RelatorioController implements Initializable{
 
 	@FXML TextField txtNomeEntidade;
 
-	List<HashMap<Integer,String>> lstHash;
+	List<Relatorio> lstRelatorio;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -144,9 +141,9 @@ public class RelatorioController implements Initializable{
 						Alerta.showError("Erro ao filtrar", "Preencha a Data Inicial (De) e a Data Final (Até)");
 					}else{
 
-						List<HashMap<Integer,String>> lstHash = Relatorio.FiltarFaturamento(periodo, true, dataInicial, dataFinal);
+						List<Relatorio> lstRelatorio = Relatorio.FiltarFaturamento(periodo, true, dataInicial, dataFinal);
 
-						if(lstHash.size()<=0){
+						if(lstRelatorio.size()<=0){
 							Alerta.showError("Erro ao gerar", "Não há registro neste período");
 						}else{
 
@@ -163,22 +160,21 @@ public class RelatorioController implements Initializable{
 
 							lucroBar.setName(cboTipoRelatorio.getValue().toString()+" - "+ cboPeriodoRelatório.getValue().toString());
 							lucroLine.setName(cboTipoRelatorio.getValue().toString()+" - "+ cboPeriodoRelatório.getValue().toString());
-							for(int i = 0; i<lstHash.size(); i++ ){
 
-								double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
-								lucroLine.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
-								lucroBar.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+							for(Relatorio item:lstRelatorio){
+								double valorfaturado = Double.parseDouble(item.getValorQuantidade());
+								lucroBar.getData().add(new XYChart.Data(item.getTituloData(), valorfaturado));
 							}
 
 							barChart.getData().addAll(lucroBar);
 							lineChart.getData().addAll(lucroLine);
 
-							this.lstHash = lstHash;
+							this.lstRelatorio = lstRelatorio;
 						}
 					}
 				}
 			}else{
-				List<HashMap<Integer,String>> lstHash = Relatorio.FiltarFaturamento(periodo, false, null, null);
+				List<Relatorio> lstRelatorio = Relatorio.FiltarFaturamento(periodo, false, null, null);
 
 				tabTabela.setDisable(false);
 				tabLinha.setDisable(false);
@@ -193,16 +189,17 @@ public class RelatorioController implements Initializable{
 
 				lucroBar.setName(cboTipoRelatorio.getValue().toString()+" - "+ cboPeriodoRelatório.getValue().toString());
 				lucroLine.setName(cboTipoRelatorio.getValue().toString()+" - "+ cboPeriodoRelatório.getValue().toString());
-				for(int i = 0; i<lstHash.size(); i++ ){
 
-					double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
-					lucroLine.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
-					lucroBar.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
+				for(Relatorio item:lstRelatorio){
+					double valorfaturado = Double.parseDouble(item.getValorQuantidade());
+					lucroBar.getData().add(new XYChart.Data(item.getTituloData(), valorfaturado));
+					lucroLine.getData().add(new XYChart.Data(item.getTituloData(), valorfaturado));
 				}
 
 				barChart.getData().addAll(lucroBar);
 				lineChart.getData().addAll(lucroLine);
-				this.lstHash = lstHash;
+				this.lstRelatorio = lstRelatorio;
+				GerarTable(1, lstRelatorio);
 			}
 		}
 	}
@@ -215,23 +212,32 @@ public class RelatorioController implements Initializable{
 		btnExportarExcel.setDisable(false);
 		tabPane.getSelectionModel().select(tabBarra);
 
-		List<HashMap<Integer,String>> lstHash = Relatorio.FiltrarPedido();
+		//List<HashMap<Integer,String>> lstHash = Relatorio.FiltrarPedido();
 
+		List<Relatorio> lstRelatorio = Relatorio.FiltrarPedido();
 		barChart.getData().clear();
 
 		XYChart.Series lucroBar = new XYChart.Series();
 
 		lucroBar.setName("Quantidade de Pedido por Status");
-		for(int i = 0; i<lstHash.size(); i++ ){
+
+		for(Relatorio item:lstRelatorio){
+
+			int quantidade =Integer.parseInt(item.getValorQuantidade());
+			lucroBar.getData().add(new XYChart.Data(item.getTituloData(), quantidade));
+		}
+
+		/*for(int i = 0; i<lstRelatorio.size(); i++ ){
 
 			String status =lstHash.get(i).get(1).toString();
 			int quantidade =Integer.parseInt(lstHash.get(i).get(2).toString());
 
 			lucroBar.getData().add(new XYChart.Data(status, quantidade));
-		}
-		GerarTable(2);
+		}*/
+		GerarTable(2, lstRelatorio);
 		barChart.getData().addAll(lucroBar);
-		this.lstHash = lstHash;
+		//this.lstHash = lstHash;
+		this.lstRelatorio = lstRelatorio;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -272,17 +278,17 @@ public class RelatorioController implements Initializable{
 
 	public void ExportaExcel(){
 		String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();
-		if(lstHash!=null){
+		if(lstRelatorio!=null){
 			if(sltComboTipo != null){
 				if(sltComboTipo.equals("Faturamento")){
-					if(this.lstHash != null){
-						CreateExlFile.Gerar(lstHash, "Faturamento", cboPeriodoRelatório.getValue());
+					if(this.lstRelatorio != null){
+						CreateExlFile.Gerar(lstRelatorio, "Faturamento", cboPeriodoRelatório.getValue());
 					}else{
 						Alerta.showError("Erro ao exportar", "Nenhum relatório realizado");
 					}
 				}else if(sltComboTipo.equals("Pedido")){
-					if(this.lstHash != null){
-						CreateExlFile.Gerar(lstHash, "Pedido", cboPeriodoRelatório.getValue());
+					if(this.lstRelatorio != null){
+						CreateExlFile.Gerar(lstRelatorio, "Pedido", cboPeriodoRelatório.getValue());
 					}else{
 						Alerta.showError("Erro ao exportar", "Nenhum relatório realizado");
 					}
@@ -297,130 +303,40 @@ public class RelatorioController implements Initializable{
 	}
 
 	@SuppressWarnings("unchecked")
-	public void GerarTable(int tipo){
+	public void GerarTable(int tipo, List<Relatorio> lstRelatorio){
 
 		if(tipo == 1){
-
-		}else if(tipo == 2){
-			TableColumn<HashMap<Integer, String>, String> coluna1 = new TableColumn<>("Status");
-			TableColumn<HashMap<Integer, String>, String> coluna2 = new TableColumn<>("Valores");
+			TableColumn<Relatorio, String> coluna1 = new TableColumn<>("Data Referencia");
+			TableColumn<Relatorio, String> coluna2 = new TableColumn<>("Valor Total");
 
 			coluna1.setResizable(true);
 			coluna2.setResizable(true);
-			coluna1.setCellValueFactory(new PropertyValueFactory<HashMap<Integer, String>, String>("1"));
-			coluna1.setCellValueFactory(new PropertyValueFactory<HashMap<Integer, String>, String>("2"));
+			coluna1.setCellValueFactory(new PropertyValueFactory<Relatorio, String>("tituloData"));
+			coluna2.setCellValueFactory(new PropertyValueFactory<Relatorio, String>("valorQuantidade"));
 
 			table.getColumns().addAll(coluna1, coluna2);
+
+			ObservableList<Relatorio> data = FXCollections.observableList(lstRelatorio);
+
+			table.setItems(data);
+		}else if(tipo == 2){
+			TableColumn<Relatorio, String> coluna1 = new TableColumn<>("Status");
+			TableColumn<Relatorio, String> coluna2 = new TableColumn<>("Quantidade");
+
+			coluna1.setResizable(true);
+			coluna2.setResizable(true);
+			coluna1.setCellValueFactory(new PropertyValueFactory<Relatorio, String>("tituloData"));
+			coluna2.setCellValueFactory(new PropertyValueFactory<Relatorio, String>("valorQuantidade"));
+
+			table.getColumns().addAll(coluna1, coluna2);
+
+			ObservableList<Relatorio> data = FXCollections.observableList(lstRelatorio);
+
+			table.setItems(data);
 
 		}else if(tipo == 3){
 
 		}
 
-	}
-
-	// Método para Filtrar os relatórios e preecher o gráfico de linha
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void FiltrarDoido(){
-		String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();
-		if(sltComboTipo != null){
-			if(sltComboTipo.equals("Faturamento")){
-				String sltComboPeriodo = cboPeriodoRelatório.getSelectionModel().getSelectedItem();
-				if(sltComboPeriodo != null){
-					if(sltComboPeriodo.equals("Anual")){
-						lineChart.getData().clear();
-						List<HashMap<Integer,String>> lstHash = Relatorio.ListarFaturamento("Anual");
-
-						XYChart.Series lucro = new XYChart.Series();
-						lucro.setName("Faturamento anual");
-						for(int i = 0; i<lstHash.size(); i++ ){
-
-							double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
-							lucro.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
-						}
-						lineChart.getData().addAll(lucro);
-
-					}else if(sltComboPeriodo.equals("Mensal")){
-						lineChart.getData().clear();
-						List<HashMap<Integer,String>> lstHash = Relatorio.ListarFaturamento("Mensal");
-
-						XYChart.Series lucro = new XYChart.Series();
-						lucro.setName("Faturamento Mensal");
-						for(int i = 0; i<lstHash.size(); i++ ){
-
-							double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
-							lucro.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
-						}
-						lineChart.getData().addAll(lucro);
-
-					}else if(sltComboPeriodo.equals("Semanal")){
-						lineChart.getData().clear();
-						List<HashMap<Integer,String>> lstHash = Relatorio.ListarFaturamento("Semanal");
-
-						XYChart.Series lucro = new XYChart.Series();
-						lucro.setName("Faturamento Semanal");
-						for(int i = 0; i<lstHash.size(); i++ ){
-
-							double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
-							lucro.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
-						}
-						lineChart.getData().addAll(lucro);
-					}
-				}else{
-					Alerta.showError("Erro ao filtrar", "Selecione um Tipo Período");
-				}
-
-			}else if(sltComboTipo.equals("Venda")){
-				/*Relatório de vendas*/
-
-			}else if(sltComboTipo.equals("Pedido")){
-				/*Relatório de Pedidos*/
-				String sltComboPeriodo = cboPeriodoRelatório.getSelectionModel().getSelectedItem();
-				if(sltComboPeriodo != null){
-					if(sltComboPeriodo.equals("Anual")){
-						lineChart.getData().clear();
-						List<HashMap<Integer,String>> lstHash = Relatorio.ListarPedido("Anual");
-
-						XYChart.Series lucro = new XYChart.Series();
-						lucro.setName("Pedidos anual");
-						for(int i = 0; i<lstHash.size(); i++ ){
-
-							double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
-							lucro.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
-						}
-						lineChart.getData().addAll(lucro);
-
-					}else if(sltComboPeriodo.equals("Mensal")){
-						lineChart.getData().clear();
-						List<HashMap<Integer,String>> lstHash = Relatorio.ListarPedido("Mensal");
-
-						XYChart.Series lucro = new XYChart.Series();
-						lucro.setName("Pedidos Mensal");
-						for(int i = 0; i<lstHash.size(); i++ ){
-
-							double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
-							lucro.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
-						}
-						lineChart.getData().addAll(lucro);
-
-					}else if(sltComboPeriodo.equals("Semanal")){
-						lineChart.getData().clear();
-						List<HashMap<Integer,String>> lstHash = Relatorio.ListarPedido("Semanal");
-
-						XYChart.Series lucro = new XYChart.Series();
-						lucro.setName("Pedidos Semanal");
-						for(int i = 0; i<lstHash.size(); i++ ){
-
-							double valorfaturado = Double.parseDouble(lstHash.get(i).get(2));
-							lucro.getData().add(new XYChart.Data(lstHash.get(i).get(1), valorfaturado));
-						}
-						lineChart.getData().addAll(lucro);
-					}
-				}else{
-					Alerta.showError("Erro ao filtrar", "Selecione um Tipo Período");
-				}
-			}
-		}else{
-			Alerta.showError("Erro ao gerar relatório", "Selecione o Tipo de Relatório que será emitido");
-		}
 	}
 }

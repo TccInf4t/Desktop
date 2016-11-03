@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javafx.scene.control.TableColumn.CellDataFeatures"/>
 <fullyQualifiedTypeName name="javafx.scene.chart.LineChart"/>
 <fullyQualifiedTypeName name="javafx.scene.layout.AnchorPane"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="br.com.onpecas.model.Relatorio"/>
 <fullyQualifiedTypeName name="javafx.beans.value.ObservableValue"/>
 <fullyQualifiedTypeName name="javafx.beans.value.ChangeListener"/>
 <fullyQualifiedTypeName name="javafx.event.ActionEvent"/>
@@ -34,7 +32,6 @@
 <fullyQualifiedTypeName name="br.com.onpecas.model.Status"/>
 <fullyQualifiedTypeName name="org.w3c.dom.ls.LSInput"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="br.com.onpecas.view.CallScene"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Pedido"/>
 <fullyQualifiedTypeName name="javafx.scene.control.ComboBox"/>
@@ -60,4 +57,7 @@
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TableColumn"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TabPane"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.lang.Readable"/>
+<fullyQualifiedTypeName name="br.com.onpecas.model.Relatorio"/>
 </qualifiedTypeNameHistroy>

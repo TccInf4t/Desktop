@@ -1,18 +1,13 @@
 package br.com.onpecas.helper;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-
+import java.io.*;
+import java.util.*;
 import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import br.com.onpecas.model.Relatorio;
 
 public class CreateExlFile {
 	@SuppressWarnings({ "deprecation", "resource" })
-	public static void Gerar(List<HashMap<Integer, String>> lstHash, String tipo, String periodoRelatorio){
+	public static void Gerar(List<Relatorio> lstRelatorio, String tipo, String periodoRelatorio){
 	 try{
 		 Date data = new Date();
 		 String dataAtual = String.format("%s%s%s%s%s%s", data.getDay(), data.getMonth(), data.getYear(),
@@ -37,11 +32,14 @@ public class CreateExlFile {
 			 // definindo seus valores
 			 // por exemplo protocolo.getProtocolo();
 
-			 for(int i =0; i<lstHash.size(); i++){
-				 HSSFRow row=   sheet.createRow((short)i+2);
-				 row.createCell(0).setCellValue(lstHash.get(i).get(1));
-				 row.createCell(1).setCellValue(lstHash.get(i).get(2));
+			 int cont = 0;
+			 for(Relatorio item : lstRelatorio){
+				 HSSFRow row=   sheet.createRow((short)cont+2);
+				 row.createCell(0).setCellValue(item.getTituloData());
+				 row.createCell(1).setCellValue(item.getValorQuantidade());
+				 cont++;
 			 }
+
 		 }else if(tipo.equals("Pedido")){
 			 HSSFRow rowDetalhe = sheet.createRow((short)0);
 			 rowDetalhe.createCell(0).setCellValue("Tipo: ");
@@ -55,10 +53,12 @@ public class CreateExlFile {
 			 // definindo seus valores
 			 // por exemplo protocolo.getProtocolo();
 
-			 for(int i =0; i<lstHash.size(); i++){
-				 HSSFRow row=   sheet.createRow((short)i+2);
-				 row.createCell(0).setCellValue(lstHash.get(i).get(1));
-				 row.createCell(1).setCellValue(lstHash.get(i).get(2));
+			 int cont = 0;
+			 for(Relatorio item : lstRelatorio){
+				 HSSFRow row=   sheet.createRow((short)cont+2);
+				 row.createCell(0).setCellValue(item.getTituloData());
+				 row.createCell(1).setCellValue(item.getValorQuantidade());
+				 cont++;
 			 }
 		 }else if(tipo.equals("Venda")){
 			// criando as linhas
@@ -75,10 +75,12 @@ public class CreateExlFile {
 			 // por exemplo protocolo.getProtocolo();
 
 
-			 for(int i =0; i<lstHash.size(); i++){
-				 HSSFRow row=   sheet.createRow((short)i+2);
-				 row.createCell(0).setCellValue(lstHash.get(i).get(1));
-				 row.createCell(1).setCellValue(lstHash.get(i).get(2));
+			 int cont = 0;
+			 for(Relatorio item : lstRelatorio){
+				 HSSFRow row=   sheet.createRow((short)cont+2);
+				 row.createCell(0).setCellValue(item.getTituloData());
+				 row.createCell(1).setCellValue(item.getValorQuantidade());
+				 cont++;
 			 }
 		 }
 
