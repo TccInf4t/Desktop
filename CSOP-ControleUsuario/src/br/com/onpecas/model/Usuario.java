@@ -14,11 +14,7 @@ public class Usuario {
 
 	private int oid_usuario;
 	private Grupo grupo;
-	private String nomeCompleto;
-	private String login;
-	private String senha;
-	private String email;
-	private String nomeGrupo;
+	private String nomeCompleto, login, senha, email, nomeGrupo;
 
 	public int getOid_usuario() {
 		return oid_usuario;
@@ -132,7 +128,6 @@ public class Usuario {
 			return null;
 		}
 	}
-	public static void SelectSearch(Usuario usuario){}
 
 	//Metodo usado para excluir um grupo no banco de dados
 	public static void Delete(Usuario usuario){
@@ -187,245 +182,86 @@ public class Usuario {
 	}
 
 	//Método utilizado para filtrar os usuarios que aparecerão na table
-	public static List<Usuario> FiltrarGrupo(int grupo, int temnomuser, int nonome, int nologin, String nomerecebido, int temgrupo){
+	public static List<Usuario> FiltrarGrupo(boolean temNome, boolean temGrupo,
+			boolean taNome, boolean taLogin, int grupo, String nomerecebido){
+
 		Connection con = MySqlConnect.ConectarDb();
+		List<Usuario> lstUsuario = new ArrayList<>();
+		String sql ="";
 
-		if(temnomuser == 1){
-			if(temgrupo == 1){
-				if(nonome == 1 && nologin == 1){
-					List<Usuario> lstUsuario = new ArrayList<>();
-					String sql = "select u.*, g.* from usuariosistema as u "
+		if(temNome){
+			if(temGrupo){
+				if(taNome && taLogin){
+					// Tem Nome, grupo, ta no login, ta no nome completo
+					
+					sql = "select u.*, g.* from usuariosistema as u "
 							+ "inner join grupousuario as g on (u.oid_grupo = g.oid_grupo) "
-							+ "where u.oid_grupo = "+grupo+" and u.nomecompleto like '%"+nomerecebido+"%' or u.login like '%"+nomerecebido+"%';";
-					try {
-
-						ResultSet rs = con.createStatement().executeQuery(sql);
-
-						while(rs.next()){
-
-							Usuario usuario = new Usuario();
-							Grupo grupoN = new Grupo();
-
-							grupoN.setOid_grupo(rs.getInt("oid_grupo"));
-							grupoN.setNome(rs.getString("nome"));
-							grupoN.setDescricao(rs.getString("descricao"));
-
-							usuario.setGrupo(grupoN);
-
-							usuario.setOid_usuario(rs.getInt("oid_usuario"));
-							usuario.setNomeCompleto(rs.getString("nomecompleto"));
-							usuario.setEmail(rs.getString("email"));
-							usuario.setLogin(rs.getString("login"));
-							usuario.setSenha(rs.getString("senha"));
-
-							lstUsuario.add(usuario);
-						}
-
-						con.close();
-						return lstUsuario;
-
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						return null;
-					}
-				}else if(nonome == 1){
-					/* TEM NOME DE USUARIO, GRUPO SELECIONADO E NOME */
-					List<Usuario> lstUsuario = new ArrayList<>();
-					String sql = "select u.*, g.* from usuariosistema as u "
+							+ "where u.oid_grupo = "+grupo+" and (u.nomecompleto like '%"+nomerecebido+"%' or u.login like '%"+nomerecebido+"%');";
+				}else if(taNome){
+					// Tem Nome, grupo, ta no nome completo
+					
+					sql = "select u.*, g.* from usuariosistema as u "
 							+ "inner join grupousuario as g on (u.oid_grupo = g.oid_grupo) "
 							+ "where u.oid_grupo = "+grupo+" and u.nomecompleto like '%"+nomerecebido+"%';";
-					try {
-
-						ResultSet rs = con.createStatement().executeQuery(sql);
-
-						while(rs.next()){
-
-							Usuario usuario = new Usuario();
-							Grupo grupoN = new Grupo();
-
-							grupoN.setOid_grupo(rs.getInt("oid_grupo"));
-							grupoN.setNome(rs.getString("nome"));
-							grupoN.setDescricao(rs.getString("descricao"));
-
-							usuario.setGrupo(grupoN);
-
-							usuario.setOid_usuario(rs.getInt("oid_usuario"));
-							usuario.setNomeCompleto(rs.getString("nomecompleto"));
-							usuario.setEmail(rs.getString("email"));
-							usuario.setLogin(rs.getString("login"));
-							usuario.setSenha(rs.getString("senha"));
-
-							lstUsuario.add(usuario);
-						}
-
-						con.close();
-						return lstUsuario;
-
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						return null;
-					}
-
-				}else if(nologin == 1){
-					/* TEM NOME DE USUARIO, GRUPO SELECIONADO E LOGIN */
-
-					List<Usuario> lstUsuario = new ArrayList<>();
-					String sql = "select u.*, g.* from usuariosistema as u "
+				}else if(taLogin){
+					
+					// Tem Nome, grupo, ta no login
+					sql = "select u.*, g.* from usuariosistema as u "
 							+ "inner join grupousuario as g on (u.oid_grupo = g.oid_grupo) "
 							+ "where u.oid_grupo = "+grupo+" and u.login like '%"+nomerecebido+"%';";
-					try {
-
-						ResultSet rs = con.createStatement().executeQuery(sql);
-
-						while(rs.next()){
-
-							Usuario usuario = new Usuario();
-							Grupo grupoN = new Grupo();
-
-							grupoN.setOid_grupo(rs.getInt("oid_grupo"));
-							grupoN.setNome(rs.getString("nome"));
-							grupoN.setDescricao(rs.getString("descricao"));
-
-							usuario.setGrupo(grupoN);
-
-							usuario.setOid_usuario(rs.getInt("oid_usuario"));
-							usuario.setNomeCompleto(rs.getString("nomecompleto"));
-							usuario.setEmail(rs.getString("email"));
-							usuario.setLogin(rs.getString("login"));
-							usuario.setSenha(rs.getString("senha"));
-
-							lstUsuario.add(usuario);
-						}
-
-						con.close();
-						return lstUsuario;
-
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						return null;
-					}
 				}else{
-					/* TEM NOME DE USUARIO E GRUPO SELECIONADO */
-					List<Usuario> lstUsuario = new ArrayList<>();
-					String sql = "select u.*, g.* from usuariosistema as u "
+					// Tem Nome, grupo
+					
+					
+					sql = "select u.*, g.* from usuariosistema as u "
 							+ "inner join grupousuario as g on (u.oid_grupo = g.oid_grupo) "
-							+ "where u.oid_grupo = "+grupo+" and u.nomecompleto like '%"+nomerecebido+"%' or u.login like '%"+nomerecebido+"%';";
-					try {
-
-						ResultSet rs = con.createStatement().executeQuery(sql);
-
-						while(rs.next()){
-
-							Usuario usuario = new Usuario();
-							Grupo grupoN = new Grupo();
-
-							grupoN.setOid_grupo(rs.getInt("oid_grupo"));
-							grupoN.setNome(rs.getString("nome"));
-							grupoN.setDescricao(rs.getString("descricao"));
-
-							usuario.setGrupo(grupoN);
-
-							usuario.setOid_usuario(rs.getInt("oid_usuario"));
-							usuario.setNomeCompleto(rs.getString("nomecompleto"));
-							usuario.setEmail(rs.getString("email"));
-							usuario.setLogin(rs.getString("login"));
-							usuario.setSenha(rs.getString("senha"));
-
-							lstUsuario.add(usuario);
-						}
-
-						con.close();
-						return lstUsuario;
-
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						return null;
-					}
+							+ "where u.oid_grupo = "+grupo+" and (u.nomecompleto like '%"+nomerecebido+"%' or u.login like '%"+nomerecebido+"%');";
+					System.out.println(sql);
 				}
 			}else{
-				/* TEM NOME DE USUARIO SELECIONADO */
-				List<Usuario> lstUsuario = new ArrayList<>();
-				String sql = "select u.*, g.* from usuariosistema as u "
+				// Tem Nome
+				sql = "select u.*, g.* from usuariosistema as u "
 						+ "inner join grupousuario as g on (u.oid_grupo = g.oid_grupo) "
-						+ "where u.nomecompleto like '%"+nomerecebido+"%' or u.login like '%"+nomerecebido+"%';";
-				try {
-
-					ResultSet rs = con.createStatement().executeQuery(sql);
-
-					while(rs.next()){
-
-						Usuario usuario = new Usuario();
-						Grupo grupoN = new Grupo();
-
-						grupoN.setOid_grupo(rs.getInt("oid_grupo"));
-						grupoN.setNome(rs.getString("nome"));
-						grupoN.setDescricao(rs.getString("descricao"));
-
-						usuario.setGrupo(grupoN);
-
-						usuario.setOid_usuario(rs.getInt("oid_usuario"));
-						usuario.setNomeCompleto(rs.getString("nomecompleto"));
-						usuario.setEmail(rs.getString("email"));
-						usuario.setLogin(rs.getString("login"));
-						usuario.setSenha(rs.getString("senha"));
-
-						lstUsuario.add(usuario);
-					}
-
-					con.close();
-					return lstUsuario;
-
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					return null;
-				}
+						+ "where  u.nomecompleto like '%"+nomerecebido+"%' or u.login like '%"+nomerecebido+"%';";
 			}
-		} else if(temgrupo==1){
-
-			/* TEM GRUPO SELECIONADO, NOME E LOGIN */
-
-			List<Usuario> lstUsuario = new ArrayList<>();
-			String sql = "select u.*, g.* from usuariosistema as u "
+		}else if(temGrupo){
+			// Tem grupo
+			sql = "select u.*, g.* from usuariosistema as u "
 					+ "inner join grupousuario as g on (u.oid_grupo = g.oid_grupo) "
 					+ "where u.oid_grupo = "+grupo+" ;";
-			try {
-
-				ResultSet rs = con.createStatement().executeQuery(sql);
-
-				while(rs.next()){
-
-					Usuario usuario = new Usuario();
-					Grupo grupoN = new Grupo();
-
-					grupoN.setOid_grupo(rs.getInt("oid_grupo"));
-					grupoN.setNome(rs.getString("nome"));
-					grupoN.setDescricao(rs.getString("descricao"));
-
-					usuario.setGrupo(grupoN);
-
-					usuario.setOid_usuario(rs.getInt("oid_usuario"));
-					usuario.setNomeCompleto(rs.getString("nomecompleto"));
-					usuario.setEmail(rs.getString("email"));
-					usuario.setLogin(rs.getString("login"));
-					usuario.setSenha(rs.getString("senha"));
-
-					lstUsuario.add(usuario);
-				}
-
-				con.close();
-				return lstUsuario;
-
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return null;
-			}
 		}
-		return null;
+
+		try {
+
+			ResultSet rs = con.createStatement().executeQuery(sql);
+
+			while(rs.next()){
+
+				Usuario usuario = new Usuario();
+				Grupo grupoN = new Grupo();
+
+				grupoN.setOid_grupo(rs.getInt("oid_grupo"));
+				grupoN.setNome(rs.getString("nome"));
+				grupoN.setDescricao(rs.getString("descricao"));
+
+				usuario.setGrupo(grupoN);
+
+				usuario.setOid_usuario(rs.getInt("oid_usuario"));
+				usuario.setNomeCompleto(rs.getString("nomecompleto"));
+				usuario.setEmail(rs.getString("email"));
+				usuario.setLogin(rs.getString("login"));
+				usuario.setSenha(rs.getString("senha"));
+
+				lstUsuario.add(usuario);
+			}
+
+			con.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return lstUsuario;
 	}
 }

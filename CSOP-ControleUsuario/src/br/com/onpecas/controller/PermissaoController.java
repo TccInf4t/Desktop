@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class PermissaoController implements Initializable {
 
-	@FXML CheckBox CMSAcessar;
+	@FXML CheckBox CMSAcessar, SGEAcessar, ExpedicaoAcessar, RelatoriosAcessar;
 	@FXML Button btnSalvar,btnCancelar;
 	@FXML Label lbGrupo;
 
@@ -32,7 +32,6 @@ public class PermissaoController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-
 		AtribuirCheckbox(permissao);
 
 		scene = new CallScene();
@@ -54,61 +53,54 @@ public class PermissaoController implements Initializable {
 	public void VerificarExistencia(Grupo grupo){
 
 		if(Permissao.Buscar(grupo)){
-
 			permissao=Permissao.Select(grupo);
 			existe = true;
 
 		}else{
-
 			permissao = new Permissao();
 			existe=false;
 		}
 	}
 
 	public void AtribuirBotoes(){
-
 		btnSalvar.setOnAction(l-> SalvarPermissao());
 		btnCancelar.setOnAction(l-> VoltarTela());
 
 	}
 
 	private void VoltarTela() {
-
 		Helper.AUXGROUP.setValue(1);
 		myStage.close();
 
 	}
 
-
 	//caso a variavel 'existe' seja false, é inserido um novo registro no banco,caso contrário, é apenas atualizado
 	private void SalvarPermissao() {
-
 		SetarPermissoes();
 
 		if(existe){
-
 			Permissao.Update(permissao);
 
 		}else{
-
 			Permissao.Insert(permissao, grupo.getOid_grupo());
 
 		}
-
 		VoltarTela();
 
 	}
 
 	public void SetarPermissoes(){
-
 		permissao.setAcs_cms(CMSAcessar.isSelected());
-
+		permissao.setAcs_expedicao(ExpedicaoAcessar.isSelected());
+		permissao.setAcs_relatorios(RelatoriosAcessar.isSelected());
+		permissao.setAcs_sge(SGEAcessar.isSelected());
 	}
 
 	//Função que seta os valores para as checkboxs.
 	public void AtribuirCheckbox(Permissao permissao){
-
 		CMSAcessar.setSelected(permissao.getAcs_cms());
-
+		SGEAcessar.setSelected(permissao.getAcs_sge());
+		ExpedicaoAcessar.setSelected(permissao.getAcs_expedicao());
+		RelatoriosAcessar.setSelected(permissao.getAcs_relatorios());
 	}
 }

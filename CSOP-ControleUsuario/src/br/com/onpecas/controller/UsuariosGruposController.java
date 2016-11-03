@@ -18,6 +18,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 
 //classe de "controller" que associa o grupo e o usuário
 public class UsuariosGruposController implements Initializable{
@@ -50,6 +53,13 @@ public class UsuariosGruposController implements Initializable{
         AtribuirBotoes();
         AtualizarTblGroup();
         AtualizarTblUser();
+
+        cboGrupo.setOnKeyPressed(k-> {
+			KeyCombination  backspace = new KeyCodeCombination(KeyCode.BACK_SPACE);
+			if(backspace.match(k)){
+				cboGrupo.getSelectionModel().clearSelection();
+			}
+		});
 
         //Listener para atualizar os dados das table assim que o segundo scene se fecha
         //Antes de fechar o segundo Scene, o valor da variavel AUXGROUP é mudado, assim o listener irá detectar e atualizar as tables
@@ -158,10 +168,18 @@ public class UsuariosGruposController implements Initializable{
         btnUserEdit.setOnAction(l-> UpdateUser());
         btnUserDelete.setOnAction(l-> DeleteUser());
 
-        btnLimparFiltro.setOnAction(l-> AtualizarTblUser());
+        btnLimparFiltro.setOnAction(l-> LimparFiltro());
         btnFiltrar.setOnAction(l-> Filtrar());
     }
 
+    public void LimparFiltro(){
+    	cboGrupo.getSelectionModel().clearSelection();
+    	txtPesqUser.clear();
+    	radioLogin.setSelected(false);
+    	radioNomeCompleto.setSelected(false);
+    	AtualizarTblUser();
+    }
+    
     //Metodo que chama a tela de permissões passando o grupo que foi selecionado
     private void Permission() {
         Grupo grupo = tblGroup.getSelectionModel().getSelectedItem();
@@ -176,33 +194,38 @@ public class UsuariosGruposController implements Initializable{
     public void Filtrar(){
         if(!txtPesqUser.getText().isEmpty()){
             if(cboGrupo.getSelectionModel().getSelectedItem()!= null){
+            	int oid_grupo = cboGrupo.getSelectionModel().getSelectedItem().getOid_grupo();
                 if(radioNomeCompleto.isSelected() && radioLogin.isSelected()){
                     /* TEM NOME DE USUARIO, GRUPO SELECIONADO, NOME E LOGIN */
 
-                	AtualizarTblUserComFiltro(Usuario.FiltrarGrupo(cboGrupo.getSelectionModel().getSelectedItem().getOid_grupo(), 1, 1, 1, txtPesqUser.getText(), 1));
+                	AtualizarTblUserComFiltro(Usuario.FiltrarGrupo(true, true, true, true, oid_grupo, txtPesqUser.getText()));
 
                 }else if(radioNomeCompleto.isSelected()){
                     /* TEM NOME DE USUARIO, GRUPO SELECIONADO E NOME */
 
-                	AtualizarTblUserComFiltro(Usuario.FiltrarGrupo(cboGrupo.getSelectionModel().getSelectedItem().getOid_grupo(), 1, 1, 0, txtPesqUser.getText(), 1));
+                	AtualizarTblUserComFiltro(Usuario.FiltrarGrupo(true, true, true, false, oid_grupo, txtPesqUser.getText()));
 
                 }else if(radioLogin.isSelected()){
                     /* TEM NOME DE USUARIO, GRUPO SELECIONADO E LOGIN */
 
-                	AtualizarTblUserComFiltro(Usuario.FiltrarGrupo(cboGrupo.getSelectionModel().getSelectedItem().getOid_grupo(), 1, 0, 1, txtPesqUser.getText(), 1));
+                	AtualizarTblUserComFiltro(Usuario.FiltrarGrupo(true, true, false, true, oid_grupo, txtPesqUser.getText()));
 
                 }else{
                     /* TEM NOME DE USUARIO E GRUPO SELECIONADO */
-                	AtualizarTblUserComFiltro(Usuario.FiltrarGrupo(cboGrupo.getSelectionModel().getSelectedItem().getOid_grupo(), 1, 0, 0, txtPesqUser.getText(), 1));
+
+
+                	AtualizarTblUserComFiltro(Usuario.FiltrarGrupo(true, true, false, false, oid_grupo, txtPesqUser.getText()));
                 }
             }else{
                 /* TEM NOME DE USUARIO SELECIONADO */
 
-            	AtualizarTblUserComFiltro(Usuario.FiltrarGrupo(0, 1, 0, 0, txtPesqUser.getText(), 0));
+            	AtualizarTblUserComFiltro(Usuario.FiltrarGrupo(true, false, false, false, 0, txtPesqUser.getText()));
 
             }
         }else if(cboGrupo.getSelectionModel().getSelectedItem()!= null){
-        	AtualizarTblUserComFiltro(Usuario.FiltrarGrupo(cboGrupo.getSelectionModel().getSelectedItem().getOid_grupo(), 0, 0, 0, "", 1));
+        	/* TEM GRUPO SELECIONADO */
+        	int oid_grupo = cboGrupo.getSelectionModel().getSelectedItem().getOid_grupo();
+        	AtualizarTblUserComFiltro(Usuario.FiltrarGrupo(false, true, false, false, oid_grupo, null));
         }else {
             Alerta.showError("Erro", "Selecione o filtro desejado");
         }
@@ -229,6 +252,7 @@ public class UsuariosGruposController implements Initializable{
 
         tblUser.setItems(data);
     }
+
     public void AtualizarTblUserComFiltro(List<Usuario> lstUsers){
         clnUserNome.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomeCompleto"));
         clnUserLogin.setCellValueFactory(new PropertyValueFactory<Usuario, String>("login"));

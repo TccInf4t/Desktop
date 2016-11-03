@@ -10,8 +10,27 @@ import br.com.onpecas.helper.MySqlConnect;
 public class Permissao {
 
 	private int Oid_permissao;
-	private boolean acs_cms;
+	private boolean acs_cms, acs_sge, acs_expedicao, acs_relatorios;
 
+
+	public boolean getAcs_sge() {
+		return acs_sge;
+	}
+	public void setAcs_sge(boolean acs_sge) {
+		this.acs_sge = acs_sge;
+	}
+	public boolean getAcs_expedicao() {
+		return acs_expedicao;
+	}
+	public void setAcs_expedicao(boolean acs_expedicao) {
+		this.acs_expedicao = acs_expedicao;
+	}
+	public boolean getAcs_relatorios() {
+		return acs_relatorios;
+	}
+	public void setAcs_relatorios(boolean acs_relatorios) {
+		this.acs_relatorios = acs_relatorios;
+	}
 	public int getOid_permissao() {
 		return Oid_permissao;
 	}
@@ -25,10 +44,10 @@ public class Permissao {
 		this.acs_cms = acs_cms;
 	}
 
-	public static void Insert(Permissao permissao,int oid_grupo){
+	public static void Insert(Permissao permissao, int oid_grupo){
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql ="insert into permissao (acs_cms) values(?);";
+		String sql ="insert into permissao (acs_cms, acs_expedicao, acs_sge, acs_relatorios) values(?, ?, ?, ?);";
 
 		String sql2="update grupousuario set oid_permissao = (select oid_permissao from permissao order by oid_permissao desc limit 1) where oid_grupo = ?;";
 
@@ -37,6 +56,9 @@ public class Permissao {
 		try {
 			parametros = con.prepareStatement(sql);
 			parametros.setBoolean(1, permissao.getAcs_cms());
+			parametros.setBoolean(2, permissao.getAcs_expedicao());
+			parametros.setBoolean(3, permissao.getAcs_sge());
+			parametros.setBoolean(4, permissao.getAcs_relatorios());
 
 			parametros.executeUpdate();
 
@@ -61,14 +83,17 @@ public class Permissao {
 	public static void Update(Permissao permissao){
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql ="update permissao set acs_cms = ? where oid_permissao = ?;";
+		String sql ="update permissao set acs_cms = ?, acs_expedicao=?, acs_sge=?, acs_relatorios=? where oid_permissao = ?;";
 
 		PreparedStatement parametros;
 
 		try {
 			parametros = con.prepareStatement(sql);
 			parametros.setBoolean(1, permissao.getAcs_cms());
-			parametros.setInt(2, permissao.getOid_permissao());
+			parametros.setBoolean(2, permissao.getAcs_expedicao());
+			parametros.setBoolean(3, permissao.getAcs_sge());
+			parametros.setBoolean(4, permissao.getAcs_relatorios());
+			parametros.setInt(5, permissao.getOid_permissao());
 
 			parametros.executeUpdate();
 			con.close();
@@ -120,6 +145,9 @@ public class Permissao {
 
 			permissao.setOid_permissao(rs.getInt("oid_permissao"));
 			permissao.setAcs_cms(rs.getBoolean("acs_cms"));
+			permissao.setAcs_expedicao(rs.getBoolean("acs_expedicao"));
+			permissao.setAcs_relatorios(rs.getBoolean("acs_relatorios"));
+			permissao.setAcs_sge(rs.getBoolean("acs_sge"));
 
 			}
 			con.close();

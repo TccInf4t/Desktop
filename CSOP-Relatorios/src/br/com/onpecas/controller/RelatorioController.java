@@ -85,6 +85,9 @@ public class RelatorioController implements Initializable{
 
 		}else if(sltComboTipo.equals("Pedido")){
 			FiltrarPorPedido();
+			panePeriodo.setVisible(false);
+			paneVenda.setVisible(false);
+			tabLinha.setDisable(true);
 		}else if(sltComboTipo.equals("Venda")){
 			paneVenda.setVisible(true);
 			panePeriodo.setVisible(true);
@@ -215,10 +218,10 @@ public class RelatorioController implements Initializable{
 		//List<HashMap<Integer,String>> lstHash = Relatorio.FiltrarPedido();
 
 		List<Relatorio> lstRelatorio = Relatorio.FiltrarPedido();
+
 		barChart.getData().clear();
 
 		XYChart.Series lucroBar = new XYChart.Series();
-
 		lucroBar.setName("Quantidade de Pedido por Status");
 
 		for(Relatorio item:lstRelatorio){
@@ -304,7 +307,8 @@ public class RelatorioController implements Initializable{
 
 	@SuppressWarnings("unchecked")
 	public void GerarTable(int tipo, List<Relatorio> lstRelatorio){
-
+		table.getItems().clear();
+		table.getColumns().clear();
 		if(tipo == 1){
 			TableColumn<Relatorio, String> coluna1 = new TableColumn<>("Data Referencia");
 			TableColumn<Relatorio, String> coluna2 = new TableColumn<>("Valor Total");
