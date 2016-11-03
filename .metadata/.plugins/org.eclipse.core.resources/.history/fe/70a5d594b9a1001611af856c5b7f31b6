@@ -1,6 +1,5 @@
 package br.com.onpecas.helper;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,7 +18,7 @@ public class CreateExlFile {
 				 data.getHours(), data.getMinutes(), data.getSeconds());
 
 	     // local do arquivo
-		 String filename=System.getProperty("user.home")+"/Documents/OnPecaControl/planilhas/"+tipo+"-"+dataAtual+".xls" ;
+		 String filename="C:/OnPecaControl/planilhas/"+tipo+"-"+dataAtual+".xls" ;
 		 HSSFWorkbook workbook=new HSSFWorkbook();
 		 HSSFSheet sheet =  workbook.createSheet("Sheet");
 
@@ -42,6 +41,7 @@ public class CreateExlFile {
 				 row.createCell(0).setCellValue(lstHash.get(i).get(1));
 				 row.createCell(1).setCellValue(lstHash.get(i).get(2));
 			 }
+			Alerta.showInformation("Sucesso", "Planilha gerada com sucesso\n Você pode visualizá-la em C:/OnPecaControl/planilhas/");
 		 }else if(tipo.equals("Pedido")){
 			 HSSFRow rowDetalhe = sheet.createRow((short)0);
 			 rowDetalhe.createCell(0).setCellValue("Tipo: ");
@@ -60,6 +60,7 @@ public class CreateExlFile {
 				 row.createCell(0).setCellValue(lstHash.get(i).get(1));
 				 row.createCell(1).setCellValue(lstHash.get(i).get(2));
 			 }
+			Alerta.showInformation("Sucesso", "Planilha gerada com sucesso\n Você pode visualizá-la em C:/OnPecaControl/planilhas/");
 		 }else if(tipo.equals("Venda")){
 			// criando as linhas
 			 HSSFRow rowDetalhe = sheet.createRow((short)0);
@@ -80,17 +81,14 @@ public class CreateExlFile {
 				 row.createCell(0).setCellValue(lstHash.get(i).get(1));
 				 row.createCell(1).setCellValue(lstHash.get(i).get(2));
 			 }
+			Alerta.showInformation("Sucesso", "Planilha gerada com sucesso\n Você pode visualizá-la em C:/OnPecaControl/planilhas/");
 		 }
 
-		 File diretorio = new File(System.getProperty("user.home")+"/Documents/OnPecaControl/planilhas/");
-
-		 if(!diretorio.exists())
-			 diretorio.mkdirs();
 
 		 FileOutputStream fileOut =  new FileOutputStream(filename);
 		 workbook.write(fileOut);
 		 fileOut.close();
-		Alerta.showInformation("Sucesso", "Planilha gerada com sucesso\n Você pode visualizá-la em C:/OnPecaControl/planilhas/");
+
 	 } catch ( Exception ex ) {
 	     System.out.println(ex);
 		Alerta.showError("Erro ao exportar", ex.getMessage());

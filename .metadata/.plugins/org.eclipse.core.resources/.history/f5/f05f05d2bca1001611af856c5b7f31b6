@@ -82,11 +82,19 @@ public class CreateExlFile {
 			 }
 		 }
 
-		 File diretorio = new File(System.getProperty("user.home")+"/Documents/OnPecaControl/planilhas/");
+		 String username = System.getProperty("user.home").substring(9);
+		 System.out.println(username);
+		 File diretorio = new File(System.getProperty("user.home")+"\\OnPecaControl\\planilhas");
+		 
+		 if(!diretorio.exists()){
+			 diretorio.mkdir();
+			 System.out.println("Diretorio nao existe");
+			 
+		 }else{
+			 System.out.println("Diretorio existe");
+		 }
 
-		 if(!diretorio.exists())
-			 diretorio.mkdirs();
-
+		 System.out.println(System.getProperty("user.home"));
 		 FileOutputStream fileOut =  new FileOutputStream(filename);
 		 workbook.write(fileOut);
 		 fileOut.close();

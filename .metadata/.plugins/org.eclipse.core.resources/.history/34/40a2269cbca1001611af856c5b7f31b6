@@ -232,6 +232,7 @@ public class RelatorioController implements Initializable{
 			String status =lstHash.get(i).get(1).toString();
 			int quantidade =Integer.parseInt(lstHash.get(i).get(2).toString());
 
+			System.out.println("Nome Status: "+lstHash.get(i).get(1)+" - Quantidade: "+quantidade);
 			lucroBar.getData().add(new XYChart.Data(status, quantidade));
 		}
 
