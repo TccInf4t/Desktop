@@ -41,7 +41,7 @@ public class RelatorioController implements Initializable{
 
 	@FXML TextField txtNomeEntidade;
 
-	List<HashMap<Integer,String>> lstHash;
+	List<HashMap<String,String>> lstHash;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -312,6 +312,9 @@ public class RelatorioController implements Initializable{
 
 			table.getColumns().addAll(coluna1, coluna2);
 
+			ObservableList<HashMap<Integer, String>> data = FXCollections.observableList(lstHash);
+
+	        table.setItems(data);
 		}else if(tipo == 3){
 
 		}

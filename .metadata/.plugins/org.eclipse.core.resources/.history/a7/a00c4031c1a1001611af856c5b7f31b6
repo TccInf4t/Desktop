@@ -41,7 +41,7 @@ public class RelatorioController implements Initializable{
 
 	@FXML TextField txtNomeEntidade;
 
-	List<HashMap<Integer,String>> lstHash;
+	List<HashMap<String,String>> lstHash;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -144,7 +144,7 @@ public class RelatorioController implements Initializable{
 						Alerta.showError("Erro ao filtrar", "Preencha a Data Inicial (De) e a Data Final (Até)");
 					}else{
 
-						List<HashMap<Integer,String>> lstHash = Relatorio.FiltarFaturamento(periodo, true, dataInicial, dataFinal);
+						List<HashMap<String,String>> lstHash = Relatorio.FiltarFaturamento(periodo, true, dataInicial, dataFinal);
 
 						if(lstHash.size()<=0){
 							Alerta.showError("Erro ao gerar", "Não há registro neste período");
@@ -178,7 +178,7 @@ public class RelatorioController implements Initializable{
 					}
 				}
 			}else{
-				List<HashMap<Integer,String>> lstHash = Relatorio.FiltarFaturamento(periodo, false, null, null);
+				List<HashMap<String,String>> lstHash = Relatorio.FiltarFaturamento(periodo, false, null, null);
 
 				tabTabela.setDisable(false);
 				tabLinha.setDisable(false);
@@ -215,7 +215,7 @@ public class RelatorioController implements Initializable{
 		btnExportarExcel.setDisable(false);
 		tabPane.getSelectionModel().select(tabBarra);
 
-		List<HashMap<Integer,String>> lstHash = Relatorio.FiltrarPedido();
+		List<HashMap<String,String>> lstHash = Relatorio.FiltrarPedido();
 
 		barChart.getData().clear();
 
@@ -312,6 +312,9 @@ public class RelatorioController implements Initializable{
 
 			table.getColumns().addAll(coluna1, coluna2);
 
+			ObservableList<HashMap<Integer, String>> data = FXCollections.observableList(lstHash);
+
+	        table.setItems(data);
 		}else if(tipo == 3){
 
 		}

@@ -5,8 +5,6 @@ import java.util.*;
 
 import br.com.onpecas.helper.*;
 import br.com.onpecas.model.*;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,7 +13,6 @@ import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
-import javafx.util.Callback;
 
 public class RelatorioController implements Initializable{
 
@@ -300,22 +297,25 @@ public class RelatorioController implements Initializable{
 	public void GerarTable(int tipo){
 
 		if(tipo == 1){
-
+			
 		}else if(tipo == 2){
 			TableColumn<HashMap<Integer, String>, String> coluna1 = new TableColumn<>("Status");
 			TableColumn<HashMap<Integer, String>, String> coluna2 = new TableColumn<>("Valores");
-
+			
 			coluna1.setResizable(true);
 			coluna2.setResizable(true);
 			coluna1.setCellValueFactory(new PropertyValueFactory<HashMap<Integer, String>, String>("1"));
 			coluna1.setCellValueFactory(new PropertyValueFactory<HashMap<Integer, String>, String>("2"));
-
+			
 			table.getColumns().addAll(coluna1, coluna2);
+			
+			ObservableList<HashMap<Integer, String>> data = FXCollections.observableList(lstHash);
 
+	        table.setItems(data);
 		}else if(tipo == 3){
-
+			
 		}
-
+		
 	}
 
 	// Método para Filtrar os relatórios e preecher o gráfico de linha
