@@ -31,7 +31,7 @@ public class RelatorioController implements Initializable{
 
 	@FXML CheckBox chbDataSelecionavel;
 
-	@FXML Pane panePeriodo, paneVenda;
+	@FXML Pane panePeriodo, paneVenda, paneRegiao, paneEntidade;
 
 	@FXML Tab tabTabela, tabLinha, tabBarra;
 	@FXML TabPane tabPane;
@@ -52,6 +52,26 @@ public class RelatorioController implements Initializable{
 		btnExportarExcel.setOnAction(l-> ExportaExcel());
 	}
 
+
+	@FXML
+	private void handleEstado() {
+		Estado estado = cboEstado.getSelectionModel().getSelectedItem();
+
+		if(estado != null){
+			CarregarCidades(estado);
+		}
+	}
+
+	/*
+	 * Método para preencher a combobox cboCidade após selecionar um estado
+	 * */
+	public void CarregarCidades(Estado estado){
+		cboCidade.setDisable(false);
+		cboCidade.getItems().clear();
+		cboCidade.getItems().addAll(Cidade.BuscarCidade(estado));
+	}
+
+
 	/*
 	 * Desativa todos os componentes que não serão usados até a seleção de um item no combobox cboTipoRelatorio
 	 * */
@@ -63,10 +83,16 @@ public class RelatorioController implements Initializable{
 		tabTabela.setDisable(true);
 		tabLinha.setDisable(true);
 		tabBarra.setDisable(true);
-
+		cboCidade.setDisable(true);
 
 		panePeriodo.setVisible(false);
 		paneVenda.setVisible(false);
+		paneRegiao.setVisible(false);
+		paneEntidade.setVisible(false);
+
+		cboCidade.getItems().clear();
+
+		cboEstado.getItems().addAll(Estado.Select());
 	}
 
 	//Listener para quando o combobox cboTipoRelatorio for selecionado
@@ -76,7 +102,7 @@ public class RelatorioController implements Initializable{
 	    // Button was clicked, do something...
 		String sltComboTipo = cboTipoRelatorio.getSelectionModel().getSelectedItem();
 		if(sltComboTipo.equals("Faturamento")){
-
+			DestivarTodos();
 			panePeriodo.setVisible(true);
 			cboPeriodoRelatório.setDisable(false);;
 			cboPeriodoRelatório.setPromptText("Selecione");
@@ -84,16 +110,18 @@ public class RelatorioController implements Initializable{
 			cboPeriodoRelatório.getItems().addAll("Diario", "Semanal", "Mensal", "Anual");
 
 		}else if(sltComboTipo.equals("Pedido")){
+			DestivarTodos();
 			FiltrarPorPedido();
 			panePeriodo.setVisible(false);
 			paneVenda.setVisible(false);
 			tabLinha.setDisable(true);
 		}else if(sltComboTipo.equals("Venda")){
+			DestivarTodos();
 			paneVenda.setVisible(true);
-			panePeriodo.setVisible(true);
+			//panePeriodo.setVisible(true);
 
 			cboEntidade.getItems().clear();
-			cboEntidade.getItems().addAll("Cliente", "Produto", "Transportadora");
+			cboEntidade.getItems().addAll("Cliente", "Produto", "Região");
 
 			cboPeriodoRelatório.setDisable(false);;
 			cboPeriodoRelatório.getItems().clear();
@@ -110,6 +138,24 @@ public class RelatorioController implements Initializable{
 			datePickerInicial.setDisable(true);
 			datePickerFinal.setDisable(true);
 		}
+	}
+
+	@FXML
+	private void handleCboEntidade(){
+		String entidade = cboEntidade.getValue();
+
+		if(entidade != null){
+			if(entidade.equals("Região")){
+				paneRegiao.setVisible(true);
+				paneEntidade.setVisible(false);
+				panePeriodo.setVisible(true);
+			}else {
+				paneRegiao.setVisible(false);
+				panePeriodo.setVisible(true);
+				paneEntidade.setVisible(true);
+			}
+		}
+		
 	}
 
 	public void Filtrar(){
@@ -296,6 +342,7 @@ public class RelatorioController implements Initializable{
 						Alerta.showError("Erro ao exportar", "Nenhum relatório realizado");
 					}
 				}else if(sltComboTipo.equals("Venda")){
+
 				}
 			}else{
 				Alerta.showError("Erro ao exportar", "Nenhum relatório realizado");
