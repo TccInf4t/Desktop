@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class CSOPControllerRelatorio extends Application {
 
-	public static Stage primaryStage;
+	static Stage primaryStage;
 	static AnchorPane border;
 
 	@Override

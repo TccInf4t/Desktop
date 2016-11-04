@@ -11,12 +11,12 @@ import javafx.stage.Stage;
 
 public class CSOPControllerRelatorio extends Application {
 
-	public static Stage primaryStage;
+	static Stage primaryStage;
 	static AnchorPane border;
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		CSOPControllerRelatorio.primaryStage = primaryStage;
+		this.primaryStage = primaryStage;
 		LoadBorder();
 	}
 
