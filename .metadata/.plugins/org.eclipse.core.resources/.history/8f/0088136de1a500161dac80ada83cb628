@@ -318,7 +318,7 @@ public class RelatorioController implements Initializable{
 								}else{
 									// Se tiver a cidade, estado, periodo, data inicial e a data final
 
-									List<Relatorio> lstRelatorio = Relatorio.FiltrarVenda(entidadeSelecionada, null, estado.getOid_estado(), true, cidade.getOid_cidade(), periodo, true, dataInicial, dataFinal);
+									List<Relatorio> lstRelatorio = Relatorio.FiltrarVenda(null, null, estado.getOid_estado(), true, cidade.getOid_cidade(), periodo, true, dataInicial, dataFinal);
 
 									tabTabela.setDisable(false);
 									tabLinha.setDisable(false);
@@ -349,7 +349,7 @@ public class RelatorioController implements Initializable{
 						}else{
 							// Se tiver a cidade, estado e periodo
 
-							List<Relatorio> lstRelatorio = Relatorio.FiltrarVenda(entidadeSelecionada, null, estado.getOid_estado(), true, cidade.getOid_cidade(), periodo, false, null, null);
+							List<Relatorio> lstRelatorio = Relatorio.FiltrarVenda(null, null, estado.getOid_estado(), true, cidade.getOid_cidade(), periodo, false, null, null);
 
 							tabTabela.setDisable(false);
 							tabLinha.setDisable(false);
@@ -392,65 +392,15 @@ public class RelatorioController implements Initializable{
 								if(dataFinal.isEmpty() || dataInicial.isEmpty()){
 									Alerta.showError("Erro ao filtrar", "Preencha a Data Inicial (De) e a Data Final (Até)");
 								}else{
-									// Se tiver a cidade, estado, periodo, data inicial e a data final
+									// Se tiver a estado, periodo, data inicial e a data final
 
-									List<Relatorio> lstRelatorio = Relatorio.FiltrarVenda(entidadeSelecionada, null, estado.getOid_estado(), false, 0, periodo, false, dataInicial, dataFinal);
-
-									tabTabela.setDisable(false);
-									tabLinha.setDisable(false);
-									tabBarra.setDisable(false);
-									btnExportarExcel.setDisable(false);
-
-									lineChart.getData().clear();
-									barChart.getData().clear();
-
-									XYChart.Series lucroLine = new XYChart.Series();
-									XYChart.Series lucroBar = new XYChart.Series();
-
-									lucroBar.setName("Venda "+cboPeriodoRelatório.getValue()+" - "+cboEntidade.getValue()+" De: "+dataInicial+" Até: "+dataFinal);
-									lucroLine.setName("Venda "+cboPeriodoRelatório.getValue()+" - "+cboEntidade.getValue()+" De: "+dataInicial+" Até: "+dataFinal);
-
-									for(Relatorio item:lstRelatorio){
-										double valorfaturado = Double.parseDouble(item.getValorQuantidade());
-										lucroBar.getData().add(new XYChart.Data(item.getTituloData(), valorfaturado));
-										lucroLine.getData().add(new XYChart.Data(item.getTituloData(), valorfaturado));
-									}
-
-									barChart.getData().addAll(lucroBar);
-									lineChart.getData().addAll(lucroLine);
-									this.lstRelatorio = lstRelatorio;
-									GerarTable(1, lstRelatorio);
+									System.out.println("Tem data inicial e final");
 								}
 							}
 						}else{
-							// Se tiver a cidade, estado e periodo
+							// Se tiver a estado e periodo
+							System.out.println("Periodo");
 
-							List<Relatorio> lstRelatorio = Relatorio.FiltrarVenda(entidadeSelecionada, null, estado.getOid_estado(), false, 0, periodo, false, null, null);
-
-							tabTabela.setDisable(false);
-							tabLinha.setDisable(false);
-							tabBarra.setDisable(false);
-							btnExportarExcel.setDisable(false);
-
-							lineChart.getData().clear();
-							barChart.getData().clear();
-
-							XYChart.Series lucroLine = new XYChart.Series();
-							XYChart.Series lucroBar = new XYChart.Series();
-
-							lucroBar.setName("Venda "+cboPeriodoRelatório.getValue()+" - "+cboEntidade.getValue());
-							lucroLine.setName("Venda "+cboPeriodoRelatório.getValue()+" - "+cboEntidade.getValue());
-
-							for(Relatorio item:lstRelatorio){
-								double valorfaturado = Double.parseDouble(item.getValorQuantidade());
-								lucroBar.getData().add(new XYChart.Data(item.getTituloData(), valorfaturado));
-								lucroLine.getData().add(new XYChart.Data(item.getTituloData(), valorfaturado));
-							}
-
-							barChart.getData().addAll(lucroBar);
-							lineChart.getData().addAll(lucroLine);
-							this.lstRelatorio = lstRelatorio;
-							GerarTable(1, lstRelatorio);
 						}
 					}
 				}

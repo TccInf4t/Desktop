@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javafx.scene.chart.LineChart"/>
 <fullyQualifiedTypeName name="javafx.scene.layout.AnchorPane"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="javafx.beans.value.ObservableValue"/>
@@ -58,6 +57,7 @@
 <fullyQualifiedTypeName name="javafx.scene.control.TabPane"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.lang.Readable"/>
-<fullyQualifiedTypeName name="br.com.onpecas.model.Relatorio"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Estado"/>
+<fullyQualifiedTypeName name="br.com.onpecas.model.Relatorio"/>
+<fullyQualifiedTypeName name="com.sun.javafx.scene.EnteredExitedHandler"/>
 </qualifiedTypeNameHistroy>

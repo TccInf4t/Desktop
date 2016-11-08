@@ -318,7 +318,7 @@ public class RelatorioController implements Initializable{
 								}else{
 									// Se tiver a cidade, estado, periodo, data inicial e a data final
 
-									List<Relatorio> lstRelatorio = Relatorio.FiltrarVenda(entidadeSelecionada, null, estado.getOid_estado(), true, cidade.getOid_cidade(), periodo, true, dataInicial, dataFinal);
+									List<Relatorio> lstRelatorio = Relatorio.FiltrarVenda(null, null, estado.getOid_estado(), true, cidade.getOid_cidade(), periodo, true, dataInicial, dataFinal);
 
 									tabTabela.setDisable(false);
 									tabLinha.setDisable(false);
@@ -349,7 +349,7 @@ public class RelatorioController implements Initializable{
 						}else{
 							// Se tiver a cidade, estado e periodo
 
-							List<Relatorio> lstRelatorio = Relatorio.FiltrarVenda(entidadeSelecionada, null, estado.getOid_estado(), true, cidade.getOid_cidade(), periodo, false, null, null);
+							List<Relatorio> lstRelatorio = Relatorio.FiltrarVenda(null, null, estado.getOid_estado(), true, cidade.getOid_cidade(), periodo, false, null, null);
 
 							tabTabela.setDisable(false);
 							tabLinha.setDisable(false);
@@ -394,7 +394,7 @@ public class RelatorioController implements Initializable{
 								}else{
 									// Se tiver a cidade, estado, periodo, data inicial e a data final
 
-									List<Relatorio> lstRelatorio = Relatorio.FiltrarVenda(entidadeSelecionada, null, estado.getOid_estado(), false, 0, periodo, false, dataInicial, dataFinal);
+									List<Relatorio> lstRelatorio = Relatorio.FiltrarVenda(null, null, estado.getOid_estado(), false, 0, periodo, false, dataInicial, dataFinal);
 
 									tabTabela.setDisable(false);
 									tabLinha.setDisable(false);
@@ -425,7 +425,7 @@ public class RelatorioController implements Initializable{
 						}else{
 							// Se tiver a cidade, estado e periodo
 
-							List<Relatorio> lstRelatorio = Relatorio.FiltrarVenda(entidadeSelecionada, null, estado.getOid_estado(), false, 0, periodo, false, null, null);
+							List<Relatorio> lstRelatorio = Relatorio.FiltrarVenda(null, null, estado.getOid_estado(), false, 0, periodo, false, null, null);
 
 							tabTabela.setDisable(false);
 							tabLinha.setDisable(false);

@@ -145,7 +145,7 @@ public class Relatorio {
 								+"from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) "
 								+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and oid_cidade = "+oid_cidade+" "
 								+ "group by yearweek(dtrealizado) ;";
-						
+
 					}else if(periodo.equals("Mensal")){
 						sql ="select v.*, p.*,concat(extract(month from dtrealizado),' - ', extract(year from dtrealizado)) as datareferencia, "
 								+ "sum(valortotal)+sum(frete) as valorfaturado "
@@ -199,6 +199,7 @@ public class Relatorio {
 
 					}
 				}
+			}
 			}else{
 				if(temData){
 					if(periodo.equals("Semanal")){
@@ -399,7 +400,7 @@ public class Relatorio {
 				}
 			}
 		}
-System.out.println(sql);
+
 		try {
 			ResultSet rs = con.createStatement().executeQuery(sql);
 
