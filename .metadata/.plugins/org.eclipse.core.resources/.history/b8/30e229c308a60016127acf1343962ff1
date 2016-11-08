@@ -115,6 +115,7 @@ public class Relatorio {
 				relatorio.setTituloData(rs.getString("datareferencia"));
 				relatorio.setValorQuantidade(rs.getString("ValorFaturado"));
 
+				System.out.println(relatorio.getTituloData()+"--"+relatorio.getValorQuantidade());
 				lstRelatorio.add(relatorio);
 			}
 		} catch (SQLException e) {
@@ -407,6 +408,7 @@ public class Relatorio {
 				relatorio.setTituloData(rs.getString("datareferencia"));
 				relatorio.setValorQuantidade(rs.getString("ValorFaturado"));
 
+				System.out.println(relatorio.getTituloData()+"--"+relatorio.getValorQuantidade());
 				lstRelatorio.add(relatorio);
 			}
 		} catch (SQLException e) {

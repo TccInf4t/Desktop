@@ -118,6 +118,7 @@ public class RelatorioController implements Initializable{
 		}else if(sltComboTipo.equals("Venda")){
 			DestivarTodos();
 			paneVenda.setVisible(true);
+			//panePeriodo.setVisible(true);
 
 			cboEntidade.getItems().clear();
 			cboEntidade.getItems().addAll("Cliente", "Produto", "Região");
@@ -142,9 +143,7 @@ public class RelatorioController implements Initializable{
 	@FXML
 	private void handleCboEntidade(){
 		String entidade = cboEntidade.getValue();
-		txtNomeEntidade.clear();
-		cboCidade.getSelectionModel().clearSelection();
-		cboEstado.getSelectionModel().clearSelection();
+
 		if(entidade != null){
 			if(entidade.equals("Região")){
 				paneRegiao.setVisible(true);
@@ -590,11 +589,7 @@ public class RelatorioController implements Initializable{
 						Alerta.showError("Erro ao exportar", "Nenhum relatório realizado");
 					}
 				}else if(sltComboTipo.equals("Venda")){
-					if(this.lstRelatorio != null){
-						CreateExlFile.Gerar(lstRelatorio, "Venda", cboPeriodoRelatório.getValue());
-					}else{
-						Alerta.showError("Erro ao exportar", "Nenhum relatório realizado");
-					}
+
 				}
 			}else{
 				Alerta.showError("Erro ao exportar", "Nenhum relatório realizado");

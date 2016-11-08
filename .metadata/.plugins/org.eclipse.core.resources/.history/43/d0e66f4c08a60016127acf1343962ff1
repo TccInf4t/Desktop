@@ -118,6 +118,7 @@ public class RelatorioController implements Initializable{
 		}else if(sltComboTipo.equals("Venda")){
 			DestivarTodos();
 			paneVenda.setVisible(true);
+			//panePeriodo.setVisible(true);
 
 			cboEntidade.getItems().clear();
 			cboEntidade.getItems().addAll("Cliente", "Produto", "Região");

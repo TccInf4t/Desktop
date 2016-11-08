@@ -88,8 +88,8 @@ public class CreateExlFile {
 			 FileOutputStream fileOut =  new FileOutputStream(caminhoEditado);
 			 workbook.write(fileOut);
 			 fileOut.close();
-			 Alerta.showInformation("Sucesso", "Planilha gerada com sucesso\n Você pode visualizá-la em "+caminho.toString());
-		 }
+			 Alerta.showInformation("Sucesso", "Planilha gerada com sucesso\n Você pode visualizá-la em C:/OnPecaControl/planilhas/");
+			 }
 	 } catch ( Exception ex ) {
 	     System.out.println(ex);
 		Alerta.showError("Erro ao exportar", ex.getMessage());
