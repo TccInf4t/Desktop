@@ -8,7 +8,6 @@ import br.com.onpecas.model.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
@@ -43,8 +42,6 @@ public class CallScene {
 			Scene scene = new Scene(module);
 			thirdStage.initModality(Modality.APPLICATION_MODAL);
 			thirdStage.setScene(scene);
-			thirdStage.setTitle("Endereco");
-			thirdStage.getIcons().add(new Image(getClass().getResource("logo.png").toString()));
 			thirdStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -64,8 +61,6 @@ public class CallScene {
 			Scene scene = new Scene(module);
 			secondStage.initModality(Modality.APPLICATION_MODAL);
 			secondStage.setScene(scene);
-			secondStage.setTitle("Transportadora Detalhe");
-			secondStage.getIcons().add(new Image(getClass().getResource("logo.png").toString()));
 			secondStage.show();
 
 		} catch (IOException e) {
@@ -100,8 +95,6 @@ public class CallScene {
 			Scene scene = new Scene(module);
 			thirdStage.initModality(Modality.APPLICATION_MODAL);
 			thirdStage.setScene(scene);
-			thirdStage.setTitle("Pedidos sem Lote Detalhe");
-			thirdStage.getIcons().add(new Image(getClass().getResource("logo.png").toString()));
 			thirdStage.show();
 
 		} catch (IOException e) {
@@ -136,8 +129,6 @@ public class CallScene {
 			Scene scene = new Scene(module);
 			secondStage.initModality(Modality.APPLICATION_MODAL);
 			secondStage.setScene(scene);
-			secondStage.setTitle("Lote Inicial");
-			secondStage.getIcons().add(new Image(getClass().getResource("logo.png").toString()));
 			secondStage.show();
 
 		} catch (IOException e) {
@@ -157,8 +148,6 @@ public class CallScene {
 			Scene scene = new Scene(module);
 			secondStage.initModality(Modality.APPLICATION_MODAL);
 			secondStage.setScene(scene);
-			secondStage.setTitle("Gerar Lote");
-			secondStage.getIcons().add(new Image(getClass().getResource("logo.png").toString()));
 			secondStage.show();
 
 		} catch (IOException e) {
@@ -178,8 +167,6 @@ public class CallScene {
 			Scene scene = new Scene(module);
 			secondStage.initModality(Modality.APPLICATION_MODAL);
 			secondStage.setScene(scene);
-			secondStage.setTitle("Iniciar Transporte");
-			secondStage.getIcons().add(new Image(getClass().getResource("logo.png").toString()));
 			secondStage.show();
 
 		} catch (IOException e) {

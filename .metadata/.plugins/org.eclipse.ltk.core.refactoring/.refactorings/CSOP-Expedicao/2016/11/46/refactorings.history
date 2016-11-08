@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;logo.png&apos; to &apos;CSOP-ControleUsuario/src/br.com.onpecas.view&apos;&#x0D;&#x0A;- Original project: &apos;CSOP-Expedicao&apos;&#x0D;&#x0A;- Destination element: &apos;CSOP-ControleUsuario/src/br.com.onpecas.view&apos;&#x0D;&#x0A;- Original element: &apos;logo.png&apos;" description="Copy file" destination="=CSOP-ControleUsuario/src&lt;br.com.onpecas.view" element1="src/br/com/onpecas/view/logo.png" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1478647988376" units="0" version="1.0"/>
+</session>
