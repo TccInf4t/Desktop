@@ -185,72 +185,22 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 			Transportadora transportadora_gerada = new Transportadora();
 
 			transportadora_gerada.setEndereco(endereco);
-
+			
 			transportadora_gerada.setFrete(format.format(Double.parseDouble(txtFrete.getText())));
 			transportadora_gerada.setObservacoes(txtObservacoes.getText());
 			transportadora_gerada.setRamo(txtRamo.getText());
 			transportadora_gerada.setNome(txtNomeCompleto.getText());
 			transportadora_gerada.setTelefone(txtTelefone.getText());
 
-			if(endereco == null){
-				Alerta.showError("Impossivel cadastrar", "Cadastre um endereço antes");
-			}else{
-				if(cboTipoPessoa.getSelectionModel().getSelectedItem().equals("FÍSICA")){
-					if(Helper.isValidCPF(txtCPF.getText().replace(".", "").replace("-", ""))){
-						transportadora_gerada.setCnpj(txtCPF.getText());
-						transportadora_gerada.setNatureza("F");
-						transportadora_gerada.setRg(txtRG.getText());
-						transportadora_gerada.setCidade(endereco.getCidade().getNome());
-						transportadora_gerada.setEstado(endereco.getCidade().getEstado().getNome());
-
-						Transportadora.Insert(transportadora_gerada);
-						Helper.AUXTRANSPORTADORA.setValue(1);
-						Helper.AUXENDERECOCOMPLETO.setValue(0);
-						Helper.ENDERECO_GERADO = null;
-						CallScene.secondStage.close();
-					}else{
-						Alerta.showError("Impossivel cadastrar", "Digite um CPF válido");
-					}
-
-				}else if(cboTipoPessoa.getSelectionModel().getSelectedItem().equals("JURÍDICA")){
-					if(Helper.isValidCNPJ(txtCPF.getText().replace(".", "").replace("-", ""))){
-						transportadora_gerada.setCnpj(txtCPF.getText());
-						transportadora_gerada.setNatureza("J");
-						transportadora_gerada.setCidade(endereco.getCidade().getNome());
-						transportadora_gerada.setEstado(endereco.getCidade().getEstado().getNome());
-
-						Transportadora.Insert(transportadora_gerada);
-						Helper.AUXTRANSPORTADORA.setValue(1);
-						Helper.AUXENDERECOCOMPLETO.setValue(0);
-						Helper.ENDERECO_GERADO = null;
-						CallScene.secondStage.close();
-					}else{
-						Alerta.showError("Impossivel cadastrar", "Digite um CNPJ válido");
-					}
-				}
-			}
-
-		}else if(btnCadastrar.getText().equals("ATUALIZAR")){
-			Transportadora transportadora_editada = new Transportadora();
-
-			transportadora_editada.setOid_transportadora(transportadora.getOid_transportadora());
-			transportadora_editada.setEndereco(endereco);
-			transportadora_editada.setFrete(format.format(Double.parseDouble(txtFrete.getText())));
-			transportadora_editada.setObservacoes(txtObservacoes.getText());
-			transportadora_editada.setRamo(txtRamo.getText());
-			transportadora_editada.setNome(txtNomeCompleto.getText());
-			transportadora_editada.setTelefone(txtTelefone.getText());
-
-
 			if(cboTipoPessoa.getSelectionModel().getSelectedItem().equals("FÍSICA")){
 				if(Helper.isValidCPF(txtCPF.getText().replace(".", "").replace("-", ""))){
-					transportadora_editada.setCnpj(txtCPF.getText());
-					transportadora_editada.setNatureza("F");
-					transportadora_editada.setRg(txtRG.getText());
-					transportadora_editada.setCidade(endereco.getCidade().getNome());
-					transportadora_editada.setEstado(endereco.getCidade().getEstado().getNome());
+					transportadora_gerada.setCnpj(txtCPF.getText());
+					transportadora_gerada.setNatureza("F");
+					transportadora_gerada.setRg(txtRG.getText());
+					transportadora_gerada.setCidade(endereco.getCidade().getNome());
+					transportadora_gerada.setEstado(endereco.getCidade().getEstado().getNome());
 
-					Transportadora.Update(transportadora_editada);
+					Transportadora.Insert(transportadora_gerada);
 					Helper.AUXTRANSPORTADORA.setValue(1);
 					Helper.AUXENDERECOCOMPLETO.setValue(0);
 					Helper.ENDERECO_GERADO = null;
@@ -258,15 +208,15 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 				}else{
 					Alerta.showError("Impossivel cadastrar", "Digite um CPF válido");
 				}
-
+				
 			}else if(cboTipoPessoa.getSelectionModel().getSelectedItem().equals("JURÍDICA")){
 				if(Helper.isValidCNPJ(txtCPF.getText().replace(".", "").replace("-", ""))){
-					transportadora_editada.setCnpj(txtCPF.getText());
-					transportadora_editada.setNatureza("J");
-					transportadora_editada.setCidade(endereco.getCidade().getNome());
-					transportadora_editada.setEstado(endereco.getCidade().getEstado().getNome());
+					transportadora_gerada.setCnpj(txtCPF.getText());
+					transportadora_gerada.setNatureza("J");
+					transportadora_gerada.setCidade(endereco.getCidade().getNome());
+					transportadora_gerada.setEstado(endereco.getCidade().getEstado().getNome());
 
-					Transportadora.Update(transportadora_editada);
+					Transportadora.Insert(transportadora_gerada);
 					Helper.AUXTRANSPORTADORA.setValue(1);
 					Helper.AUXENDERECOCOMPLETO.setValue(0);
 					Helper.ENDERECO_GERADO = null;
@@ -274,7 +224,38 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 				}else{
 					Alerta.showError("Impossivel cadastrar", "Digite um CNPJ válido");
 				}
+				
 			}
+
+			
+
+		}else if(btnCadastrar.getText().equals("ATUALIZAR")){
+			Transportadora transportadora_editada = new Transportadora();
+
+			transportadora_editada.setOid_transportadora(transportadora.getOid_transportadora());
+			transportadora_editada.setEndereco(endereco);
+			transportadora_editada.setCnpj(txtCPF.getText());
+			transportadora_editada.setFrete(format.format(Double.parseDouble(txtFrete.getText())));
+			transportadora_editada.setObservacoes(txtObservacoes.getText());
+			transportadora_editada.setRamo(txtRamo.getText());
+			transportadora_editada.setNome(txtNomeCompleto.getText());
+			transportadora_editada.setTelefone(txtTelefone.getText());
+
+			if(cboTipoPessoa.getSelectionModel().getSelectedItem().equals("FÍSICA")){
+				transportadora_editada.setNatureza("F");
+				transportadora_editada.setRg(txtRG.getText());
+			}else if(cboTipoPessoa.getSelectionModel().getSelectedItem().equals("JURÍDICA")){
+				transportadora_editada.setNatureza("J");
+			}
+
+			transportadora_editada.setCidade(endereco.getCidade().getNome());
+			transportadora_editada.setEstado(endereco.getCidade().getEstado().getNome());
+
+			Transportadora.Update(transportadora_editada);
+			Helper.AUXTRANSPORTADORA.setValue(1);
+			Helper.AUXENDERECOCOMPLETO.setValue(0);
+			Helper.ENDERECO_GERADO = null;
+			CallScene.secondStage.close();
 		}
 	}
 }
