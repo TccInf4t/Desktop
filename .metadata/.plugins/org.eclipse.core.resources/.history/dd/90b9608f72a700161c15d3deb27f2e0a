@@ -1,0 +1,73 @@
+package br.com.onpecas.controller;
+
+import java.net.URL;
+import java.util.*;
+
+import br.com.onpecas.helper.Alerta;
+import br.com.onpecas.model.*;
+import br.com.onpecas.view.CallScene;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.input.*;
+
+public class LoginController implements Initializable{
+
+	@FXML Button btnAcessar, btnCancelar;
+	@FXML static TextField txtServer, txtLogin, txtSenha;
+
+	public boolean aux;
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		ConfigButoes();
+		VerificarServer();
+
+		aux = false;
+
+		txtServer.setOnKeyPressed(k-> {
+			KeyCombination  f7 = new KeyCodeCombination(KeyCode.F7);
+			if(f7.match(k)){
+				txtSenha.setEditable(true);
+			}
+		});
+		/*getClass().setOnKeyPressed(k-> {
+			KeyCombination  backspace = new KeyCodeCombination(KeyCode.BACK_SPACE);
+			if(backspace.match(k)){
+				cboTransportadora.getSelectionModel().clearSelection();
+				txtNumLote.setDisable(false);
+				chbEmTransporte.setDisable(false);
+				chbFinalizado.setDisable(false);
+
+			}
+		});*/
+
+	}
+
+	private void ConfigButoes() {
+		btnAcessar.setOnAction(l-> Acessar());
+		btnCancelar.setOnAction(l-> Cancelar());
+	}
+
+	private void VerificarServer() {
+		txtServer.setText(Login.VerificarServer());
+	}
+
+	public void Acessar(){
+		if(aux){
+			String ip = txtServer.getText();
+			if(ip.isEmpty() || ip == null){
+				Alerta.showError("Não foi possível se logar", "Digite um ip");
+			}else{
+				Login.AtribuiIP(ip);
+			}
+			CallScene callScene = new CallScene();
+			callScene.LoadPainelPrincipal();
+		}else{
+			CallScene callScene = new CallScene();
+			callScene.LoadPainelPrincipal();
+		}
+	}
+
+	public void Cancelar(){
+		System.exit(0);
+	}
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="300.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Label layoutX="34.0" layoutY="22.0" text="Server:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="34.0" layoutY="69.0" text="Login:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="116.0" text="Senha:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtServer" layoutX="112.0" layoutY="23.0" prefHeight="25.0" prefWidth="216.0" />
+      <TextField fx:id="txtLogin" layoutX="112.0" layoutY="70.0" prefHeight="25.0" prefWidth="280.0" />
+      <PasswordField fx:id="txtSenha" layoutX="112.0" layoutY="117.0" prefHeight="25.0" prefWidth="280.0" />
+      <Button fx:id="btnAcessar" layoutX="374.0" layoutY="247.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="112.0" style="-fx-background-color: #32CD32;" text="ACESSAR">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCancelar" layoutX="232.0" layoutY="247.0" mnemonicParsing="false" style="-fx-background-color: FA8072;" text="CANCELAR">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnOutro" layoutX="344.0" layoutY="23.0" mnemonicParsing="false" text="Outro" />
+   </children>
+</AnchorPane>

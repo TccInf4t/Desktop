@@ -15,7 +15,7 @@ import javafx.stage.*;
 public class CallScene {
 	public static Stage secondStage;
 	public static Stage thirdStage;
-
+	public static BorderPane border;
 	/*Função para abrir uma carregar a tela com alguns campos da transportadora, masntendo a primeira*/
 	public void LoadTransportadoraInicial(){
 		FXMLLoader loader = new FXMLLoader();
@@ -25,7 +25,7 @@ public class CallScene {
 		try {
 			ScrollPane module= (ScrollPane) loader.load();
 
-			CSOPControllerExpedicao.border.setCenter(module);
+			border.setCenter(module);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -82,7 +82,7 @@ public class CallScene {
 		try {
 			AnchorPane module= (AnchorPane) loader.load();
 
-			CSOPControllerExpedicao.border.setCenter(module);
+			border.setCenter(module);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -118,7 +118,7 @@ public class CallScene {
 		try {
 			AnchorPane module= (AnchorPane) loader.load();
 
-			CSOPControllerExpedicao.border.setCenter(module);
+			border.setCenter(module);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -183,6 +183,25 @@ public class CallScene {
 			secondStage.show();
 
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void LoadPainelPrincipal(){
+		FXMLLoader loader = new FXMLLoader();
+
+		loader.setLocation(getClass().getResource("PainelPrincipal.fxml"));
+		loader.setController(new PainelPrincipalController());
+		try {
+			border = (BorderPane) loader.load();
+			Scene scene = new Scene(border);
+
+			CSOPControllerExpedicao.primaryStage.setScene(scene);
+			CSOPControllerExpedicao.primaryStage.setTitle("CSOP - Expedição");
+			CSOPControllerExpedicao.primaryStage.getIcons().add(new Image(getClass().getResource("logo.png").toString()));
+			CSOPControllerExpedicao.primaryStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
