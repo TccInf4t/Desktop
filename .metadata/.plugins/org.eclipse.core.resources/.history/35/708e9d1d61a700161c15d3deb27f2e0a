@@ -30,7 +30,7 @@
       <TextField fx:id="txtNomeCompleto" layoutX="252.0" layoutY="120.0" prefHeight="25.0" prefWidth="544.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="206.0" AnchorPane.topAnchor="120.0" />
       <TextField fx:id="txtLogin" layoutX="250.0" layoutY="167.0" prefHeight="25.0" prefWidth="279.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="470.0" AnchorPane.topAnchor="167.0" />
       <PasswordField fx:id="txtSenha" layoutX="250.0" layoutY="217.0" prefHeight="25.0" prefWidth="280.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="470.0" AnchorPane.topAnchor="217.0" />
-      <TextField fx:id="txtEmail" layoutX="250.0" layoutY="263.0" prefHeight="25.0" prefWidth="544.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="206.0" AnchorPane.topAnchor="263.0" />
+       <TextField fx:id="txtEmail" layoutX="250.0" layoutY="263.0" prefHeight="25.0" prefWidth="544.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="206.0" AnchorPane.topAnchor="263.0" />
       <ComboBox fx:id="cboGrupo" layoutX="294.0" layoutY="313.0" prefHeight="25.0" prefWidth="279.0" promptText="Todos" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="470.0" AnchorPane.topAnchor="313.0">
          <cursor>
             <Cursor fx:constant="HAND" />

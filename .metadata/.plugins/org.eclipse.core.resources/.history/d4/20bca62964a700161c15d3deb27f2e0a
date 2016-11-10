@@ -71,7 +71,6 @@ public class CreateExlFile {
 				 HSSFRow rowhead = sheet.createRow((short)1);
 				 rowhead.createCell(0).setCellValue("data");
 				 rowhead.createCell(1).setCellValue("valor");
-				 rowhead.createCell(2).setCellValue("quantidade");
 
 				 // definindo seus valores
 				 // por exemplo protocolo.getProtocolo();
@@ -82,7 +81,6 @@ public class CreateExlFile {
 					 HSSFRow row=   sheet.createRow((short)cont+2);
 					 row.createCell(0).setCellValue(item.getTituloData());
 					 row.createCell(1).setCellValue(item.getValorQuantidade());
-					 row.createCell(2).setCellValue(item.getQuantidadeVenda());
 					 cont++;
 				 }
 			 }

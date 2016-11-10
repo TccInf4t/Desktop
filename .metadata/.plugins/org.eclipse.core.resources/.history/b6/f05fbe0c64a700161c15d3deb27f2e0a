@@ -406,6 +406,7 @@ public class Relatorio {
 			while(rs.next()){
 				Relatorio relatorio = new Relatorio();
 				relatorio.setQuantidadeVenda(rs.getString("quantidadevenda"));
+				System.out.println(rs.getString("quantidadevenda"));
 				relatorio.setTituloData(rs.getString("datareferencia"));
 				relatorio.setValorQuantidade(rs.getString("ValorFaturado"));
 

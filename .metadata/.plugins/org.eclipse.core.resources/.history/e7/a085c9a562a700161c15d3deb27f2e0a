@@ -149,21 +149,21 @@ public class Relatorio {
 
 					}else if(periodo.equals("Mensal")){
 						sql ="select v.*, p.*,concat(extract(month from dtrealizado),' - ', extract(year from dtrealizado)) as datareferencia, "
-								+ "sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+								+ "sum(valortotal)+sum(frete) as valorfaturado "
 								+ "from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) "
-								+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and oid_cidade = "+oid_cidade+"  "
+								+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and oid_cidade = "+oid_cidade+" "
 								+ "group by extract(year from dtrealizado), "
 								+ "extract(month from dtrealizado) ;";
 
 					}else if(periodo.equals("Anual")){
-						sql ="select v.*, p.*, extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+						sql ="select v.*, p.*, extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado "
 								+ "from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) "
 								+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and oid_cidade = "+oid_cidade+" "
 								+ "group by extract(year from dtrealizado) ;";
 
 					}else if(periodo.equals("Diario")){
 						sql = "select v.*, p.*,  dtrealizado as datareferencia, "
-								+"sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+								+"sum(valortotal)+sum(frete) as valorfaturado "
 								+"from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) "
 								+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and oid_cidade = "+oid_cidade+" "
 								+ "group by date(dtrealizado) ;";
@@ -176,25 +176,25 @@ public class Relatorio {
 								+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y') as semanafinal, "
 								+"concat('De: ', date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Sunday'), '%X%V %W'), '%d/%m/%y'), ' - Até: ',"
 								+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y')) as datareferencia,"
-								+"sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "+
+								+"sum(valortotal)+sum(frete) as valorfaturado "+
 								"from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) and oid_cidade = "+oid_cidade+" "
 								+ "group by yearweek(dtrealizado) ;";
 
 					}else if(periodo.equals("Mensal")){
 						sql ="select v.*, p.*,concat(extract(month from dtrealizado),' - ', extract(year from dtrealizado)) as datareferencia, "
-								+ "sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+								+ "sum(valortotal)+sum(frete) as valorfaturado "
 								+ "from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) and oid_cidade = "+oid_cidade+" "
 								+ "group by extract(year from dtrealizado), "
 								+ "extract(month from dtrealizado) ;";
 
 					}else if(periodo.equals("Anual")){
-						sql ="select v.*, p.*,  extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+						sql ="select v.*, p.*,  extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado "
 								+ "from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) and oid_cidade = "+oid_cidade+" "
 								+ "group by extract(year from dtrealizado) ;";
 
 					}else if(periodo.equals("Diario")){
 						sql = "select v.*, p.*,  dtrealizado as datareferencia, "
-								+"sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+								+"sum(valortotal)+sum(frete) as valorfaturado "
 								+"from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) and oid_cidade = "+oid_cidade+" "
 								+ "group by date(dtrealizado) ;";
 
@@ -208,28 +208,28 @@ public class Relatorio {
 								+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y') as semanafinal, "
 								+"concat('De: ', date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Sunday'), '%X%V %W'), '%d/%m/%y'), ' - Até: ',"
 								+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y')) as datareferencia,"
-								+"sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+								+"sum(valortotal)+sum(frete) as valorfaturado "
 								+"from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) "
 								+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and oid_estado = "+oid_estado+" "
 								+ "group by yearweek(dtrealizado) ;";
 
 					}else if(periodo.equals("Mensal")){
 						sql ="select v.*, p.*,concat(extract(month from dtrealizado),' - ', extract(year from dtrealizado)) as datareferencia, "
-								+ "sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+								+ "sum(valortotal)+sum(frete) as valorfaturado "
 								+ "from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) "
 								+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and oid_estado = "+oid_estado+" "
 								+ "group by extract(year from dtrealizado), "
 								+ "extract(month from dtrealizado) ;";
 
 					}else if(periodo.equals("Anual")){
-						sql ="select v.*, p.*, extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+						sql ="select v.*, p.*, extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado "
 								+ "from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) "
 								+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and oid_estado = "+oid_estado+" "
 								+ "group by extract(year from dtrealizado) ;";
 
 					}else if(periodo.equals("Diario")){
 						sql = "select v.*, p.*,  dtrealizado as datareferencia, "
-								+"sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+								+"sum(valortotal)+sum(frete) as valorfaturado "
 								+"from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) "
 								+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and oid_estado = "+oid_estado+" "
 								+ "group by date(dtrealizado) ;";
@@ -242,25 +242,25 @@ public class Relatorio {
 								+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y') as semanafinal, "
 								+"concat('De: ', date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Sunday'), '%X%V %W'), '%d/%m/%y'), ' - Até: ',"
 								+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y')) as datareferencia,"
-								+"sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "+
+								+"sum(valortotal)+sum(frete) as valorfaturado "+
 								"from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) and oid_estado = "+oid_estado+" "
 								+ "group by yearweek(dtrealizado) ;";
 
 					}else if(periodo.equals("Mensal")){
 						sql ="select v.*, p.*,concat(extract(month from dtrealizado),' - ', extract(year from dtrealizado)) as datareferencia, "
-								+ "sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+								+ "sum(valortotal)+sum(frete) as valorfaturado "
 								+ "from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) and oid_estado = "+oid_estado+" "
 								+ "group by extract(year from dtrealizado), "
 								+ "extract(month from dtrealizado) ;";
 
 					}else if(periodo.equals("Anual")){
-						sql ="select v.*, p.*,  extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+						sql ="select v.*, p.*,  extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado "
 								+ "from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) and oid_estado = "+oid_estado+" "
 								+ "group by extract(year from dtrealizado) ;";
 
 					}else if(periodo.equals("Diario")){
 						sql = "select v.*, p.*,  dtrealizado as datareferencia, "
-								+"sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+								+"sum(valortotal)+sum(frete) as valorfaturado "
 								+"from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) and oid_estado = "+oid_estado+" "
 								+ "group by date(dtrealizado) ;";
 
@@ -275,28 +275,28 @@ public class Relatorio {
 							+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y') as semanafinal, "
 							+"concat('De: ', date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Sunday'), '%X%V %W'), '%d/%m/%y'), ' - Até: ',"
 							+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y')) as datareferencia,"
-							+"sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+							+"sum(valortotal)+sum(frete) as valorfaturado "
 							+"from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) "
 							+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and p.nome like '%"+nomeEntidade+"%' "
 							+ "group by yearweek(dtrealizado) ;";
 
 				}else if(periodo.equals("Mensal")){
 					sql ="select v.*, p.*,concat(extract(month from dtrealizado),' - ', extract(year from dtrealizado)) as datareferencia, "
-							+ "sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+							+ "sum(valortotal)+sum(frete) as valorfaturado "
 							+ "from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) "
 							+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and p.nome like '%"+nomeEntidade+"%' "
 							+ "group by extract(year from dtrealizado), "
 							+ "extract(month from dtrealizado) ;";
 
 				}else if(periodo.equals("Anual")){
-					sql ="select v.*, p.*, extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+					sql ="select v.*, p.*, extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado "
 							+ "from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) "
 							+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and p.nome like '%"+nomeEntidade+"%' "
 							+ "group by extract(year from dtrealizado) ;";
 
 				}else if(periodo.equals("Diario")){
 					sql = "select v.*, p.*,  dtrealizado as datareferencia, "
-							+"sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+							+"sum(valortotal)+sum(frete) as valorfaturado "
 							+"from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) "
 							+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and p.nome like '%"+nomeEntidade+"%' "
 							+ "group by date(dtrealizado) ;";
@@ -309,25 +309,25 @@ public class Relatorio {
 							+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y') as semanafinal, "
 							+"concat('De: ', date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Sunday'), '%X%V %W'), '%d/%m/%y'), ' - Até: ',"
 							+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y')) as datareferencia,"
-							+"sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "+
+							+"sum(valortotal)+sum(frete) as valorfaturado "+
 							"from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) and p.nome like '%"+nomeEntidade+"%' "
 							+ "group by yearweek(dtrealizado) ;";
 
 				}else if(periodo.equals("Mensal")){
 					sql ="select v.*, p.*,concat(extract(month from dtrealizado),' - ', extract(year from dtrealizado)) as datareferencia, "
-							+ "sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+							+ "sum(valortotal)+sum(frete) as valorfaturado "
 							+ "from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) and p.nome like '%"+nomeEntidade+"%' "
 							+ "group by extract(year from dtrealizado), "
 							+ "extract(month from dtrealizado) ;";
 
 				}else if(periodo.equals("Anual")){
-					sql ="select v.*, p.*,  extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+					sql ="select v.*, p.*,  extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado "
 							+ "from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) and p.nome like '%"+nomeEntidade+"%' "
 							+ "group by extract(year from dtrealizado) ;";
 
 				}else if(periodo.equals("Diario")){
 					sql = "select v.*, p.*,  dtrealizado as datareferencia, "
-							+"sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+							+"sum(valortotal)+sum(frete) as valorfaturado "
 							+"from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) and p.nome like '%"+nomeEntidade+"%' "
 							+ "group by date(dtrealizado) ;";
 
@@ -341,28 +341,28 @@ public class Relatorio {
 							+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y') as semanafinal, "
 							+"concat('De: ', date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Sunday'), '%X%V %W'), '%d/%m/%y'), ' - Até: ',"
 							+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y')) as datareferencia,"
-							+"sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+							+"sum(valortotal)+sum(frete) as valorfaturado "
 							+"from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) "
 							+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and NomeCliente like '%"+nomeEntidade+"%' "
 							+ "group by yearweek(dtrealizado) ;";
 
 				}else if(periodo.equals("Mensal")){
 					sql ="select v.*, p.*,concat(extract(month from dtrealizado),' - ', extract(year from dtrealizado)) as datareferencia, "
-							+ "sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+							+ "sum(valortotal)+sum(frete) as valorfaturado "
 							+ "from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) "
 							+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and NomeCliente like '%"+nomeEntidade+"%' "
 							+ "group by extract(year from dtrealizado), "
 							+ "extract(month from dtrealizado) ;";
 
 				}else if(periodo.equals("Anual")){
-					sql ="select v.*, p.*, extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+					sql ="select v.*, p.*, extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado "
 							+ "from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) "
 							+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and NomeCliente like '%"+nomeEntidade+"%' "
 							+ "group by extract(year from dtrealizado) ;";
 
 				}else if(periodo.equals("Diario")){
 					sql = "select v.*, p.*,  dtrealizado as datareferencia, "
-							+"sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+							+"sum(valortotal)+sum(frete) as valorfaturado "
 							+"from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) "
 							+ "where dtrealizado between '"+dataInicial+"' and '"+dataFinal+"' and NomeCliente like '%"+nomeEntidade+"%' "
 							+ "group by date(dtrealizado) ;";
@@ -375,25 +375,25 @@ public class Relatorio {
 							+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y') as semanafinal, "
 							+"concat('De: ', date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Sunday'), '%X%V %W'), '%d/%m/%y'), ' - Até: ',"
 							+"date_format(STR_TO_DATE(concat(yearweek(dtrealizado), ' Saturday'), '%X%V %W'), '%d/%m/%y')) as datareferencia,"
-							+"sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "+
+							+"sum(valortotal)+sum(frete) as valorfaturado "+
 							"from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) and NomeCliente like '%"+nomeEntidade+"%' "
 							+ "group by yearweek(dtrealizado) ;";
 
 				}else if(periodo.equals("Mensal")){
 					sql ="select v.*, p.*,concat(extract(month from dtrealizado),' - ', extract(year from dtrealizado)) as datareferencia, "
-							+ "sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+							+ "sum(valortotal)+sum(frete) as valorfaturado "
 							+ "from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) and NomeCliente like '%"+nomeEntidade+"%' "
 							+ "group by extract(year from dtrealizado), "
 							+ "extract(month from dtrealizado) ;";
 
 				}else if(periodo.equals("Anual")){
-					sql ="select v.*, p.*,  extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+					sql ="select v.*, p.*,  extract(year from dtrealizado) as datareferencia, sum(valortotal)+sum(frete) as valorfaturado "
 							+ "from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) and NomeCliente like '%"+nomeEntidade+"%' "
 							+ "group by extract(year from dtrealizado) ;";
 
 				}else if(periodo.equals("Diario")){
 					sql = "select v.*, p.*,  dtrealizado as datareferencia, "
-							+"sum(valortotal)+sum(frete) as valorfaturado, count(*) as quantidadevenda  "
+							+"sum(valortotal)+sum(frete) as valorfaturado "
 							+"from visualizacaorelatorios as v inner join peca as p on (v.oid_peca = p.oid_peca) and NomeCliente like '%"+nomeEntidade+"%' "
 							+ "group by date(dtrealizado) ;";
 

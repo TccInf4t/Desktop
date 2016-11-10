@@ -35,7 +35,7 @@ public class UserController implements Initializable{
 		//Foi criado um objeto do tipo grupo, caso ele seja nulo,
 		//quer dizer que a instancia foi feita pelo primeiro modo
 		if(usuario != null){
-			cboGrupo.getSelectionModel().select(usuario.getGrupo());
+			cboGrupo.getSelectionModel().select(usuario.getGrupo().getOid_grupo());
 
 			PrepararUpdate(usuario);
 		}

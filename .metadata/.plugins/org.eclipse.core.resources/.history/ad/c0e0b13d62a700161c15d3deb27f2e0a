@@ -52,6 +52,7 @@ public class RelatorioController implements Initializable{
 		btnExportarExcel.setOnAction(l-> ExportaExcel());
 	}
 
+
 	@FXML
 	private void handleEstado() {
 		Estado estado = cboEstado.getSelectionModel().getSelectedItem();
@@ -141,9 +142,6 @@ public class RelatorioController implements Initializable{
 	@FXML
 	private void handleCboEntidade(){
 		String entidade = cboEntidade.getValue();
-		datePickerFinal.setValue(null);
-		datePickerInicial.setValue(null);
-		chbDataSelecionavel.setSelected(false);
 		txtNomeEntidade.clear();
 		cboCidade.getSelectionModel().clearSelection();
 		cboEstado.getSelectionModel().clearSelection();
@@ -346,7 +344,7 @@ public class RelatorioController implements Initializable{
 									barChart.getData().addAll(lucroBar);
 									lineChart.getData().addAll(lucroLine);
 									this.lstRelatorio = lstRelatorio;
-									GerarTable(3, lstRelatorio);
+									GerarTable(1, lstRelatorio);
 								}
 							}
 						}else{
@@ -377,7 +375,7 @@ public class RelatorioController implements Initializable{
 							barChart.getData().addAll(lucroBar);
 							lineChart.getData().addAll(lucroLine);
 							this.lstRelatorio = lstRelatorio;
-							GerarTable(3, lstRelatorio);
+							GerarTable(1, lstRelatorio);
 						}
 					}
 				}else{
@@ -422,7 +420,7 @@ public class RelatorioController implements Initializable{
 									barChart.getData().addAll(lucroBar);
 									lineChart.getData().addAll(lucroLine);
 									this.lstRelatorio = lstRelatorio;
-									GerarTable(3, lstRelatorio);
+									GerarTable(1, lstRelatorio);
 								}
 							}
 						}else{
@@ -453,7 +451,7 @@ public class RelatorioController implements Initializable{
 							barChart.getData().addAll(lucroBar);
 							lineChart.getData().addAll(lucroLine);
 							this.lstRelatorio = lstRelatorio;
-							GerarTable(3, lstRelatorio);
+							GerarTable(1, lstRelatorio);
 						}
 					}
 				}
@@ -507,7 +505,7 @@ public class RelatorioController implements Initializable{
 								barChart.getData().addAll(lucroBar);
 								lineChart.getData().addAll(lucroLine);
 								this.lstRelatorio = lstRelatorio;
-								GerarTable(3, lstRelatorio);
+								GerarTable(1, lstRelatorio);
 							}
 						}
 					}else{
@@ -537,11 +535,42 @@ public class RelatorioController implements Initializable{
 						barChart.getData().addAll(lucroBar);
 						lineChart.getData().addAll(lucroLine);
 						this.lstRelatorio = lstRelatorio;
-						GerarTable(3, lstRelatorio);
+						GerarTable(1, lstRelatorio);
 					}
 				}
 			}
 		}
+
+			/*if(txtNomeEntidade.getText().isEmpty()){
+				Alerta.showError("Erro ao filtrar", "Selecione preecha o nome da entidade");
+			}else{
+				String periodo = cboPeriodoRelatório.getSelectionModel().getSelectedItem();
+				if(periodo == null){
+					Alerta.showError("Erro ao filtrar", "Selecione um Periodo");
+				}else{
+					if(chbDataSelecionavel.isSelected()){
+						if(datePickerInicial.getValue() ==  null || datePickerFinal.getValue() == null){
+							Alerta.showError("Erro ao filtrar", "Preencha a Data Inicial (De) e a Data Final (Até)");
+						}else{
+							String dataInicial = datePickerInicial.getValue().toString();
+							String dataFinal = datePickerFinal.getValue().toString();
+
+							if(dataFinal.isEmpty() || dataInicial.isEmpty()){
+								Alerta.showError("Erro ao filtrar", "Preencha a Data Inicial (De) e a Data Final (Até)");
+							}else{
+								// Se tiver a data inicial e a data final
+
+								System.out.println("Tem data inicial e final");
+							}
+						}
+					}else{
+						// Se tiver somente o perido selecionado
+						System.out.println("Periodo");
+
+					}
+				}
+			}*/
+
 	}
 
 	public void ExportaExcel(){
@@ -609,22 +638,7 @@ public class RelatorioController implements Initializable{
 			table.setItems(data);
 
 		}else if(tipo == 3){
-			TableColumn<Relatorio, String> coluna1 = new TableColumn<>("Data Referencia");
-			TableColumn<Relatorio, String> coluna2 = new TableColumn<>("Valor Total");
-			TableColumn<Relatorio, String> coluna3 = new TableColumn<>("Quantidade");
 
-			coluna1.setResizable(true);
-			coluna2.setResizable(true);
-			coluna3.setResizable(true);
-			coluna1.setCellValueFactory(new PropertyValueFactory<Relatorio, String>("tituloData"));
-			coluna2.setCellValueFactory(new PropertyValueFactory<Relatorio, String>("valorQuantidade"));
-			coluna3.setCellValueFactory(new PropertyValueFactory<Relatorio, String>("quantidadeVenda"));
-
-			table.getColumns().addAll(coluna1, coluna2, coluna3);
-
-			ObservableList<Relatorio> data = FXCollections.observableList(lstRelatorio);
-
-			table.setItems(data);
 		}
 
 	}
