@@ -10,13 +10,14 @@ public class MySqlConnect {
 
 		Connection con = null;
 
+		String ip = Helper.ip;
 		try {
 			//Direciona para o drive do banco de dados
 			Class.forName("com.mysql.jdbc.Driver");
-
+			
 			//Define a String de conexão, que contem o server, o banco que será usario, o usuario e a senha
 			con = DriverManager
-					.getConnection("jdbc:mysql://localhost/dbcsop", "csop", "csoptcc@2016");
+					.getConnection("jdbc:mysql://"+ip+"/dbcsop", "csop", "csoptcc@2016");
 
 		} catch (Exception ex) {
 			// TODO Auto-generated catch block

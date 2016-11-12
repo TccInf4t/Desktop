@@ -2,11 +2,10 @@ package br.com.onpecas.view;
 
 import java.io.IOException;
 
-import br.com.onpecas.controller.UsuariosGruposController;
+import br.com.onpecas.controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.*;
@@ -15,11 +14,11 @@ public class CSOPControllerUsers extends Application {
 
 	CallScene scene;
 	BorderPane border;
-	Stage primaryStage;
+	public static Stage primaryStage;
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		this.primaryStage = primaryStage;
+		CSOPControllerUsers.primaryStage = primaryStage;
 
 		LoadMain();
 	}
@@ -28,12 +27,12 @@ public class CSOPControllerUsers extends Application {
 	public void LoadMain() throws IOException{
 
 		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("UsuariosGrupos.fxml"));
-        loader.setController(new UsuariosGruposController());
+        loader.setLocation(getClass().getResource("Login.fxml"));
+        loader.setController(new LoginController());
 
-		ScrollPane module= (ScrollPane) loader.load();
+		AnchorPane module= (AnchorPane) loader.load();
 		Scene scene = new Scene(module);
-		primaryStage.setTitle("CSOP - Controle de Usuario");
+		primaryStage.setTitle("CSOP Controle de Usuario");
 		primaryStage.getIcons().add(new Image(getClass().getResource("logo.png").toString()));
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -41,5 +40,6 @@ public class CSOPControllerUsers extends Application {
 	}
 	public static void main(String[] args) {
 		launch(args);
+		System.exit(0);
 	}
 }

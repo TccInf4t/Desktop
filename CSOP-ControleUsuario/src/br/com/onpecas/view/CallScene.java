@@ -19,21 +19,22 @@ public class CallScene {
 
 	/*Esse método serve para carregar a tela de controle de permissões*/
 	public void LoadPermission(Grupo grupo){
-		
+
 		secondStage = new Stage();
-		
+
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("Permissoes.fxml"));
 	    loader.setController(new PermissaoController(secondStage, grupo));
 
 		try {
-			ScrollPane module= (ScrollPane) loader.load();
+			AnchorPane module= (AnchorPane) loader.load();
 
 			Scene scene = new Scene(module);
 			secondStage.initModality(Modality.APPLICATION_MODAL);
 			secondStage.setScene(scene);
 			secondStage.setTitle("Permisões");
 			secondStage.getIcons().add(new Image(getClass().getResource("logo.png").toString()));
+			
 			secondStage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -92,6 +93,26 @@ public class CallScene {
 			secondStage.getIcons().add(new Image(getClass().getResource("logo.png").toString()));
 			secondStage.setScene(scene);
 			secondStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void LoadMain(){
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("UsuariosGrupos.fxml"));
+        loader.setController(new UsuariosGruposController());
+
+		ScrollPane module;
+		try {
+			module = (ScrollPane) loader.load();
+			Scene scene = new Scene(module);
+			CSOPControllerUsers.primaryStage.setTitle("CSOP - Controle de Usuario");
+			CSOPControllerUsers.primaryStage.getIcons().add(new Image(getClass().getResource("logo.png").toString()));
+			CSOPControllerUsers.primaryStage.setScene(scene);
+			CSOPControllerUsers.primaryStage.show();
+			CSOPControllerUsers.primaryStage.centerOnScreen();
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

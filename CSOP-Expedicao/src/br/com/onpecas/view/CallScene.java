@@ -200,6 +200,7 @@ public class CallScene {
 			CSOPControllerExpedicao.primaryStage.setTitle("CSOP - Expedição");
 			CSOPControllerExpedicao.primaryStage.getIcons().add(new Image(getClass().getResource("logo.png").toString()));
 			CSOPControllerExpedicao.primaryStage.show();
+			CSOPControllerExpedicao.primaryStage.centerOnScreen();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

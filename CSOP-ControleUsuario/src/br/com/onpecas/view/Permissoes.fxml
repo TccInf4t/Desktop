@@ -8,9 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1000.0">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
          <children>
             <Separator prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
             <Label fx:id="lbGrupo" layoutX="409.0" layoutY="21.0" text="Nome do Grupo">
@@ -20,8 +18,8 @@
             </Label>
             <GridPane layoutX="16.0" layoutY="79.0" prefHeight="321.0" prefWidth="970.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="79.0">
               <columnConstraints>
-                <ColumnConstraints maxWidth="686.0" minWidth="10.0" prefWidth="130.0" />
-                  <ColumnConstraints maxWidth="686.0" minWidth="10.0" prefWidth="534.0" />
+                <ColumnConstraints maxWidth="686.0" minWidth="10.0" prefWidth="244.0" />
+                  <ColumnConstraints maxWidth="686.0" minWidth="10.0" prefWidth="416.0" />
                   <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="545.0" minWidth="0.0" prefWidth="80.0" />
                   <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="239.0" minWidth="0.0" prefWidth="80.0" />
                   <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="79.0" />
@@ -64,9 +62,15 @@
                   </Label>
                   <CheckBox fx:id="SGEAcessar" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <CheckBox fx:id="RelatoriosAcessar" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <CheckBox fx:id="CtrlUserAcessar" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <Label prefHeight="27.0" prefWidth="212.0" text="Controle de Usuario" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
-            <Button fx:id="btnSalvar" layoutX="820.0" layoutY="750.0" mnemonicParsing="false" style="-fx-background-color: #32CD32;" text="Salvar">
+            <Button fx:id="btnSalvar" layoutX="796.0" layoutY="755.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #32CD32;" text="Salvar" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="134.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -74,12 +78,11 @@
                   <ColorAdjust />
                </effect>
             </Button>
-            <Button fx:id="btnCancelar" layoutX="882.0" layoutY="749.0" mnemonicParsing="false" style="-fx-background-color: #FA8072;" text="Cancelar">
+            <Button fx:id="btnCancelar" layoutX="906.0" layoutY="755.0" mnemonicParsing="false" style="-fx-background-color: #FA8072;" text="Cancelar" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="32.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
             <Separator prefWidth="200.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-         </children></AnchorPane>
-  </content>
-</ScrollPane>
+         </children>
+     </AnchorPane>

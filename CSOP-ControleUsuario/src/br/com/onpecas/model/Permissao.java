@@ -10,7 +10,7 @@ import br.com.onpecas.helper.MySqlConnect;
 public class Permissao {
 
 	private int Oid_permissao;
-	private boolean acs_cms, acs_sge, acs_expedicao, acs_relatorios;
+	private boolean acs_cms, acs_sge, acs_expedicao, acs_relatorios, acs_ctrluser;
 
 
 	public boolean getAcs_sge() {
@@ -43,11 +43,17 @@ public class Permissao {
 	public void setAcs_cms(boolean acs_cms) {
 		this.acs_cms = acs_cms;
 	}
+	public boolean getAcs_ctrluser() {
+		return acs_ctrluser;
+	}
+	public void setAcs_ctrluser(boolean acs_ctrluser) {
+		this.acs_ctrluser = acs_ctrluser;
+	}
 
 	public static void Insert(Permissao permissao, int oid_grupo){
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql ="insert into permissao (acs_cms, acs_expedicao, acs_sge, acs_relatorios) values(?, ?, ?, ?);";
+		String sql ="insert into permissao (acs_cms, acs_expedicao, acs_sge, acs_relatorios, acs_ctrluser) values(?, ?, ?, ?,?);";
 
 		String sql2="update grupousuario set oid_permissao = (select oid_permissao from permissao order by oid_permissao desc limit 1) where oid_grupo = ?;";
 
@@ -59,6 +65,7 @@ public class Permissao {
 			parametros.setBoolean(2, permissao.getAcs_expedicao());
 			parametros.setBoolean(3, permissao.getAcs_sge());
 			parametros.setBoolean(4, permissao.getAcs_relatorios());
+			parametros.setBoolean(6, permissao.getAcs_ctrluser());
 
 			parametros.executeUpdate();
 
@@ -83,7 +90,7 @@ public class Permissao {
 	public static void Update(Permissao permissao){
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql ="update permissao set acs_cms = ?, acs_expedicao=?, acs_sge=?, acs_relatorios=? where oid_permissao = ?;";
+		String sql ="update permissao set acs_cms = ?, acs_expedicao=?, acs_sge=?, acs_relatorios=?, acs_ctrluser= ? where oid_permissao = ?;";
 
 		PreparedStatement parametros;
 
@@ -93,7 +100,8 @@ public class Permissao {
 			parametros.setBoolean(2, permissao.getAcs_expedicao());
 			parametros.setBoolean(3, permissao.getAcs_sge());
 			parametros.setBoolean(4, permissao.getAcs_relatorios());
-			parametros.setInt(5, permissao.getOid_permissao());
+			parametros.setBoolean(5, permissao.getAcs_ctrluser());
+			parametros.setInt(6, permissao.getOid_permissao());
 
 			parametros.executeUpdate();
 			con.close();
@@ -143,11 +151,12 @@ public class Permissao {
 
 			while(rs.next()){
 
-			permissao.setOid_permissao(rs.getInt("oid_permissao"));
-			permissao.setAcs_cms(rs.getBoolean("acs_cms"));
-			permissao.setAcs_expedicao(rs.getBoolean("acs_expedicao"));
-			permissao.setAcs_relatorios(rs.getBoolean("acs_relatorios"));
-			permissao.setAcs_sge(rs.getBoolean("acs_sge"));
+				permissao.setOid_permissao(rs.getInt("oid_permissao"));
+				permissao.setAcs_cms(rs.getBoolean("acs_cms"));
+				permissao.setAcs_expedicao(rs.getBoolean("acs_expedicao"));
+				permissao.setAcs_relatorios(rs.getBoolean("acs_relatorios"));
+				permissao.setAcs_sge(rs.getBoolean("acs_sge"));
+				permissao.setAcs_ctrluser(rs.getBoolean("acs_ctrluser"));
 
 			}
 			con.close();
@@ -171,21 +180,14 @@ public class Permissao {
 
 
 			while(rs.next()){
-
 				if(rs.getRow()== 1){
-
 					return true;
-
 				}else{
-
 					return false;
-
 				}
-
-				}
+			}
 
 			con.close();
-
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -24,8 +24,8 @@ public class CSOPControllerRelatorio extends Application {
 	/*Carregamento inicial das bordas*/
 	public void LoadBorder() throws IOException{
 		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Relatorio.fxml"));
-        loader.setController(new RelatorioController());
+        loader.setLocation(getClass().getResource("Login.fxml"));
+        loader.setController(new LoginController());
 
 		border = (AnchorPane) loader.load();
         Scene scene = new Scene(border);

@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class PermissaoController implements Initializable {
 
-	@FXML CheckBox CMSAcessar, SGEAcessar, ExpedicaoAcessar, RelatoriosAcessar;
+	@FXML CheckBox CMSAcessar, SGEAcessar, ExpedicaoAcessar, RelatoriosAcessar, CtrlUserAcessar;
 	@FXML Button btnSalvar,btnCancelar;
 	@FXML Label lbGrupo;
 
@@ -86,7 +86,6 @@ public class PermissaoController implements Initializable {
 
 		}
 		VoltarTela();
-
 	}
 
 	public void SetarPermissoes(){
@@ -94,6 +93,7 @@ public class PermissaoController implements Initializable {
 		permissao.setAcs_expedicao(ExpedicaoAcessar.isSelected());
 		permissao.setAcs_relatorios(RelatoriosAcessar.isSelected());
 		permissao.setAcs_sge(SGEAcessar.isSelected());
+		permissao.setAcs_ctrluser(CtrlUserAcessar.isSelected());
 	}
 
 	//Função que seta os valores para as checkboxs.
@@ -102,5 +102,6 @@ public class PermissaoController implements Initializable {
 		SGEAcessar.setSelected(permissao.getAcs_sge());
 		ExpedicaoAcessar.setSelected(permissao.getAcs_expedicao());
 		RelatoriosAcessar.setSelected(permissao.getAcs_relatorios());
+		CtrlUserAcessar.setSelected(permissao.getAcs_ctrluser());
 	}
 }

@@ -1,0 +1,12 @@
+package br.com.onpecas.view;
+
+
+public class CallScene {
+
+	public void LoadMain(){
+
+	}
+
+
+
+}
