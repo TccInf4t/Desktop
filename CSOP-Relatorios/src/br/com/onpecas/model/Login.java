@@ -1,11 +1,7 @@
 package br.com.onpecas.model;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import br.com.onpecas.helper.Alerta;
+import java.sql.*;
 import br.com.onpecas.helper.MySqlConnect;
 
 public class Login {
@@ -34,7 +30,6 @@ public class Login {
 				}
 			}
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		return 0;
@@ -66,12 +61,13 @@ public class Login {
 				}
 
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 		} catch (FileNotFoundException e1) {
-			Alerta.showError("Caminho Errado", "Caminho ou arquivo não encontrado\nContate o administrador");
+			File filePadrao = new File("C:/CSOP/");
+			filePadrao.mkdirs();
+
 		}
 
 		return "localhost";
@@ -87,7 +83,6 @@ public class Login {
 			writer.close(); //Fechando conexão e escrita do arquivo.
 
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
