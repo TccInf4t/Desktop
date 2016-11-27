@@ -160,7 +160,7 @@ public class Transportadora {
 	public static void Insert(Transportadora transportadora){
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql ="insert into transportadora (nome, cnpj, frete, ramo, observacoes, oid_endereco, natureza, rg, telefone, logintransporte) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ";
+		String sql ="insert into transportadora (nome, cnpj, frete, ramo, observacoes, oid_endereco, natureza, rg, telefone, logintransporte) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ); ";
 
 		PreparedStatement parametros;
 
@@ -176,7 +176,6 @@ public class Transportadora {
 			parametros.setString(7, transportadora.getNatureza());
 			parametros.setString(8, transportadora.getRg());
 			parametros.setString(9, transportadora.getTelefone());
-			parametros.setString(10, transportadora.getLoginTransporte());
 
 			parametros.executeUpdate();
 			con.close();
@@ -192,7 +191,7 @@ public class Transportadora {
 	public static void Update(Transportadora transportadora) {
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql ="update transportadora set nome = ?, cnpj = ?, frete = ?, ramo = ?, observacoes = ?, rg = ?, natureza =?, telefone =?, logintransporte=? where oid_transportadora = ?; ";
+		String sql ="update transportadora set nome = ?, cnpj = ?, frete = ?, ramo = ?, observacoes = ?, rg = ?, natureza =?, telefone =? where oid_transportadora = ?; ";
 
 		PreparedStatement parametros;
 
@@ -208,8 +207,7 @@ public class Transportadora {
 			parametros.setString(6, transportadora.getRg());
 			parametros.setString(7, transportadora.getNatureza());
 			parametros.setString(8, transportadora.getTelefone());
-			parametros.setString(9, transportadora.getLoginTransporte());
-			parametros.setInt(10, transportadora.getOid_transportadora());
+			parametros.setInt(9, transportadora.getOid_transportadora());
 
 			parametros.executeUpdate();
 			con.close();
@@ -267,7 +265,6 @@ public class Transportadora {
 				transportadora.setRg(rs.getString("rg"));
 				transportadora.setTelefone(rs.getString("telefone"));
 				transportadora.setLoginTransporte(rs.getString("logintransporte"));
-
 				transportadora.setEndereco(endereco);
 				transportadora.setCidade(endereco.getCidade().getNome());
 				transportadora.setEstado(endereco.getCidade().getEstado().getNome());
@@ -304,7 +301,7 @@ public class Transportadora {
 				transportadora.setRg(rs.getString("rg"));
 				transportadora.setTelefone(rs.getString("telefone"));
 				transportadora.setLoginTransporte(rs.getString("logintransporte"));
-
+				
 				transportadora.setEndereco(endereco);
 				transportadora.setCidade(endereco.getCidade().getNome());
 				transportadora.setEstado(endereco.getCidade().getEstado().getNome());
@@ -374,7 +371,7 @@ public class Transportadora {
 				transportadora.setRg(rs.getString("rg"));
 				transportadora.setTelefone(rs.getString("telefone"));
 				transportadora.setLoginTransporte(rs.getString("logintransporte"));
-
+				
 				transportadora.setEndereco(endereco);
 				transportadora.setCidade(endereco.getCidade().getNome());
 				transportadora.setEstado(endereco.getCidade().getEstado().getNome());

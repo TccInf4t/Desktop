@@ -15,12 +15,12 @@
               <MenuItem fx:id="menuItemTransportadora" mnemonicParsing="false" text="Inicial" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Pedido sem Lote">
+          <Menu mnemonicParsing="false" text="Pedidos">
             <items>
               <MenuItem fx:id="menuItemPedidoSemLote" mnemonicParsing="false" text="Inicial" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Lote sem Transporte">
+            <Menu mnemonicParsing="false" text="Lotes">
                <items>
                   <MenuItem fx:id="menuItemLoteSemTransporte" mnemonicParsing="false" text="Inicial" />
                </items>

@@ -15,7 +15,7 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 
 	@FXML Button btnAbrirEndereco, btnCadastrar, btnCancelar;
 
-	@FXML TextField txtNomeCompleto, txtCPF, txtRG, txtTelefone, txtFrete, txtRamo, txtLoginTransporte;
+	@FXML TextField txtNomeCompleto, txtCPF, txtRG, txtTelefone, txtFrete, txtRamo;
 
 	@FXML TextArea txtObservacoes;
 
@@ -55,7 +55,6 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 			txtObservacoes.setText(transportadora.getObservacoes());
 			txtTelefone.setText(transportadora.getTelefone());
 			lblEnderecoCompleto.setText(transportadora.getEndereco().getEnderecoCompleto());
-			txtLoginTransporte.setText(transportadora.getLoginTransporte());
 
 			if(transportadora.getNatureza().equals("F")){
 				cboTipoPessoa.setValue("FÍSICA");
@@ -192,7 +191,7 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 			transportadora_gerada.setRamo(txtRamo.getText());
 			transportadora_gerada.setNome(txtNomeCompleto.getText());
 			transportadora_gerada.setTelefone(txtTelefone.getText());
-			transportadora_gerada.setLoginTransporte(txtLoginTransporte.getText());
+
 			if(endereco == null){
 				Alerta.showError("Impossivel cadastrar", "Cadastre um endereço antes");
 			}else{
@@ -241,7 +240,7 @@ public class TransportadoraCadastroDetalheController implements Initializable{
 			transportadora_editada.setRamo(txtRamo.getText());
 			transportadora_editada.setNome(txtNomeCompleto.getText());
 			transportadora_editada.setTelefone(txtTelefone.getText());
-			transportadora_editada.setLoginTransporte(txtLoginTransporte.getText());
+
 
 			if(cboTipoPessoa.getSelectionModel().getSelectedItem().equals("FÍSICA")){
 				if(Helper.isValidCPF(txtCPF.getText().replace(".", "").replace("-", ""))){
