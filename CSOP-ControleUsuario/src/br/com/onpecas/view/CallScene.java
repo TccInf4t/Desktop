@@ -6,7 +6,6 @@ import br.com.onpecas.controller.*;
 import br.com.onpecas.model.*;
 import javafx.fxml.*;
 import javafx.scene.*;
-import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.*;
@@ -34,7 +33,7 @@ public class CallScene {
 			secondStage.setScene(scene);
 			secondStage.setTitle("Permisões");
 			secondStage.getIcons().add(new Image(getClass().getResource("logo.png").toString()));
-			
+
 			secondStage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -103,9 +102,9 @@ public class CallScene {
         loader.setLocation(getClass().getResource("UsuariosGrupos.fxml"));
         loader.setController(new UsuariosGruposController());
 
-		ScrollPane module;
+        AnchorPane module;
 		try {
-			module = (ScrollPane) loader.load();
+			module = (AnchorPane) loader.load();
 			Scene scene = new Scene(module);
 			CSOPControllerUsers.primaryStage.setTitle("CSOP - Controle de Usuario");
 			CSOPControllerUsers.primaryStage.getIcons().add(new Image(getClass().getResource("logo.png").toString()));

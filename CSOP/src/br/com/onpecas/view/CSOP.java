@@ -6,6 +6,7 @@ import br.com.onpecas.controller.CSOPController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
@@ -15,7 +16,7 @@ public class CSOP extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		CSOP.primaryStage = primaryStage;
-
+		CSOP.primaryStage.getIcons().add(new Image(getClass().getResource("logo.png").toString()));
 		LoadModule();
 	}
 

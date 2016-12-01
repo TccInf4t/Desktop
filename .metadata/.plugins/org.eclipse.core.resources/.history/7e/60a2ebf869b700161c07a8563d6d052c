@@ -1,0 +1,9 @@
+package br.com.onpecas.view;
+
+public class RetornarConteudoLocal {
+
+	public static String RetornarImagem(){
+		get
+		//return getClass().getResource("logo.png").toString();
+	}
+}

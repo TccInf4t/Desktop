@@ -13,9 +13,9 @@
    <children>
       <Separator layoutX="14.0" layoutY="94.0" prefWidth="200.0" AnchorPane.bottomAnchor="403.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0" />
       <ImageView fitHeight="108.0" fitWidth="220.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="15.0" />
-      <Label layoutX="273.0" layoutY="52.0" text="Bem vindo!" AnchorPane.leftAnchor="273.0" AnchorPane.topAnchor="52.0">
+      <Label layoutX="270.0" layoutY="52.0" text="Módulos CSOP" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="52.0">
          <font>
-            <Font size="24.0" />
+            <Font name="Verdana" size="24.0" />
          </font>
       </Label>
       <Button fx:id="btnexpedicao" layoutX="408.0" layoutY="183.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="220.0" text="Expedição" AnchorPane.bottomAnchor="247.0" AnchorPane.leftAnchor="408.0">

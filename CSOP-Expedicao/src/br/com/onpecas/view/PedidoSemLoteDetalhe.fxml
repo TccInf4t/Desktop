@@ -16,7 +16,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TableView fx:id="tblListProduto" layoutX="14.0" layoutY="412.0" prefHeight="295.0" prefWidth="972.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="59.0">
+      <TableView fx:id="tblListProduto" layoutX="14.0" layoutY="412.0" prefHeight="238.0" prefWidth="972.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="59.0">
         <columns>
           <TableColumn fx:id="clnNomePeca" prefWidth="205.0" resizable="false" text="Nome da Peça" />
             <TableColumn fx:id="clnDescricao" prefWidth="239.0" resizable="false" text="Descrição" />

@@ -18,6 +18,7 @@ public class CSOPControllerExpedicao extends Application {
 	public void start(Stage primaryStage) throws IOException {
 		CSOPControllerExpedicao.primaryStage = primaryStage;
 		LoadBorder();
+
 	}
 
 	/*Carregamento inicial das bordas*/
@@ -29,7 +30,6 @@ public class CSOPControllerExpedicao extends Application {
 		AnchorPane module = (AnchorPane) loader.load();
 
 		scene = new Scene(module);
-
         primaryStage.setScene(scene);
         primaryStage.setTitle("CSOP Expedição - Login");
         primaryStage.getIcons().add(new Image(getClass().getResource("logo.png").toString()));
